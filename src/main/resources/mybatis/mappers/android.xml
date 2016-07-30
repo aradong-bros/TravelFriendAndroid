@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="android"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
+
+	<!-- cityList_no 받아서  관광지 리스트 조회  -->
+	<select id="selectListByCityNo" resultType="attractionvo" parameterType="int">
+		select no,
+		       location,
+		       category
+		from postList 
+		where cityList_no = #{cityList_no}
+		order by no desc
+	</select>
+
+	<!-- no 받아서  관광지 하나 조회 -->
+	<select id="selectAtrByNo" resultType="attractionvo" parameterType="int">
+		select no,
+		       name,
+		       location,
+		       picture,
+		       category
+		from postList 
+		where no = #{no}
+	</select>
+
+	<!-- no 받아서  관광지 하나 전체 조회 -->
+	<select id="selectAllAtrByNo" resultType="attractionvo" parameterType="int">
+		select no,
+		       cityList_no, 
+		       name,
+		       location,
+		       picture,
+		       info,  
+		       category,
+		       address 
+		from postList 
+		where no = #{no}
+	</select>
+
+</mapper>
