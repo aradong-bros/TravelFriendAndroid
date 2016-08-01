@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 
 @Repository
 public class AndroidDao 
@@ -33,5 +34,12 @@ public class AndroidDao
     	AttractionVo allAtrVo = sqlSession.selectOne("android.selectAllAtrByNo", no);
     	
     	return allAtrVo;
+    }
+    
+    public CityListVo selectCityByNo(int no)
+    {
+    	CityListVo cityVo = sqlSession.selectOne("android.selectCityByNo", no);
+    	
+    	return cityVo;
     }
 }

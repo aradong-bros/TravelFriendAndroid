@@ -5,6 +5,7 @@
 	<!-- ~~.xml 등  매핑파일들의 resultType 이름에 아리아스를 주어 간단히 만든다. -->
 	<typeAliases>
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo" alias="attractionvo"/> <!-- 아리아스는 모두 소문자로 쓰는게 관례. 대문자로 써도 상관은 없다. -->
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo" alias="citylistvo"/> <!-- 아리아스는 모두 소문자로 쓰는게 관례. 대문자로 써도 상관은 없다. -->
 	</typeAliases>
 	
 	<mappers>

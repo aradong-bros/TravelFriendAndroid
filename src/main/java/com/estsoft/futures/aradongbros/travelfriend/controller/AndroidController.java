@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 
 @Controller
 @RequestMapping("/android")
@@ -26,6 +27,7 @@ public class AndroidController
 	 * 1. getPinData : "지역 번호"를 매개변수로 받아서 지역별 핀의 정보만 가져온다  -> PK, 위치, 카테고리  -> 지역별 관광정보 반환
 	 * 2. getThumbnailData : "관광지 정보 PK"를 매개변수로 받아서 핀 눌렀을때 나오는 썸네일 정보를 가져온다 -> PK, 위치, 카테고리  + 타이틀, 사진  -> 관광지 정보 1개 반환
 	 * 3. getDetailData : "관광지 정보 PK"를 매개변수로 받아서 썸네일 눌렀을때 나오는 상세 정보를 가져온다 -> 관광지의 모든 정보 가져온다. -> 관광지 정보 1개 반환
+	 * 4. getCityData : "cityList"의 PK를 매개변수로 받아서 각 도시의 정보를 가져온다.
 	 * 
 	 * ★★★★★주의 : location 없는  7개 데이터를 삭제해서  빠져있는 데이터가 7개 있음!!! 근데 이게 중간에 PK가 구멍이 뚫린채로 있어서 나중에 다시 정리 하겠음!!
 	 * 구멍뚫린 번호 : 254, 1849, 3937, 4199, 4284, 4634, 5237 -> postList의 PK
@@ -50,6 +52,12 @@ public class AndroidController
 		return map;
 	}
 	
+	/*
+	 * 2번 메소드
+	 * 
+	 * no : DB에 들어있는 postList의 PK 번호 임.
+	 * no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 관광지의 PK, 이름, 위치, 사진, 카테고리 정보를 가져온다.
+	 */
 	@RequestMapping("/getThumbnailData/{no}")
 	@ResponseBody
 	public Map<String, Object> getThumbnailData(@PathVariable("no") int no)
@@ -62,6 +70,12 @@ public class AndroidController
 		return map;
 	}
 	
+	/*
+	 * 3번 메소드
+	 * 
+	 * no : DB에 들어있는 postList의 PK 번호 임.
+	 * no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 관광지의 전체 정보를 가져온다.
+	 */
 	@RequestMapping("/getDetailData/{no}")
 	@ResponseBody
 	public Map<String, Object> getDetailData(@PathVariable("no") int no)
@@ -74,4 +88,16 @@ public class AndroidController
 		return map;
 	}
 
+	//getCityData
+	@RequestMapping("/getCityData/{no}")
+	@ResponseBody
+	public Map<String, Object> getCityData(@PathVariable("no") int no)
+	{
+		CityListVo cityVo = androidService.selectCityByNo(no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cityVo", cityVo);
+		
+		return map;
+	}
 }

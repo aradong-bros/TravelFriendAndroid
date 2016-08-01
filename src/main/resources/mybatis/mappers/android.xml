@@ -37,5 +37,14 @@
 		from postList 
 		where no = #{no}
 	</select>
+	
+	<!-- no 받아서 도시 하나 조회하기 -->
+	<select id="selectCityByNo" resultType="citylistvo" parameterType="int">
+		select no,
+		       name,
+		       location
+		from cityList 
+		where no = #{no}
+	</select>
 
 </mapper>
