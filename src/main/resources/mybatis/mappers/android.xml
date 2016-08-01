@@ -6,6 +6,8 @@
 	<!-- cityList_no 받아서  관광지 리스트 조회  -->
 	<select id="selectListByCityNo" resultType="attractionvo" parameterType="int">
 		select no,
+			   name,
+			   picture,
 		       location,
 		       category
 		from postList 
