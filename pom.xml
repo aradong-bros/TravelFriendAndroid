@@ -197,7 +197,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://222.239.250.207:8080/manager/text</url>
-					<path>/TrainFriendAndroid</path>
+					<path>/TravelFriendAndroid</path>
 					<username>admin</username>
 					<password>vbcjtm2016</password>
 				</configuration>

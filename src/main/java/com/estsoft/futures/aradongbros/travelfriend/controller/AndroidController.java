@@ -56,7 +56,6 @@ public class AndroidController
 	 * 2번 메소드
 	 * 
 	 * no : DB에 들어있는 postList의 PK 번호 임.
-	 * no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 관광지의 PK, 이름, 위치, 사진, 카테고리 정보를 가져온다.
 	 */
 	@RequestMapping("/getThumbnailData/{no}")
 	@ResponseBody
@@ -74,7 +73,6 @@ public class AndroidController
 	 * 3번 메소드
 	 * 
 	 * no : DB에 들어있는 postList의 PK 번호 임.
-	 * no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 관광지의 전체 정보를 가져온다.
 	 */
 	@RequestMapping("/getDetailData/{no}")
 	@ResponseBody
@@ -88,7 +86,12 @@ public class AndroidController
 		return map;
 	}
 
-	//getCityData
+	/*
+	 * 4번 메소드
+	 * 
+	 * no : DB에 들어있는 cityList의 PK 번호 임.
+	 * no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 관광지의 전체 정보를 가져온다.
+	 */
 	@RequestMapping("/getCityData/{no}")
 	@ResponseBody
 	public Map<String, Object> getCityData(@PathVariable("no") int no)
