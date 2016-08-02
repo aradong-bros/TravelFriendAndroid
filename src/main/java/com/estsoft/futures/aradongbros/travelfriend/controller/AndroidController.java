@@ -39,16 +39,37 @@ public class AndroidController
 	 * 
 	 * cityList_no : DB에 들어있는 cityList의 no(PK) 번호 임. (주의 : 지역코드 아님)
 	 * cityList_no 를  1 ~ 12 까지 넣으면 각 번호에 해당하는 지역의 정보를 가져온다.
+	 * category : 1-food, 2-inn, 3-tour
 	 */
-	@RequestMapping("/getPinData/{cityList_no}")
+	@RequestMapping("/getPinData/{cityList_no}/{categoryNo}")
 	@ResponseBody
-	public Map<String, Object> getPinData(@PathVariable("cityList_no")int cityList_no)
+	public Map<String, Object> getPinData(@PathVariable("cityList_no")int cityList_no,
+										  @PathVariable("categoryNo") int categoryNo)
 	{
-		List<AttractionVo> atrList = androidService.selectListByCityNo(cityList_no);
-		
+		List<AttractionVo> atrList; 
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("atrList", atrList);
 		
+		if ( categoryNo == 1 )
+		{
+			atrList = androidService.getPinDataByCategory(cityList_no, "food");
+			map.put("atrList", atrList);
+		}
+		else if ( categoryNo == 2 )
+		{
+			atrList = androidService.getPinDataByCategory(cityList_no, "inn");
+			map.put("atrList", atrList);
+		}
+		else if ( categoryNo == 3 )
+		{
+			atrList = androidService.getPinDataByCategory(cityList_no, "tour");
+			map.put("atrList", atrList);
+		}
+		else
+		{
+			atrList = androidService.selectListByCityNo(cityList_no);
+			map.put("atrList", atrList);
+		}
+				
 		return map;
 	}
 	
