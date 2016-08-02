@@ -1,6 +1,8 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,16 @@ public class AndroidDao
     	CityListVo cityVo = sqlSession.selectOne("android.selectCityByNo", no);
     	
     	return cityVo;
+    }
+    
+    public List<AttractionVo> getPinDataByCategory(int cityList_no, String category)
+    {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("cityList_no", cityList_no);
+    	map.put("category", category);
+    	
+    	List<AttractionVo> atrList = sqlSession.selectList("android.getPinDataByCategory", map);
+    	
+    	return atrList;
     }
 }

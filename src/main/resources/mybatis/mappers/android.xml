@@ -48,5 +48,18 @@
 		from cityList 
 		where no = #{no}
 	</select>
+	
+	<!-- cityList_no, category 받아서 지역별 카테코리별 관좡지 정보 전달 -->
+	<select id="getPinDataByCategory" resultType="attractionvo" parameterType="map">
+		select no,
+			   name,
+			   picture,
+		       location,
+		       category
+		from postList 
+		where cityList_no = #{cityList_no}
+			and category = #{category}
+		order by no desc
+	</select>
 
 </mapper>

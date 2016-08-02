@@ -42,4 +42,11 @@ public class AndroidService
 		
 		return cityVo;
 	}
+	
+	public List<AttractionVo> getPinDataByCategory(int cityList_no, String category)
+	{
+		List<AttractionVo> atrList = androidDao.getPinDataByCategory(cityList_no, category);
+		
+		return atrList;
+	}
 }

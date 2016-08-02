@@ -20,11 +20,12 @@ public class AndroidController
 {
 	@Autowired
 	private AndroidService androidService;
-	//asdf
+	
 	/**
 	 * 세 종류의 메소드가 있다.
 	 * 
 	 * 1. getPinData : "지역 번호"를 매개변수로 받아서 지역별 핀의 정보만 가져온다  -> PK, 위치, 카테고리  -> 지역별 관광정보 반환
+	 * 1-1. getPinDataByCategory : "지역 번호, 카테고리 enum값"을 매개변수로 받아서 지역별, 카테고리별 핀의 정보를 가져온다.
 	 * 2. getThumbnailData : "관광지 정보 PK"를 매개변수로 받아서 핀 눌렀을때 나오는 썸네일 정보를 가져온다 -> PK, 위치, 카테고리  + 타이틀, 사진  -> 관광지 정보 1개 반환
 	 * 3. getDetailData : "관광지 정보 PK"를 매개변수로 받아서 썸네일 눌렀을때 나오는 상세 정보를 가져온다 -> 관광지의 모든 정보 가져온다. -> 관광지 정보 1개 반환
 	 * 4. getCityData : "cityList"의 PK를 매개변수로 받아서 각 도시의 정보를 가져온다.
@@ -45,6 +46,25 @@ public class AndroidController
 	public Map<String, Object> getPinData(@PathVariable("cityList_no")int cityList_no)
 	{
 		List<AttractionVo> atrList = androidService.selectListByCityNo(cityList_no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("atrList", atrList);
+		
+		return map;
+	}
+	
+	/*
+	 * 1-1번 메소드
+	 * 
+	 * cityList_no : DB에 들어있는 cityList의 no(PK) 번호 임. (주의 : 지역코드 아님)
+	 * category : category의 enum값, inn, food, tour의  값만 사용가능!
+	 */
+	@RequestMapping("/getPinDataByCategory/{cityList_no}/{category}")
+	@ResponseBody
+	public Map<String, Object> getPinDataByCategory(@PathVariable("cityList_no") int cityList_no,
+													@PathVariable("category") String category)
+	{	
+		List<AttractionVo> atrList = androidService.getPinDataByCategory(cityList_no, category);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("atrList", atrList);
