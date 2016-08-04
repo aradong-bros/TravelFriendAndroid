@@ -4,6 +4,8 @@ public class TrainStationVo
 {
 	private int no;
 	private String name;
+	private String location;
+	private int cityNum;
 	
 	public int getNo() {
 		return no;
@@ -21,8 +23,24 @@ public class TrainStationVo
 		this.name = name;
 	}
 	
+	public String getLocation() {
+		return location;
+	}
+	
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
+	public int getCityNum() {
+		return cityNum;
+	}
+	
+	public void setCityNum(int cityNum) {
+		this.cityNum = cityNum;
+	}
+
 	@Override
 	public String toString() {
-		return "TrainStationVo [no=" + no + ", name=" + name + "]";
+		return "TrainStationVo [no=" + no + ", name=" + name + ", location=" + location + ", cityNum=" + cityNum + "]";
 	}
 }

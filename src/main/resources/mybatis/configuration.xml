@@ -7,10 +7,16 @@
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo" alias="attractionvo"/> <!-- 아리아스는 모두 소문자로 쓰는게 관례. 대문자로 써도 상관은 없다. -->
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo" alias="citylistvo"/> <!-- 아리아스는 모두 소문자로 쓰는게 관례. 대문자로 써도 상관은 없다. -->
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.UserVo" alias="uservo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainCategoryVo" alias="traincategoryvo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainInfoVo" alias="traininfovo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainLineVo" alias="trainlinevo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainOperationRouteVo" alias="trainoperationroutevo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainStationVo" alias="trainstationvo"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/android.xml" />
 		<mapper resource="mybatis/mappers/user.xml"/>
+		<mapper resource="mybatis/mappers/train.xml"/>
 	</mappers>
 </configuration>
