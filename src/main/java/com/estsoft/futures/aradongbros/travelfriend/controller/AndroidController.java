@@ -1,15 +1,20 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
@@ -28,6 +33,7 @@ public class AndroidController
 	 * 2. getThumbnailData : "관광지 정보 PK"를 매개변수로 받아서 핀 눌렀을때 나오는 썸네일 정보를 가져온다 -> PK, 위치, 카테고리  + 타이틀, 사진  -> 관광지 정보 1개 반환
 	 * 3. getDetailData : "관광지 정보 PK"를 매개변수로 받아서 썸네일 눌렀을때 나오는 상세 정보를 가져온다 -> 관광지의 모든 정보 가져온다. -> 관광지 정보 1개 반환
 	 * 4. getCityData : "cityList"의 PK를 매개변수로 받아서 각 도시의 정보를 가져온다.
+	 * 5. getTravelRoot : "사용자가 선택한 관좡지 정보"를 받아서 최단 경로를 반환한다.
 	 * 
 	 * ★★★★★주의 : location 없는  7개 데이터를 삭제해서  빠져있는 데이터가 7개 있음!!! 근데 이게 중간에 PK가 구멍이 뚫린채로 있어서 나중에 다시 정리 하겠음!!
 	 * 구멍뚫린 번호 : 254, 1849, 3937, 4199, 4284, 4634, 5237 -> postList의 PK
@@ -124,4 +130,45 @@ public class AndroidController
 		
 		return map;
 	}
+	
+	/*
+	 * 5번 메소드 
+	 * atrList : 사용자가 선택한 관과지의  no, location 정보를 담고 있는 AttractionVo 리스트
+	 * 
+	 */
+	@RequestMapping("/getTravelRoot")  // URL : ~~~ /getTravelRoot?atrList=atrList
+	@ResponseBody
+	public Map<String, Object> getTravelRoot(@ModelAttribute("atrList") List<AttractionVo> atrList)
+	{
+		System.out.println(atrList);
+		System.out.println("들어왔따~~~~~~");
+		
+		Kruskal kruskal = new Kruskal(atrList);
+		
+		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
+		map.put("start", TRAVEL_ROOT[0]);
+		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);		
+		
+		return map;
+	}
+	
+	//테스트
+	//http://localhost:8080/TravelFriendAndroid/android/test
+	@RequestMapping("/test")
+	public String test(RedirectAttributes redirectAttributes)
+	{
+		List<AttractionVo> atrList = new ArrayList<AttractionVo>(); 
+		atrList.add(androidService.selectAtrByNo(6588));
+		atrList.add(androidService.selectAtrByNo(6574));
+		atrList.add(androidService.selectAtrByNo(6570));
+		atrList.add(androidService.selectAtrByNo(6564));
+		
+		redirectAttributes.addFlashAttribute("atrList", atrList);
+			
+		return "redirect:/android/getTravelRoot";
+	}
+	
 }
