@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
@@ -135,18 +137,20 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody List<AttractionVo> atrList)
+	public Map<String, Object> getTravelRoot(@RequestBody String atrList)
 	{	
 		System.out.println(atrList);
 		
-		Kruskal kruskal = new Kruskal(atrList);
+/*		Kruskal kruskal = new Kruskal(atrList);
 		
 		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
 		map.put("start", TRAVEL_ROOT[0]);
-		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);		
+		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);	*/
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		return map;
 	}
