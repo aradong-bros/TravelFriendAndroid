@@ -1,6 +1,5 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @Controller
 @RequestMapping("/android")
@@ -137,7 +135,7 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody String atrList)
+	public Map<String, Object> getTravelRoot(@RequestBody JSONPObject atrList)
 	{	
 		System.out.println(atrList);
 		
