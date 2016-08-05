@@ -43,4 +43,23 @@ public class UserController {
 		
 		return map;
 	}
+	
+	/*
+	 * 유저 modify 메소드
+	 * 
+	 * 필요 파라미터 : no, name, picture
+	 * 모든 파라미터는 인코딩 필요
+	 * 리턴타입 : jsonString
+	 */
+	@RequestMapping("modifyUser")
+	@ResponseBody
+	public Map<String, UserVo> modifyUser(
+			@ModelAttribute UserVo userVo)
+	{
+		UserVo modifiedUser = userService.modifyUser(userVo);
+		Map<String, UserVo> map = new HashMap<>();
+		map.put("userVo", modifiedUser);
+		
+		return map;
+	}
 }

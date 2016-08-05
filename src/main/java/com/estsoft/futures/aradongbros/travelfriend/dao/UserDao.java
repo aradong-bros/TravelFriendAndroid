@@ -29,4 +29,10 @@ public class UserDao
 		sqlSession.insert("user.insertUser", userVo);
 		return userVo;
 	}
+
+	public UserVo modifyUser(UserVo userVo) {
+		sqlSession.update("user.modifyUser", userVo);
+		UserVo modifiedUser = sqlSession.selectOne("user.selectUserByNo", userVo.getNo());
+		return modifiedUser;
+	}
 }

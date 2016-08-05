@@ -9,9 +9,25 @@
 		]]>
 	</select>
 	
+	<select id="selectUserByNo" parameterType="int" resultType="uservo">
+		<![CDATA[
+		select * from user
+		where no = #{no}
+		]]>
+	</select>
+	
 	<insert id="insertUser" parameterType="uservo" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
 		<![CDATA[
 		insert into user values(null, #{name}, #{picture}, #{platform}, #{userID});
 		]]>
 	</insert>
+	
+	<update id="modifyUser" parameterType="uservo">
+		<![CDATA[
+		update user
+		set name = #{name},
+			picture = #{picture}
+		where no = #{no}
+		]]>
+	</update>
 </mapper>

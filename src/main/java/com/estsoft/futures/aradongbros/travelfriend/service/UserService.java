@@ -19,7 +19,13 @@ public class UserService
 		return userVo;
 	}
 
-	public UserVo insertUser(UserVo userVo) {
+	public UserVo insertUser(UserVo userVo) 
+	{
 		return userDao.insertUser(userVo);
+	}
+
+	public UserVo modifyUser(UserVo userVo) 
+	{
+		return userDao.modifyUser(userVo);
 	}
 }
