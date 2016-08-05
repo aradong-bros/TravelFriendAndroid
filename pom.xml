@@ -104,10 +104,10 @@
 
 		<!-- 메세지 컨버터 jackson -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.1.1</version>
-		</dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.4.4</version>
+        </dependency>
 
 		<!-- validation -->
 		<dependency>
@@ -148,6 +148,8 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		
+		
 
 
 	</dependencies>

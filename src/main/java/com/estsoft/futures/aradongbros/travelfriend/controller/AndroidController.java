@@ -1,18 +1,15 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
@@ -136,12 +133,11 @@ public class AndroidController
 	 * atrList : 사용자가 선택한 관과지의  no, location 정보를 담고 있는 AttractionVo 리스트
 	 * 
 	 */
-	@RequestMapping("/getTravelRoot")  // URL : ~~~ /getTravelRoot?atrList=atrList
+	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@ModelAttribute("atrList") List<AttractionVo> atrList)
-	{
+	public Map<String, Object> getTravelRoot(@RequestBody List<AttractionVo> atrList)
+	{	
 		System.out.println(atrList);
-		System.out.println("들어왔따~~~~~~");
 		
 		Kruskal kruskal = new Kruskal(atrList);
 		
@@ -155,11 +151,12 @@ public class AndroidController
 		return map;
 	}
 	
-	//테스트
-	//http://localhost:8080/TravelFriendAndroid/android/test
-	@RequestMapping("/test")
+	//테스트 
+	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
+/*	@RequestMapping("/test")
 	public String test(RedirectAttributes redirectAttributes)
 	{
+		
 		List<AttractionVo> atrList = new ArrayList<AttractionVo>(); 
 		atrList.add(androidService.selectAtrByNo(6588));
 		atrList.add(androidService.selectAtrByNo(6574));
@@ -169,6 +166,6 @@ public class AndroidController
 		redirectAttributes.addFlashAttribute("atrList", atrList);
 			
 		return "redirect:/android/getTravelRoot";
-	}
+	}*/
 	
 }
