@@ -78,7 +78,15 @@ public class Kruskal
 		
 		// 여행 경로 출력
 		int[] TRAVEL_ROOT = new int[node.length];
-		TRAVEL_ROOT = getRoot(path, TRAVEL_ROOT);
+		
+		if ( node.length == 1 )
+		{
+			TRAVEL_ROOT[0] = node[0].getNo();
+		}
+		else
+		{
+			TRAVEL_ROOT = getRoot(path, TRAVEL_ROOT);			
+		}
 		
 		System.out.print("전체 경로 : ");
 		for ( int i = 0; i < TRAVEL_ROOT.length; i++ )
