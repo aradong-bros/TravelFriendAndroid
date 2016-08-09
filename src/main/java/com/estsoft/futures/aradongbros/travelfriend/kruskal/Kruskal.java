@@ -2,7 +2,7 @@ package com.estsoft.futures.aradongbros.travelfriend.kruskal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
 
 public class Kruskal 
 {
@@ -12,7 +12,7 @@ public class Kruskal
 	
 	public Kruskal(){}
 	
-	public Kruskal(List<AttractionVo> atrList)
+	public Kruskal(List<AttractionDTO> atrList)
 	{	
 		node = new Node[atrList.size()];
 		

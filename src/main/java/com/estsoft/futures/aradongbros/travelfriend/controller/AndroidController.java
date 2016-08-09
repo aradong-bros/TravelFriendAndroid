@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootDTO;
+import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
@@ -135,49 +137,26 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody TravelRootDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	public Map<String, Object> getTravelRoot(@RequestBody AttractionDTO[] trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
 	{	
-/*		Kruskal kruskal = new Kruskal(atrList);
+		List<AttractionDTO> atrList = new ArrayList<AttractionDTO>();
+		
+		for ( int i = 0; i < trDTO.length; i++ )
+		{
+			atrList.add(trDTO[i]);
+		}
+		
+		Kruskal kruskal = new Kruskal(atrList);
 		
 		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
 		map.put("start", TRAVEL_ROOT[0]);
-		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);	*/
+		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("atrList", trDTO.getAtrList());
 		return map;
-	}
-	
-	@RequestMapping("/object")
-	@ResponseBody
-	public Map<String, Object> object(@RequestBody AttractionDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
-	{			
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("trDTO", trDTO);
-		return map;
-	}
-	
-	@RequestMapping("/array")
-	@ResponseBody
-	public Map<String, Object> array(@RequestBody AttractionDTO[] trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
-	{			
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("trDTO", trDTO);
-		return map;
-	}
-	
-	@RequestMapping("/list")
-	@ResponseBody
-	public Map<String, Object> list(@RequestBody TravelRootDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
-	{			
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("trDTO", trDTO);
-		return map;
-	}
-	
+	}	
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
 /*	@RequestMapping("/test")
