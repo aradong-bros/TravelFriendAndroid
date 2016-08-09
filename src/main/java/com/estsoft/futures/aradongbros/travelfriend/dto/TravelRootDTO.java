@@ -7,18 +7,18 @@ import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 
 public class TravelRootDTO 
 {
-	private List<AttractionVo> atrList = new ArrayList<AttractionVo>();
+	private List<AttractionDTO> atrList = new ArrayList<AttractionDTO>();
 
-	public List<AttractionVo> getAtrList() {
+	public List<AttractionDTO> getAtrList() {
 		return atrList;
 	}
 
-	public void setAtrList(List<AttractionVo> atrList) {
+	public void setAtrList(List<AttractionDTO> atrList) {
 		this.atrList = atrList;
 	}
 
 	@Override
 	public String toString() {
-		return "AttractionDTO [atrList=" + atrList + "]";
+		return "TravelRootDTO [atrList=" + atrList + "]";
 	}
 }
