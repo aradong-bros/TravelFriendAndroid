@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootDTO;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
@@ -147,6 +148,33 @@ public class AndroidController
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("atrList", trDTO.getAtrList());
+		return map;
+	}
+	
+	@RequestMapping("/object")
+	@ResponseBody
+	public Map<String, Object> object(@RequestBody AttractionDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	{			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("trDTO", trDTO);
+		return map;
+	}
+	
+	@RequestMapping("/array")
+	@ResponseBody
+	public Map<String, Object> array(@RequestBody AttractionDTO[] trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	{			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("trDTO", trDTO);
+		return map;
+	}
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String, Object> list(@RequestBody TravelRootDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	{			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("trDTO", trDTO);
 		return map;
 	}
 	
