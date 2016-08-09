@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+	<select id="selectCommentByNo" parameterType="int" resultType="commentvo">
+		<![CDATA[
+		select * from comment
+		where no = #{no}
+		]]>
+	</select>
+	
+	<select id="selectCommentByPostList_no" parameterType="int" resultType="commentvo">
+		<![CDATA[
+		select * from comment
+		where postList_no = #{postList_no}
+		]]>
+	</select>
+	
+	<insert id="insertComment" parameterType="commentvo" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
+		<![CDATA[
+		insert into comment values(null, #{user_no}, #{postList_no}, now(), #{content});
+		]]>
+	</insert>
+	
+	<delete id="deleteCommentByNo" parameterType="int">
+		<![CDATA[
+		delete from comment where no = {#no}
+		]]>
+	</delete>
+	
+	<update id="modifyComment" parameterType="commentvo">
+		<![CDATA[
+		update comment set content=#{content}, date=now() where no=#{no}
+		]]>
+	</update>
+</mapper>
