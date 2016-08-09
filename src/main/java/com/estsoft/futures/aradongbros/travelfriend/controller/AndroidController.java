@@ -149,7 +149,8 @@ public class AndroidController
 		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);	*/
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		map.put("no", trDTO.getNo());
+		map.put("location", trDTO.getLocation());
 		return map;
 	}
 	
