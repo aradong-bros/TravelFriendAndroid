@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
+import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootDTO;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
@@ -134,11 +134,8 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody AttractionDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	public Map<String, Object> getTravelRoot(@RequestBody TravelRootDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
 	{	
-		// DTO 안에 리스트를 만들어서 DTO 객체로 받는다.
-		System.out.println(trDTO.getNo() + " : " + trDTO.getLocation());
-		
 /*		Kruskal kruskal = new Kruskal(atrList);
 		
 		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
@@ -149,8 +146,7 @@ public class AndroidController
 		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);	*/
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("no", trDTO.getNo());
-		map.put("location", trDTO.getLocation());
+		map.put("atrList", trDTO.getAtrList());
 		return map;
 	}
 	
