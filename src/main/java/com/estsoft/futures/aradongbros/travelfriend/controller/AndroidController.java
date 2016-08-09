@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootDTO;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @Controller
 @RequestMapping("/android")
@@ -131,13 +131,13 @@ public class AndroidController
 	/*
 	 * 5번 메소드 
 	 * atrList : 사용자가 선택한 관과지의  no, location 정보를 담고 있는 AttractionVo 리스트
-	 * 
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody JSONPObject atrList)
+	public Map<String, Object> getTravelRoot(@RequestBody TravelRootDTO trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
 	{	
-		System.out.println(atrList);
+		// DTO 안에 리스트를 만들어서 DTO 객체로 받는다.
+		System.out.println(trDTO.getAtrList());
 		
 /*		Kruskal kruskal = new Kruskal(atrList);
 		
