@@ -1,10 +1,14 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.ScheduleService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
@@ -20,8 +24,12 @@ public class ScheduleController
 	
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schInsert
 	@RequestMapping("/schInsert")
-	public void insertScheduleData(@RequestBody ScheduleVo schVo)
+	@ResponseBody
+	public Map<String,Object> insertScheduleData(@RequestBody ScheduleVo schVo)
 	{	
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("isfinished", schVo.getIsfinished());
+		
 		if ( schVo.getIsfinished() == "0" )
 		{
 			schVo.setIsfinished("ongoing");
@@ -35,6 +43,8 @@ public class ScheduleController
 		schVo.getEndDate().replaceAll("/", "-");
 		
 		scheduleService.insertScheduleData(schVo);
+
+		return map;
 	}
 	
 	// 삭제 -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schDelete/{no}
