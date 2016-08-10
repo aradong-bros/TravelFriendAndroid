@@ -13,5 +13,12 @@
 			select last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<!-- 스케줄 1개 삭제 -->
+	<delete id="deleteScheduleData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from schedule
+		where no = #{no}
+	</delete>
 
 </mapper>

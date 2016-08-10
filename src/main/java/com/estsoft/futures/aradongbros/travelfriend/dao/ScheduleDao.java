@@ -17,4 +17,10 @@ public class ScheduleDao
 	{
 		sqlSession.insert("schedule.insertScheduleData", schVo);
 	}
+	
+	//삭제
+	public void deleteScheduleData(int no)
+	{
+		sqlSession.delete("schedule.deleteScheduleData", no);
+	}
 }

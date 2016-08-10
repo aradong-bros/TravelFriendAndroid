@@ -18,7 +18,7 @@ public class ScheduleController
 	
 	// 조회
 	
-	// 삽입  -> url : localhost:8080/TravelFriendAndroid/schedule/schInsert
+	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schInsert
 	@RequestMapping("/schInsert")
 	public void insertScheduleData(@RequestBody ScheduleVo schVo)
 	{	
@@ -37,11 +37,12 @@ public class ScheduleController
 		scheduleService.insertScheduleData(schVo);
 	}
 	
-	// 삭제 -> url : localhost:8080/TravelFriendAndroid/schedule/schDelete/{no}
+	// 삭제 -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schDelete/{no}
 	@RequestMapping("/schDelete/{no}")
 	public void deleteScheduleData(@PathVariable("no") int no)
 	{			
-		//scheduleService.deleteScheduleData(no);
+		scheduleService.deleteScheduleData(no);
 	}
+	
 	// 수정
 }

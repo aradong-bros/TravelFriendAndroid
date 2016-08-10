@@ -17,4 +17,10 @@ public class ScheduleService
 	{
 		ScheduleDao.insertScheduleData(schVo);
 	}
+	
+	//삭제
+	public void deleteScheduleData(int no)
+	{
+		ScheduleDao.deleteScheduleData(no);
+	}
 }
