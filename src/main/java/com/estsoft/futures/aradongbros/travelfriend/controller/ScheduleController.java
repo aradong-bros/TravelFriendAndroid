@@ -22,6 +22,15 @@ public class ScheduleController
 	//url : localhost:8080/TravelFriendAndroid/schedule/schInsert
 	public void insertScheduleData(@RequestBody ScheduleVo schVo)
 	{	
+		if ( schVo.getIsfinished() == "0" )
+		{
+			schVo.setIsfinished("ongoing");
+		}
+		else if ( schVo.getIsfinished() == "1" )
+		{
+			schVo.setIsfinished("finished");
+		}
+		
 		scheduleService.insertScheduleData(schVo);
 	}
 	
