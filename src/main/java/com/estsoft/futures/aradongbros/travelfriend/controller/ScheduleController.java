@@ -31,14 +31,14 @@ public class ScheduleController
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("isfinished", schVo.getIsfinished());
 		
-		if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "0") )
+		/*if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "0") )
 		{
 			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "ongoing"));
 		}
 		else if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "1") )
 		{
 			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "finished"));
-		}
+		}*/
 		
 		schVo.getStartDate().replaceAll("/", "-");
 		schVo.getEndDate().replaceAll("/", "-");
