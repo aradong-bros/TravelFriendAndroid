@@ -12,18 +12,18 @@ public class Kruskal
 	
 	public Kruskal(){}
 	
-	public Kruskal(List<AttractionDTO> atrList)
+	public Kruskal(AttractionDTO[] atrList)
 	{	
-		node = new Node[atrList.size()];
+		node = new Node[atrList.length];
 		
-		for ( int i = 0; i < atrList.size(); i++ )
+		for ( int i = 0; i < atrList.length; i++ )
 		{
-			String[] location = atrList.get(i).getLocation().split(",");
+			String[] location = atrList[i].getLocation().split(",");
 			
 			this.locationX = Double.parseDouble(location[0]);
 			this.locationY = Double.parseDouble(location[1]);
 			
-			node[i] = new Node(atrList.get(i).getNo(), this.locationX, this.locationY);
+			node[i] = new Node(atrList[i].getNo(), this.locationX, this.locationY);
 		}		
 	}
 	

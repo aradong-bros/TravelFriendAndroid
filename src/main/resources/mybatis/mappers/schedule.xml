@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="schedule"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
+
+	<!-- 새로운 관광지 정보 1개 입력 -->
+	<insert id="insertScheduleData" parameterType="schedulevo"> <!-- 인자로 넘겨주는 놈의 타입 -->
+		<![CDATA[
+			insert into postList values(null, #{user_no}, #{title}, #{isPublic}, #{startDate}, #{endDate}, #{isfinished)
+		]]>
+		
+		<selectKey keyProperty="postList_no" resultType="int" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+</mapper>

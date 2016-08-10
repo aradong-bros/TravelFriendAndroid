@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
-import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootDTO;
+import com.estsoft.futures.aradongbros.travelfriend.dto.CityAndPostDTO;
+import com.estsoft.futures.aradongbros.travelfriend.dto.CityListNoAndTravelRootDTO;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
@@ -137,28 +138,31 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@RequestBody AttractionDTO[] trDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	public Map<String, Object> getTravelRoot(@RequestBody CityAndPostDTO[] cpDTO)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
 	{	
-		List<AttractionDTO> atrList = new ArrayList<AttractionDTO>();
-		
-		for ( int i = 0; i < trDTO.length; i++ )
-		{
-			atrList.add(trDTO[i]);
-		}
-		
-		Kruskal kruskal = new Kruskal(atrList);
-		
-		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
-		
+		List<AttractionDTO[]> atrList = new ArrayList<AttractionDTO[]>();
+		Kruskal[] kruskal = new Kruskal[atrList.size()];
+		List<int[]> TRAVEL_ROOT = new ArrayList<int[]>();
+		CityListNoAndTravelRootDTO[] cityAndTravelRoot = new CityListNoAndTravelRootDTO[cpDTO.length];
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
-		map.put("start", TRAVEL_ROOT[0]);
-		map.put("end", TRAVEL_ROOT[TRAVEL_ROOT.length - 1]);
+		
+		for ( int i = 0; i < cpDTO.length; i++ )
+		{
+			atrList.add(cpDTO[i].getAtrDTOArray());
+			kruskal[i] = new Kruskal(atrList.get(i));
+			TRAVEL_ROOT.add(kruskal[i].getTravelRoot());
+			
+			cityAndTravelRoot[i].setCityList_no(cpDTO[i].getCityList_no());
+			cityAndTravelRoot[i].setTRAVEL_ROOT(TRAVEL_ROOT);
+			
+			map.put("TRByCity", cityAndTravelRoot[i]);
+		}
 		
 		return map;
 	}	
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
+	//받을땐 모텔어트리뷰터로 받는다.
 /*	@RequestMapping("/test")
 	public String test(RedirectAttributes redirectAttributes)
 	{
