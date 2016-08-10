@@ -8,7 +8,7 @@ public class ScheduleVo
 	private int isPublic;
 	private String startDate;
 	private String endDate;
-	private String isfinished;
+	private Isfinished isfinished;
 	
 	public int getNo() {
 		return no;
@@ -46,10 +46,10 @@ public class ScheduleVo
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public String getIsfinished() {
+	public Isfinished getIsfinished() {
 		return isfinished;
 	}
-	public void setIsfinished(String isfinished) {
+	public void setIsfinished(Isfinished isfinished) {
 		this.isfinished = isfinished;
 	}
 	@Override

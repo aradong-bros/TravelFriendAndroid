@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.ScheduleService;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Isfinished;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
 
 @Controller
@@ -30,13 +31,13 @@ public class ScheduleController
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("isfinished", schVo.getIsfinished());
 		
-		if ( schVo.getIsfinished() == "0" )
+		if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "0") )
 		{
-			schVo.setIsfinished("ongoing");
+			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "ongoing"));
 		}
-		else if ( schVo.getIsfinished() == "1" )
+		else if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "1") )
 		{
-			schVo.setIsfinished("finished");
+			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "finished"));
 		}
 		
 		schVo.getStartDate().replaceAll("/", "-");
