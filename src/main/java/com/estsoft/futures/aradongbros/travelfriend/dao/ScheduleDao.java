@@ -44,7 +44,8 @@ public class ScheduleDao
 	// 삽입
 	public int insertScheduleData(ScheduleVo schVo)
 	{
-		int no = sqlSession.insert("schedule.insertScheduleData", schVo);
+		sqlSession.insert("schedule.insertScheduleData", schVo);
+		int no = schVo.getNo(); 
 		
 		return no;
 	}
