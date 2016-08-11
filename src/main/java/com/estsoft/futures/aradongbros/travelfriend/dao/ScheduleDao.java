@@ -42,9 +42,11 @@ public class ScheduleDao
     }
     
 	// 삽입
-	public void insertScheduleData(ScheduleVo schVo)
+	public int insertScheduleData(ScheduleVo schVo)
 	{
-		sqlSession.insert("schedule.insertScheduleData", schVo);
+		int no = sqlSession.insert("schedule.insertScheduleData", schVo);
+		
+		return no;
 	}
 	
 	// 삭제

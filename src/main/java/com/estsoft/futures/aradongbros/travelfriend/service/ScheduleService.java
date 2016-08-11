@@ -40,9 +40,11 @@ public class ScheduleService
 	}
 	
 	//삽입
-	public void insertScheduleData(ScheduleVo schVo)
+	public int insertScheduleData(ScheduleVo schVo)
 	{
-		scheduleDao.insertScheduleData(schVo);
+		int no = scheduleDao.insertScheduleData(schVo);
+		
+		return no;
 	}
 	
 	//삭제

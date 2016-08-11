@@ -24,7 +24,7 @@ public class CityController
 	
 	// 조회
 	
-	
+
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/cityInsert
 	@RequestMapping("/cityInsert")
 	@ResponseBody

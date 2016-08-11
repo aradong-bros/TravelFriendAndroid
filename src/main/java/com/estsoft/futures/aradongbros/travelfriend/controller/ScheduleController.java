@@ -79,7 +79,9 @@ public class ScheduleController
 		schVo.getStartDate().replaceAll("/", "-");
 		schVo.getEndDate().replaceAll("/", "-");
 		
-		scheduleService.insertScheduleData(schVo);
+		int no = scheduleService.insertScheduleData(schVo);
+		
+		map.put("no", no);
 
 		return map;
 	}
