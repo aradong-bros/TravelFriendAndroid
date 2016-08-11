@@ -52,7 +52,7 @@
 	<!-- 스케줄 1개 입력 -->
 	<insert id="insertScheduleData" parameterType="schedulevo"> <!-- 인자로 넘겨주는 놈의 타입 -->
 		<![CDATA[
-			insert into schedule values(null, #{user_no}, #{title}, #{isPublic}, #{startDate}, #{endDate}, #{isfinished})
+			insert into schedule values(null, #{user_no}, #{title}, #{isPublic}, #{startDate}, #{endDate}, #{isfinished}, #{firstStation}, #{lastStation})
 		]]>
 		
 		<selectKey keyProperty="no" resultType="int" order="AFTER">
