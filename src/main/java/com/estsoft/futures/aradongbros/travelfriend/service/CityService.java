@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.estsoft.futures.aradongbros.travelfriend.dao.CityDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Status;
 
 @Service
 public class CityService 
@@ -26,5 +27,15 @@ public class CityService
 		cityDao.deleteCityData(no);
 	}
 	
-	// 수정
+	// 수정 : status
+	public void modifyStatus(int no, Status status)
+	{
+		cityDao.modifyStatus(no, status);
+	}
+	
+	// 수정 : order
+	public void modifyOrder(int no, int order)
+	{
+		cityDao.modifyOrder(no, order);
+	}
 }

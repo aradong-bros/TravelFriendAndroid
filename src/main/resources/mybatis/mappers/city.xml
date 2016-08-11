@@ -20,5 +20,19 @@
 		from city
 		where no = #{no}
 	</delete>
+	
+	<!-- 수정 : status  -->
+	<update id="modifyStatus" parameterType="map">
+		update city 
+		set status = #{status}
+		where no = #{no} 
+	</update>
+	
+	<!-- 수정 : order  -->
+	<update id="modifyOrder" parameterType="map">
+		update city 
+		set order = #{order}
+		where no = #{no} 
+	</update>
 
 </mapper>

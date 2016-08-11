@@ -74,7 +74,7 @@
 		where no = #{no} 
 	</update>
 	
-	<!-- 수정 : isPublic  -->
+	<!-- 수정 : isfinished  -->
 	<update id="modifyIsfinished" parameterType="map">
 		update schedule 
 		set isfinished = #{isfinished}
