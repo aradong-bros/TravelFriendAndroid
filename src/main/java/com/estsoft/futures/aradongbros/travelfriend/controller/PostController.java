@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Status;
 
 @Controller
 @RequestMapping("/post")
@@ -26,11 +27,19 @@ public class PostController
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/postInsert
 	@RequestMapping("/postInsert")
 	@ResponseBody
-	public Map<String,Object> insertPostData(@RequestBody PostVo postVo)
+	public Map<String,Object> insertPostData(@RequestBody PostVo[] postList)
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
 
-		postService.insertPostData(postVo);
+		for ( int i = 0; i < postList.length; i++ )
+		{
+			if ( postList[i].getPostOrder() != -1 )
+			{
+				postList[i].setPostOrder(-1);
+			}
+			
+			postService.insertPostData(postList[i]);			
+		}
 
 		return map;
 	}
