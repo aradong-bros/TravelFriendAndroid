@@ -1,6 +1,5 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class ScheduleController
 	public Map<String,Object> selectScheduleAllDataByUser(@PathVariable("user_no") int user_no)
 	{			
 		List<ScheduleVo> schList = scheduleService.selectScheduleAllDataByUser(user_no);
-				
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("schList", schList);
 		
