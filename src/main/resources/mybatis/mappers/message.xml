@@ -4,13 +4,13 @@
 <mapper namespace="message">
 	<select id="getSomeMessage" parameterType="map" resultType="map">
 		<![CDATA[
-		select *,user.name,user.picture from 
+		select message.*,user.name,user.picture from 
 			message, user
 		where talk_no = #{talk_no} 
-			and no <= #{no1} 
-			and no > #{no2}
+			and message.no <= #{no1} 
+			and message.no > #{no2}
 			and message.user_no = user.no
-		order by no desc 
+		order by message.no desc 
 		limit 100;
 		]]>
 	</select>
