@@ -33,7 +33,7 @@ public class CityController
 		
 		for ( int i = 0; i < cityList.length; i++ )
 		{
-			if ( cityList[i].getStatus() == null || cityList[i].getStatus().toString().equals("") )
+			if ( cityList[i].getStatus() != Enum.valueOf(Status.class, "none") )
 			{
 				cityList[i].setStatus(Enum.valueOf(Status.class, "none"));
 			}
