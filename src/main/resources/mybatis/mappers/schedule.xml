@@ -16,13 +16,13 @@
 		where no = #{no}
 	</select>
 	
-	<!-- 새로운 관광지 정보 1개 입력 -->
+	<!-- 스케줄 1개 입력 -->
 	<insert id="insertScheduleData" parameterType="schedulevo"> <!-- 인자로 넘겨주는 놈의 타입 -->
 		<![CDATA[
 			insert into schedule values(null, #{user_no}, #{title}, #{isPublic}, #{startDate}, #{endDate}, #{isfinished})
 		]]>
 		
-		<selectKey keyProperty="postList_no" resultType="int" order="AFTER">
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
 			select last_insert_id()
 		</selectKey>
 	</insert>

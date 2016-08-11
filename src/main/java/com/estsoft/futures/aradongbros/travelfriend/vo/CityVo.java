@@ -5,7 +5,7 @@ public class CityVo
 	private int no;
 	private int schedule_no;
 	private int cityList_no;
-	private Status status;
+	private Status status;  // start, end, none
 	private int order;
 	
 	public int getNo() {
