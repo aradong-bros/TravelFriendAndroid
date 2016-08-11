@@ -2,4 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="train">
+	<select id="selectStationNo" parameterType="string" resultType="int">
+		<![CDATA[
+		select no from trainStation
+		where `name` = #{stationName}
+		]]>
+	</select>
+	
+	<select id="selectTrainInfoByNo" parameterType="int" resultType="traininfovo">
+		<![CDATA[
+		select * from trainInfo
+		where no = #{no}
+		]]>
+	</select>
+	
+	<select id="selectStartTrainTime" parameterType="map" resultType="trainoperationroutevo">
+		<![CDATA[
+		select start.* from
+			(select * from trainOperationRoute where trainStation_no = #{startStationNo}) start,
+			(select * from trainOperationRoute where trainStation_no = #{endStationNo}) end
+		where start.trainInfo_no = end.trainInfo_no
+			and start.order < end.order
+			and start.trainCategory_no = #{categoryNo}
+			and start.trainCategory_no = end.trainCategory_no
+			and start.departureTime >= #{goTime}
+		order by start.departureTime asc;
+		]]>
+	</select>
+	
+	<select id="selectEndTrainTime" parameterType="map" resultType="trainoperationroutevo">
+		<![CDATA[
+		select end.* from
+			(select * from trainOperationRoute where trainStation_no = #{startStationNo}) start,
+			(select * from trainOperationRoute where trainStation_no = #{endStationNo}) end
+		where start.trainInfo_no = end.trainInfo_no
+			and start.order < end.order
+			and start.trainCategory_no = #{categoryNo}
+			and start.trainCategory_no = end.trainCategory_no
+			and start.departureTime >= #{goTime}
+		order by start.departureTime asc;
+		]]>
+	</select>
 </mapper>
