@@ -16,14 +16,14 @@ public class MessageDao
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<MessageVo> getSomeMessage(int talk_no, int no1, int no2) 
+	public List<Map<String, Object>> getSomeMessage(int talk_no, int no1, int no2) 
 	{
 		Map<String, Integer> map = new HashMap<>();
 		map.put("talk_no", talk_no);
 		map.put("no1", no1);
 		map.put("no2", no2);
 		
-		List<MessageVo> list = sqlSession.selectList("message.getSomeMessage", map);
+		List<Map<String, Object>> list = sqlSession.selectList("message.getSomeMessage", map);
 		return list;
 	}
 

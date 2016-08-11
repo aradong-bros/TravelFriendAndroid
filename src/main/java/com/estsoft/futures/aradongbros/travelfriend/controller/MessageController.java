@@ -33,14 +33,8 @@ public class MessageController
 			@RequestParam("no2")int no2)
 	{
 		Map<String, Object> map = new HashMap<>();
-		List<MessageVo> messageList = messageService.getSomeMessage(talk_no, no1, no2);
-		
-		List<UserVo> userList = new ArrayList<>();
-		for (MessageVo messageVo : messageList) {
-			userList.add(userService.getUserNameAndPicture(messageVo.getUser_no()));
-		}
+		List<Map<String, Object>> messageList = messageService.getSomeMessage(talk_no, no1, no2);
 		map.put("messageList", messageList);
-		map.put("user", userList);
 		
 		return map;
 	}

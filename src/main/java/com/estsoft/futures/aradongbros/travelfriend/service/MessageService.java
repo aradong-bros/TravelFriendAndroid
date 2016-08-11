@@ -15,8 +15,8 @@ public class MessageService
 	@Autowired
 	private MessageDao messageDao;
 
-	public List<MessageVo> getSomeMessage(int talk_no, int no1, int no2) {
-		List<MessageVo> messageList = messageDao.getSomeMessage(talk_no, no1, no2);
+	public List<Map<String, Object>> getSomeMessage(int talk_no, int no1, int no2) {
+		List<Map<String, Object>> messageList = messageDao.getSomeMessage(talk_no, no1, no2);
 		return messageList;
 	}
 }

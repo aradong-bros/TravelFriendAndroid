@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="message">
-	<select id="getSomeMessage" parameterType="map" resultType="messagevo">
+	<select id="getSomeMessage" parameterType="map" resultType="map">
 		<![CDATA[
-		select * from 
-			message 
+		select *,user.name,user.picture from 
+			message, user
 		where talk_no = #{talk_no} 
 			and no <= #{no1} 
-			and no > #{no2} 
+			and no > #{no2}
+			and message.user_no = user.no
 		order by no desc 
 		limit 100;
 		]]>
