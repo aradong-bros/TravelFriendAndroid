@@ -65,7 +65,7 @@ public class ScheduleController
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schInsert
 	@RequestMapping("/schInsert")
 	@ResponseBody
-	public Map<String,Object> insertScheduleData(@RequestBody ScheduleVo schVo)
+	public int insertScheduleData(@RequestBody ScheduleVo schVo)
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -81,9 +81,7 @@ public class ScheduleController
 		
 		int no = scheduleService.insertScheduleData(schVo);
 		
-		map.put("no", no);
-
-		return map;
+		return no;
 	}
 	
 	// 삭제 -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schDelete/{no}
