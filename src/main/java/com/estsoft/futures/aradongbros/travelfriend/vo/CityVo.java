@@ -7,6 +7,7 @@ public class CityVo
 	private int cityList_no;
 	private Status status;  // start, end, none
 	private int cityOrder;
+	
 	public int getNo() {
 		return no;
 	}
