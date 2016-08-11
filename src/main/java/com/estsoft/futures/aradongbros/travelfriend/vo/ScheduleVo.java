@@ -9,7 +9,8 @@ public class ScheduleVo
 	private String startDate;
 	private String endDate;
 	private Isfinished isfinished;
-	
+	private String firstStation;
+	private String lastStation;
 	public int getNo() {
 		return no;
 	}
@@ -52,9 +53,22 @@ public class ScheduleVo
 	public void setIsfinished(Isfinished isfinished) {
 		this.isfinished = isfinished;
 	}
+	public String getFirstStation() {
+		return firstStation;
+	}
+	public void setFirstStation(String firstStation) {
+		this.firstStation = firstStation;
+	}
+	public String getLastStation() {
+		return lastStation;
+	}
+	public void setLastStation(String lastStation) {
+		this.lastStation = lastStation;
+	}
 	@Override
 	public String toString() {
 		return "ScheduleVo [no=" + no + ", user_no=" + user_no + ", title=" + title + ", isPublic=" + isPublic
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", isfinished=" + isfinished + "]";
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", isfinished=" + isfinished + ", firstStation="
+				+ firstStation + ", lastStation=" + lastStation + "]";
 	}
 }
