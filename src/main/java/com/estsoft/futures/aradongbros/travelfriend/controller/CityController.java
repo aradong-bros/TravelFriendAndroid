@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.CityService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Status;
 
 @Controller
 @RequestMapping("/city")
@@ -26,11 +27,24 @@ public class CityController
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/cityInsert
 	@RequestMapping("/cityInsert")
 	@ResponseBody
-	public Map<String,Object> insertCityData(@RequestBody CityVo cityVo)
+	public Map<String,Object> insertCityData(@RequestBody CityVo[] cityList)
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
-
-		cityService.insertCityData(cityVo);
+		
+		for ( int i = 0; i < cityList.length; i++ )
+		{
+			if ( cityList[i].getStatus() == null || cityList[i].getStatus().toString().equals("") )
+			{
+				cityList[i].setStatus(Enum.valueOf(Status.class, "none"));
+			}
+			
+			if ( cityList[i].getOrder() != -1 )
+			{
+				cityList[i].setOrder(-1);
+			}
+			
+			cityService.insertCityData(cityList[i]);			
+		}
 
 		return map;
 	}
