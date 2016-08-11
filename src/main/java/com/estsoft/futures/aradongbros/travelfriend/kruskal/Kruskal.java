@@ -2,7 +2,7 @@ package com.estsoft.futures.aradongbros.travelfriend.kruskal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
 
 public class Kruskal 
 {
@@ -12,18 +12,18 @@ public class Kruskal
 	
 	public Kruskal(){}
 	
-	public Kruskal(List<AttractionVo> atrList)
+	public Kruskal(AttractionDTO[] atrList)
 	{	
-		node = new Node[atrList.size()];
+		node = new Node[atrList.length];
 		
-		for ( int i = 0; i < atrList.size(); i++ )
+		for ( int i = 0; i < atrList.length; i++ )
 		{
-			String[] location = atrList.get(i).getLocation().split(",");
+			String[] location = atrList[i].getLocation().split(",");
 			
 			this.locationX = Double.parseDouble(location[0]);
 			this.locationY = Double.parseDouble(location[1]);
 			
-			node[i] = new Node(atrList.get(i).getNo(), this.locationX, this.locationY);
+			node[i] = new Node(atrList[i].getNo(), this.locationX, this.locationY);
 		}		
 	}
 	
@@ -78,7 +78,15 @@ public class Kruskal
 		
 		// 여행 경로 출력
 		int[] TRAVEL_ROOT = new int[node.length];
-		TRAVEL_ROOT = getRoot(path, TRAVEL_ROOT);
+		
+		if ( node.length == 1 )
+		{
+			TRAVEL_ROOT[0] = node[0].getNo();
+		}
+		else
+		{
+			TRAVEL_ROOT = getRoot(path, TRAVEL_ROOT);			
+		}
 		
 		System.out.print("전체 경로 : ");
 		for ( int i = 0; i < TRAVEL_ROOT.length; i++ )
