@@ -71,7 +71,7 @@ public class ScheduleController
 		
 		// Enum.valueOf(Isfinished.class, "ongoing");   <- String to Enum 파싱
 
-		if ( schVo.getIsfinished() == null )
+		if ( schVo.getIsfinished() == null || schVo.getIsfinished().toString().equals("") )
 		{
 			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "ongoing"));
 		}
