@@ -48,7 +48,7 @@ public class TrainDao
 		map.put("endStationNo", endStationNo);
 		map.put("categoryNo", categoryNo);
 		map.put("goTime", goTime);
-		List<TrainOperationRouteVo> trainTimeList = sqlSession.selectList("train.selectENdTrainTime", map);
+		List<TrainOperationRouteVo> trainTimeList = sqlSession.selectList("train.selectEndTrainTime", map);
 		return trainTimeList;
 	}
 }
