@@ -1,6 +1,8 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,21 @@ public class ScheduleController
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	// 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelect/{no}
+	// 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectAll
+	@RequestMapping("/schSelectAll")
+	@ResponseBody
+	public Map<String,Object> selectScheduleAllData()
+	{			
+		List<ScheduleVo> schList = new ArrayList<ScheduleVo>();
+		schList = scheduleService.selectScheduleAllData();
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("schList", schList);
+		
+		return map;
+	}
+	
+	// 1개 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelect/{no}
 	@RequestMapping("/schSelect/{no}")
 	@ResponseBody
 	public Map<String,Object> selectScheduleData(@PathVariable("no") int no)

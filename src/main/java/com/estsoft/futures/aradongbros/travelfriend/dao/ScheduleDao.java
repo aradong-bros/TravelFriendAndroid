@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +17,15 @@ public class ScheduleDao
     @Autowired
     private SqlSession sqlSession;  // mybatis 사용하기위해 선언
     
-    //조회
+    // 전체 조회
+    public List<ScheduleVo> selectScheduleAllData()
+    {
+    	List<ScheduleVo> schList = sqlSession.selectList("schedule.selectScheduleAllData");
+    	
+    	return schList;
+    }
+    
+    // 1개 조회
     public ScheduleVo selectScheduleData(int no)
     {
     	ScheduleVo schVo = sqlSession.selectOne("schedule.selectScheduleData", no);
@@ -24,13 +33,13 @@ public class ScheduleDao
     	return schVo;
     }
     
-	//삽입
+	// 삽입
 	public void insertScheduleData(ScheduleVo schVo)
 	{
 		sqlSession.insert("schedule.insertScheduleData", schVo);
 	}
 	
-	//삭제
+	// 삭제
 	public void deleteScheduleData(int no)
 	{
 		sqlSession.delete("schedule.deleteScheduleData", no);

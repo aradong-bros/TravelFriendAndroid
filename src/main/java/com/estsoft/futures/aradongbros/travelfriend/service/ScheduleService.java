@@ -1,5 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,19 @@ import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
 public class ScheduleService 
 {
 	@Autowired
-	private ScheduleDao ScheduleDao;
+	private ScheduleDao scheduleDao;
+	
+    public List<ScheduleVo> selectScheduleAllData()
+    {
+    	List<ScheduleVo> schList = scheduleDao.selectScheduleAllData();
+    	
+    	return schList;
+    }
 	
 	//조회
 	public ScheduleVo selectScheduleData(int no)
 	{
-		ScheduleVo schVo = ScheduleDao.selectScheduleData(no);
+		ScheduleVo schVo = scheduleDao.selectScheduleData(no);
 		
 		return schVo;	
 	}
@@ -24,13 +33,13 @@ public class ScheduleService
 	//삽입
 	public void insertScheduleData(ScheduleVo schVo)
 	{
-		ScheduleDao.insertScheduleData(schVo);
+		scheduleDao.insertScheduleData(schVo);
 	}
 	
 	//삭제
 	public void deleteScheduleData(int no)
 	{
-		ScheduleDao.deleteScheduleData(no);
+		scheduleDao.deleteScheduleData(no);
 	}
 	
 	// 수정
@@ -38,12 +47,12 @@ public class ScheduleService
 	// 수정 : isPublic
 	public void modifyIsPublic(int no, int isPublic)
 	{
-		ScheduleDao.modifyIsPublic(no, isPublic);
+		scheduleDao.modifyIsPublic(no, isPublic);
 	}
 	
 	// 수정 : isfinished
 	public void modifyIsfinished(int no, Isfinished isfinished)
 	{
-		ScheduleDao.modifyIsfinished(no, isfinished);
+		scheduleDao.modifyIsfinished(no, isfinished);
 	}
 }
