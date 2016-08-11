@@ -1,6 +1,5 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +23,25 @@ public class ScheduleController
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	// 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectAll
-	@RequestMapping("/schSelectAll")
+	// 사용자꺼 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectByUser/{user_no}
+	@RequestMapping("/schSelectByUser/{user_no}")
 	@ResponseBody
-	public Map<String,Object> selectScheduleAllData()
+	public Map<String,Object> selectScheduleAllDataByUser(@PathVariable("user_no") int user_no)
 	{			
-		List<ScheduleVo> schList = new ArrayList<ScheduleVo>();
-		schList = scheduleService.selectScheduleAllData();
+		List<ScheduleVo> schList = scheduleService.selectScheduleAllDataByUser(user_no);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("schList", schList);
+		
+		return map;
+	}
+	
+	// 다른사람들꺼 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectByOther/{user_no}
+	@RequestMapping("/schSelectByOther/{user_no}")
+	@ResponseBody
+	public Map<String,Object> selectScheduleAllDataByOther(@PathVariable("user_no") int user_no)
+	{			
+		List<ScheduleVo> schList = scheduleService.selectScheduleAllDataByOther(user_no);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("schList", schList);
@@ -58,15 +69,8 @@ public class ScheduleController
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-/*		if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "ongoing") )
-		{
-			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "ongoing"));
-		}
-		else if ( schVo.getIsfinished() == Enum.valueOf(Isfinished.class, "finished") )
-		{
-			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "finished"));
-		}*/
-		
+		// Enum.valueOf(Isfinished.class, "ongoing");   <- String to Enum 파싱
+
 		schVo.getStartDate().replaceAll("/", "-");
 		schVo.getEndDate().replaceAll("/", "-");
 		

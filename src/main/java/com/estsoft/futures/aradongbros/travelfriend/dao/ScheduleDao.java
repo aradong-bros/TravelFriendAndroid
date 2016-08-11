@@ -17,10 +17,18 @@ public class ScheduleDao
     @Autowired
     private SqlSession sqlSession;  // mybatis 사용하기위해 선언
     
-    // 전체 조회
-    public List<ScheduleVo> selectScheduleAllData()
+    // 사용자꺼 전체 조회 
+    public List<ScheduleVo> selectScheduleAllDataByUser(int user_no)
     {
-    	List<ScheduleVo> schList = sqlSession.selectList("schedule.selectScheduleAllData");
+    	List<ScheduleVo> schList = sqlSession.selectList("schedule.selectScheduleAllDataByUser", user_no);
+    	
+    	return schList;
+    }
+    
+    // 다른사람들꺼 전체 조회
+    public List<ScheduleVo> selectScheduleAllDataByOther(int user_no)
+    {
+    	List<ScheduleVo> schList = sqlSession.selectList("schedule.selectScheduleAllDataByOther", user_no);
     	
     	return schList;
     }
