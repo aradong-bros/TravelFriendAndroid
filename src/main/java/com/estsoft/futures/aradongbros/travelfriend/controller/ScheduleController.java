@@ -36,7 +36,7 @@ public class ScheduleController
 		for ( int i = 0; i < schList.size(); i++ )
 		{
 			schList.get(i).setStartDate(sdf.format(schList.get(i).getStartDate()));
-			schList.get(i).setStartDate(sdf.format(schList.get(i).getEndDate()));
+			schList.get(i).setEndDate(sdf.format(schList.get(i).getEndDate()));
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
