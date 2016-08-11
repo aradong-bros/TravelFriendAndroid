@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +28,16 @@ public class ScheduleController
 	@RequestMapping("/schSelectByUser/{user_no}")
 	@ResponseBody
 	public Map<String,Object> selectScheduleAllDataByUser(@PathVariable("user_no") int user_no)
-	{			
+	{	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		List<ScheduleVo> schList = scheduleService.selectScheduleAllDataByUser(user_no);
+		
+		for ( int i = 0; i < schList.size(); i++ )
+		{
+			schList.get(i).setStartDate(sdf.format(schList.get(i).getStartDate()));
+			schList.get(i).setStartDate(sdf.format(schList.get(i).getEndDate()));
+		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("schList", schList);
@@ -41,7 +50,15 @@ public class ScheduleController
 	@ResponseBody
 	public Map<String,Object> selectScheduleAllDataByOther(@PathVariable("user_no") int user_no)
 	{			
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		List<ScheduleVo> schList = scheduleService.selectScheduleAllDataByOther(user_no);
+		
+		for ( int i = 0; i < schList.size(); i++ )
+		{
+			sdf.format(schList.get(i).getStartDate());
+			sdf.format(schList.get(i).getEndDate());
+		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("schList", schList);
