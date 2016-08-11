@@ -3,6 +3,19 @@
 
 <mapper namespace="schedule"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
 
+	<!-- 스케줄 1개 조회  -->
+	<select id="selectScheduleData" resultType="schedulevo" parameterType="int">
+		select no,
+			   user_no,
+			   title,
+			   isPublic,
+			   startDate,
+			   endDate,
+			   isfinished
+		from schedule 
+		where no = #{no}
+	</select>
+	
 	<!-- 새로운 관광지 정보 1개 입력 -->
 	<insert id="insertScheduleData" parameterType="schedulevo"> <!-- 인자로 넘겨주는 놈의 타입 -->
 		<![CDATA[
@@ -20,5 +33,19 @@
 		from schedule
 		where no = #{no}
 	</delete>
+	
+	<!-- 수정 : isPublic  -->
+	<update id="modifyIsPublic" parameterType="map">
+		update schedule 
+		set isPublic = #{isPublic}
+		where no = #{no} 
+	</update>
+	
+	<!-- 수정 : isPublic  -->
+	<update id="modifyIsfinished" parameterType="map">
+		update schedule 
+		set isfinished = #{isfinished}
+		where no = #{no} 
+	</update>
 
 </mapper>
