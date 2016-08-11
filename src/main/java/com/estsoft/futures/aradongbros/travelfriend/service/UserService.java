@@ -28,4 +28,8 @@ public class UserService
 	{
 		return userDao.modifyUser(userVo);
 	}
+
+	public UserVo getUserNameAndPicture(int user_no) {
+		return userDao.getUserNameAndPicture(user_no);
+	}
 }

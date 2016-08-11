@@ -35,4 +35,8 @@ public class UserDao
 		UserVo modifiedUser = sqlSession.selectOne("user.selectUserByNo", userVo.getNo());
 		return modifiedUser;
 	}
+
+	public UserVo getUserNameAndPicture(int user_no) {
+		return sqlSession.selectOne("user.getUserNameAndPicture", user_no);
+	}
 }
