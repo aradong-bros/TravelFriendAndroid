@@ -15,6 +15,14 @@ public class ScheduleService
 	@Autowired
 	private ScheduleDao scheduleDao;
 	
+	// 스케줄 no 조회
+	public int selectScheduleNo(int user_no, String title)
+	{
+		int no = scheduleDao.selectScheduleNo(user_no, title);
+		
+		return no;
+	}
+	
 	// 사용자꺼 전체 조회 
     public List<ScheduleVo> selectScheduleAllDataByUser(int user_no)
     {

@@ -23,6 +23,20 @@ public class ScheduleController
 	@Autowired
 	private ScheduleService scheduleService;
 	
+	// 스케줄 no 받아오기
+	@RequestMapping("/schSelectNo")
+	@ResponseBody
+	public Map<String,Object> selectScheduleNo(@RequestParam("user_no") int user_no,
+			 								   @RequestParam("title") String title)
+	{			
+		int no = scheduleService.selectScheduleNo(user_no, title);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("no", no);
+		
+		return map;
+	}
+	
 	// 사용자꺼 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectByUser/{user_no}
 	@RequestMapping("/schSelectByUser/{user_no}")
 	@ResponseBody
