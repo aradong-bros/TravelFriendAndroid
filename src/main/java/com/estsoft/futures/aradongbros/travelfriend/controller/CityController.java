@@ -39,9 +39,9 @@ public class CityController
 				cityList[i].setStatus(Enum.valueOf(Status.class, "none"));
 			}
 			
-			if ( cityList[i].getOrder() != -1 )
+			if ( cityList[i].getCityOrder() != -1 )
 			{
-				cityList[i].setOrder(-1);
+				cityList[i].setCityOrder(-1);
 			}
 			
 			cityService.insertCityData(cityList[i]);			
@@ -79,7 +79,7 @@ public class CityController
 	@RequestMapping("/cityModifyOrder")
 	@ResponseBody
 	public Map<String,Object> modifyOrder(@RequestParam("no") int no,
-										   @RequestParam("order") int order)
+										  @RequestParam("order") int order)
 	{
 		Map<String,Object> map = new HashMap<String,Object>();
 		

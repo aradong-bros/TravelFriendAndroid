@@ -1,5 +1,8 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +29,13 @@ public class PostDao
 		sqlSession.delete("post.deletePostData", no);
 	}
 	
-	// 수정
+	// 수정 : postOrder
+	public void modifyPostOrder(int no, int postOrder)
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("no", no);
+		map.put("postOrder", postOrder);
+		
+		sqlSession.update("post.modifyPostOrder", map);
+	}
 }

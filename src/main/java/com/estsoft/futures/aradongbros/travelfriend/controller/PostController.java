@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
@@ -56,5 +57,16 @@ public class PostController
 		return map;
 	}
 	
-	// 수정
+	// 수정 : postOrder -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/postModifyPostOrder?no={no 값}&postOrder={postOrder 값}
+	@RequestMapping("/postModifyPostOrder")
+	@ResponseBody
+	public Map<String,Object> modifyPostOrder(@RequestParam("no") int no,
+										      @RequestParam("postOrder") int postOrder)
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		postService.modifyPostOrder(no, postOrder);
+		
+		return map;
+	}
 }

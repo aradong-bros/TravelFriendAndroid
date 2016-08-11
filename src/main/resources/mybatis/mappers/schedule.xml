@@ -3,14 +3,6 @@
 
 <mapper namespace="schedule"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
 
-	<!-- 스케줄 no 조회  -->
-		<select id="selectScheduleNo" resultType="int" parameterType="map">
-		select no
-		from schedule 
-		where user_no = #{user_no}
-			and title = #{title}
-	</select>
-
 	<!-- 사용자꺼  전체 조회  -->
 	<select id="selectScheduleAllDataByUser" resultType="schedulevo" parameterType="int">
 		select no,
@@ -19,7 +11,9 @@
 			   isPublic,
 			   startDate,
 			   endDate,
-			   isfinished
+			   isfinished,
+			   firstStation,
+			   lastStation
 		from schedule 
 		where user_no = #{user_no}
 	</select>
@@ -31,7 +25,9 @@
 			   isPublic,
 			   startDate,
 			   endDate,
-			   isfinished
+			   isfinished,
+			   firstStation,
+			   lastStation
 		from schedule 
 		where user_no != #{user_no}
 	</select>

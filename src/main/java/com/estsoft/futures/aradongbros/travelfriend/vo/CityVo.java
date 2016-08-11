@@ -6,8 +6,7 @@ public class CityVo
 	private int schedule_no;
 	private int cityList_no;
 	private Status status;  // start, end, none
-	private int order;
-	
+	private int cityOrder;
 	public int getNo() {
 		return no;
 	}
@@ -32,16 +31,18 @@ public class CityVo
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	public int getOrder() {
-		return order;
+	public int getCityOrder() {
+		return cityOrder;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setCityOrder(int cityOrder) {
+		this.cityOrder = cityOrder;
 	}
 	@Override
 	public String toString() {
 		return "CityVo [no=" + no + ", schedule_no=" + schedule_no + ", cityList_no=" + cityList_no + ", status="
-				+ status + ", order=" + order + "]";
+				+ status + ", cityOrder=" + cityOrder + "]";
 	}
+	
+	
 	
 }

@@ -20,5 +20,12 @@
 		from post
 		where no = #{no}
 	</delete>
+	
+	<!-- 수정 : postOrder  -->
+	<update id="modifyPostOrder" parameterType="map">
+		update post 
+		set postOrder = #{postOrder}
+		where no = #{no} 
+	</update>
 
 </mapper>

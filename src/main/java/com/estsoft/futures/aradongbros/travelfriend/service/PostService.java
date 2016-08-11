@@ -26,5 +26,9 @@ public class PostService
 		postDao.deletePostData(no);
 	}
 	
-	// 수정
+	// 수정 : postOrder
+	public void modifyPostOrder(int no, int postOrder)
+	{
+		postDao.modifyPostOrder(no, postOrder);
+	}
 }
