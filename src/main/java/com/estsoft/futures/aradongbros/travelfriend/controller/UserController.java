@@ -62,4 +62,10 @@ public class UserController {
 		
 		return map;
 	}
+	
+	/*
+	 * 유저 프로필 사진 업로드
+	 * 
+	 * 필요 파라미터 : no, file
+	 */
 }
