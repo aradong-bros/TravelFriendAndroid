@@ -71,6 +71,11 @@ public class ScheduleController
 		
 		// Enum.valueOf(Isfinished.class, "ongoing");   <- String to Enum 파싱
 
+		if ( schVo.getIsfinished() == null )
+		{
+			schVo.setIsfinished(Enum.valueOf(Isfinished.class, "ongoing"));
+		}
+		
 		schVo.getStartDate().replaceAll("/", "-");
 		schVo.getEndDate().replaceAll("/", "-");
 		
