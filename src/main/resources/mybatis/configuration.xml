@@ -16,8 +16,6 @@
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo" alias="schedulevo"/>
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.CityVo" alias="cityvo"/>
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.PostVo" alias="postvo"/>
-		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.MessageVo" alias="messagevo"/>
-		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.PostVo" alias="postvo"/>
 	</typeAliases>
 	
 	<mappers>
@@ -27,8 +25,6 @@
 		<mapper resource="mybatis/mappers/comment.xml"/>
 		<mapper resource="mybatis/mappers/schedule.xml"/>
 		<mapper resource="mybatis/mappers/city.xml"/>
-		<mapper resource="mybatis/mappers/post.xml"/>
-		<mapper resource="mybatis/mappers/message.xml"/>
 		<mapper resource="mybatis/mappers/post.xml"/>
 	</mappers>
 </configuration>
