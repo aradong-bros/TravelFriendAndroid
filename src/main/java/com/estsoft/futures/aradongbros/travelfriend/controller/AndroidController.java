@@ -159,8 +159,9 @@ public class AndroidController
 			{
 				atrList.add(j, androidService.selectAtrByNo(postListNoList.get(j).getPostList_no()));	
 			}
-			
+
 		    map.put("cityNoList", cityNoList);
+		    map.put("postListNoList", postListNoList);
 		    map.put("atrList", atrList);
 			
 		    /*Kruskal kruskal = new Kruskal(atrList);
@@ -194,6 +195,8 @@ public class AndroidController
 			
 		return "redirect:/android/getTravelRoot";
 	}*/
+	
+	//localhost:8080/TravelFriendAndroid/android/test
 	@RequestMapping("/test")
 	@ResponseBody	 
 	public Map<String, Object> test()
@@ -202,12 +205,15 @@ public class AndroidController
 		
 		List<String> atrList = new ArrayList<String>();
 		
-		atrList.add("1");
-		atrList.add("2");
-		atrList.add("3");
-		atrList.add("4");
+		atrList.add(0, "1");
+		atrList.add(1, "2");
+		atrList.add(2, "3");
+		atrList.add(3, "4");
 		
 		atrList.removeAll(atrList);
+		
+		atrList.add(0, "1");
+		atrList.add(1, "2");
 		
 		map.put("atrList", atrList);
 			
