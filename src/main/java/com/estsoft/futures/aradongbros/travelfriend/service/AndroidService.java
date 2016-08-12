@@ -9,6 +9,7 @@ import com.estsoft.futures.aradongbros.travelfriend.dao.AndroidDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
 
 @Service
 public class AndroidService 
@@ -57,4 +58,12 @@ public class AndroidService
 		
 		return cityNoList;
 	}
+	
+	public List<PostVo> getPostListNoList(int city_no)
+	{
+		List<PostVo> postListNoList = androidDao.getPostListNoList(city_no);
+		
+		return postListNoList;
+	}
+	
 }

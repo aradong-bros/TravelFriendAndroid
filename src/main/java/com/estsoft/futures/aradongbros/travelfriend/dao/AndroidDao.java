@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
 
 @Repository
 public class AndroidDao 
@@ -63,4 +64,11 @@ public class AndroidDao
     	
     	return cityNoList;
     }
+    
+    public List<PostVo> getPostListNoList(int city_no)
+	{
+		List<PostVo> postListNoList = sqlSession.selectList("android.getPostListNoList", city_no);
+		
+		return postListNoList;
+	}
 }

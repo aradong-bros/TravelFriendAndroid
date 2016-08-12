@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
 
 @Controller
 @RequestMapping("/android")
@@ -138,18 +141,22 @@ public class AndroidController
 	@ResponseBody							
 	public Map<String, Object> getTravelRoot(@RequestParam("schedule_no") int schedule_no)  
 	{
-		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
-		
-		
 		Map<String, Object> map = new HashMap<String, Object>();
-		/*List<AttractionVo> atrList = null;
-	
-		Kruskal kruskal = new Kruskal(atrList);
+		List<AttractionVo> atrList = new ArrayList<AttractionVo>();
+		
+		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
+		List<PostVo> postListNoList = androidService.getPostListNoList(cityNoList.get(0).getNo());
+		
+		for ( int i = 0; i < postListNoList.size(); i++ )
+		{
+			atrList.add(i, androidService.selectAtrByNo(postListNoList.get(i).getPostList_no()));			
+		}
+
+	    Kruskal kruskal = new Kruskal(atrList);
 		
 		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
 		
-		map.put("TRAVEL_ROOT", TRAVEL_ROOT);*/
-		map.put("cityNoList", cityNoList);
+		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
 		
 		return map;
 	}	
