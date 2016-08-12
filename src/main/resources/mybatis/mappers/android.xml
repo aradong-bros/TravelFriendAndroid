@@ -61,5 +61,16 @@
 			and category = #{category}
 		order by no desc
 	</select>
+	
+	<!-- 스케줄no에 따른 city 조회  -->
+	<select id="getCityNoList" resultType="cityvo" parameterType="int">
+		select no,
+			   schedule_no,
+			   cityList_no,
+		       status,
+		       cityOrder
+		from city 
+		where schedule_no = #{schedule_no}
+	</select>
 
 </mapper>

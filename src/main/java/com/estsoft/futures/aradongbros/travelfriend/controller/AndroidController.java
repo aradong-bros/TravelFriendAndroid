@@ -1,22 +1,20 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 
 @Controller
 @RequestMapping("/android")
@@ -133,18 +131,25 @@ public class AndroidController
 	/*
 	 * 5번 메소드 
 	 * atrList : 사용자가 선택한 관과지의  no, location 정보를 담고 있는 AttractionVo 리스트
+	 * 스케줄 - 도시 - 관광지 모든 담기 끝난후 '완료' 버튼 누르면 경로 계산할 수있게 schedule no 받아서 경로 계산 -> requestparam으로 할 것.
+	 * url : http://222.239.250.207:8080/TravelFriendAndroid/android/getTravelRoot?schedule_no={schedule_no 값}
 	 */
 	@RequestMapping("/getTravelRoot")
-	@ResponseBody
-	public Map<String, Object> getTravelRoot(@ModelAttribute(value="atrList") List<AttractionVo> atrList)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	@ResponseBody							
+	public Map<String, Object> getTravelRoot(@RequestParam("schedule_no") int schedule_no)  
 	{
+		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		/*List<AttractionVo> atrList = null;
 	
 		Kruskal kruskal = new Kruskal(atrList);
 		
 		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
 		
-		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
+		map.put("TRAVEL_ROOT", TRAVEL_ROOT);*/
+		map.put("cityNoList", cityNoList);
 		
 		return map;
 	}	
@@ -152,7 +157,7 @@ public class AndroidController
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
 	//받을땐 모텔어트리뷰터로 받는다.
 	// http://222.239.250.207:8080/TravelFriendAndroid/android/test
-	@RequestMapping("/test")  
+/*	@RequestMapping("/test")  
 	public String test(RedirectAttributes redirectAttributes)
 	{
 		System.out.println(androidService.selectAtrByNo(6588));
@@ -166,6 +171,6 @@ public class AndroidController
 		redirectAttributes.addFlashAttribute("atrList", atrList);
 			
 		return "redirect:/android/getTravelRoot";
-	}
+	}*/
 	
 }

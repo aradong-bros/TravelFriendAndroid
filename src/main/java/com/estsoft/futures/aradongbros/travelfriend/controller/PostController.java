@@ -70,15 +70,13 @@ public class PostController
 		return map;
 	}
 	
-	//test      localhost:8080/TravelFriendAndroid/post/test?no={no 값}
+	//test      localhost:8080/TravelFriendAndroid/post/test?schedule_no={schedule_no 값}
 	@RequestMapping("/test")
 	@ResponseBody
-	public Map<String,Object> awefwef(@RequestParam("no") int no)
+	public Map<String,Object> awefwef(@RequestParam("schedule_no") int schedule_no)
 	{
-		System.out.println(no);
-		
 		Map<String,Object> map = new HashMap<String,Object>();
-		
+		map.put("schedule_no", schedule_no);
 		return map;
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.estsoft.futures.aradongbros.travelfriend.dao.AndroidDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 
 @Service
 public class AndroidService 
@@ -48,5 +49,12 @@ public class AndroidService
 		List<AttractionVo> atrList = androidDao.getPinDataByCategory(cityList_no, category);
 		
 		return atrList;
+	}
+	
+	public List<CityVo> getCityNoList(int schedule_no)
+	{
+		List<CityVo> cityNoList = androidDao.getCityNoList(schedule_no);
+		
+		return cityNoList;
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 
 @Repository
 public class AndroidDao 
@@ -54,5 +55,12 @@ public class AndroidDao
     	List<AttractionVo> atrList = sqlSession.selectList("android.getPinDataByCategory", map);
     	
     	return atrList;
+    }
+    
+    public List<CityVo> getCityNoList(int schedule_no)
+    {
+    	List<CityVo> cityNoList = sqlSession.selectList("android.getCityNoList", schedule_no);
+    	
+    	return cityNoList;
     }
 }
