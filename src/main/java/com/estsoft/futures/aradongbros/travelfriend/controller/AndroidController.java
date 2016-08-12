@@ -148,9 +148,7 @@ public class AndroidController
 		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
 		
 		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityNoList.size()];
-		
-		
-		
+
 		//------------------------------------------------------------------------------------------------
 		
 		for ( int i = 0; i < cityNoList.size(); i++ )
@@ -162,18 +160,17 @@ public class AndroidController
 				atrList.add(j, androidService.selectAtrByNo(postListNoList.get(j).getPostList_no()));	
 			}
 			
-		    Kruskal kruskal = new Kruskal(atrList);
+		    map.put("cityNoList", cityNoList);
+		    map.put("atrList", atrList);
 			
-		    travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
-		   
+		    /*Kruskal kruskal = new Kruskal(atrList);
+			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());*/
+		    
 			atrList.removeAll(atrList);
 		}
 
 		//------------------------------------------------------------------------------------------------
-		
-		
-		
-		
+
 		map.put("travelRootByCity", travelRootByCity);
 		
 		return map;
