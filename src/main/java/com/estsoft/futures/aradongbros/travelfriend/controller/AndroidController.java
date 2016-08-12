@@ -161,14 +161,8 @@ public class AndroidController
 			{
 				atrList.add(androidService.selectAtrByNo(postVoList.get(j).getPostList_no()));
 			}
-
-		    map.put("cityNoList", cityVoList);
-		    map.put("postListNoList", postVoList);
-		    map.put("atrList", atrList);
 			
 		    Kruskal kruskal = new Kruskal(atrList);
-		    
-		    map.put("kruskal", kruskal.getTravelRoot());
 		    
 			travelRootByCity[i] = new TravelRootByCity(kruskal.getTravelRoot());
 		}
