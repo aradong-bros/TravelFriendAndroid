@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
@@ -145,18 +146,35 @@ public class AndroidController
 		List<AttractionVo> atrList = new ArrayList<AttractionVo>();
 		
 		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
-		List<PostVo> postListNoList = androidService.getPostListNoList(cityNoList.get(0).getNo());
 		
-		for ( int i = 0; i < postListNoList.size(); i++ )
+		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityNoList.size()];
+		
+		
+		
+		//------------------------------------------------------------------------------------------------
+		
+		for ( int i = 0; i < cityNoList.size(); i++ )
 		{
-			atrList.add(i, androidService.selectAtrByNo(postListNoList.get(i).getPostList_no()));	
+			List<PostVo> postListNoList = androidService.getPostListNoList(cityNoList.get(i).getNo());
+			
+			for ( int j = 0; j < postListNoList.size(); j++ )
+			{
+				atrList.add(j, androidService.selectAtrByNo(postListNoList.get(j).getPostList_no()));	
+			}
+			
+		    Kruskal kruskal = new Kruskal(atrList);
+			
+		    travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
+		   
+			atrList.removeAll(atrList);
 		}
 
-	    Kruskal kruskal = new Kruskal(atrList);
+		//------------------------------------------------------------------------------------------------
 		
-		int[] TRAVEL_ROOT = kruskal.getTravelRoot();
 		
-		map.put("TRAVEL_ROOT", TRAVEL_ROOT);
+		
+		
+		map.put("travelRootByCity", travelRootByCity);
 		
 		return map;
 	}	
@@ -179,5 +197,24 @@ public class AndroidController
 			
 		return "redirect:/android/getTravelRoot";
 	}*/
+	@RequestMapping("/test")
+	@ResponseBody	 
+	public Map<String, Object> test()
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<String> atrList = new ArrayList<String>();
+		
+		atrList.add("1");
+		atrList.add("2");
+		atrList.add("3");
+		atrList.add("4");
+		
+		atrList.removeAll(atrList);
+		
+		map.put("atrList", atrList);
+			
+		return map;
+	}
 	
 }
