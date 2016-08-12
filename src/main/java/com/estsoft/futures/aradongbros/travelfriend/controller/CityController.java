@@ -51,6 +51,7 @@ public class CityController
 			
 			noArray[i] = cityList[i].getNo();  // 1번 : city_no 번호로 넘기는 경우
 			map.put("no", cityList[i].getNo());
+			map.put("noArray", noArray);
 			
 		}
 		
