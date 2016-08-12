@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,8 @@ public class CityController
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
 		
+		int[] noArray = new int[cityList.length];
+		
 		for ( int i = 0; i < cityList.length; i++ )
 		{
 			if ( cityList[i].getStatus() != Enum.valueOf(Status.class, "none") )
@@ -44,8 +47,14 @@ public class CityController
 				cityList[i].setCityOrder(-1);
 			}
 			
-			cityService.insertCityData(cityList[i]);			
+			cityService.insertCityData(cityList[i]);
+			
+			noArray[i] = cityList[i].getNo();  // 1번 : city_no 번호로 넘기는 경우
+			map.put("no", cityList[i].getNo());
+			
 		}
+		
+		
 
 		return map;
 	}
