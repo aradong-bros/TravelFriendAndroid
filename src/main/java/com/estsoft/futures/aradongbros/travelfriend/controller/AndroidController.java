@@ -149,7 +149,7 @@ public class AndroidController
 		
 		for ( int i = 0; i < postListNoList.size(); i++ )
 		{
-			atrList.add(i, androidService.selectAtrByNo(postListNoList.get(i).getPostList_no()));			
+			atrList.add(i, androidService.selectAtrByNo(postListNoList.get(i).getPostList_no()));	
 		}
 
 	    Kruskal kruskal = new Kruskal(atrList);

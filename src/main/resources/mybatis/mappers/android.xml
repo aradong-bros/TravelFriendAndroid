@@ -74,7 +74,7 @@
 	</select>
 	
 	<!-- city의 no에 따른 postList_no 조회  -->
-	<select id="getPostListNoList" resultType="attractionvo" parameterType="int">
+	<select id="getPostListNoList" resultType="postvo" parameterType="int">
 		select no,
 			   city_no,
 			   postList_no,
