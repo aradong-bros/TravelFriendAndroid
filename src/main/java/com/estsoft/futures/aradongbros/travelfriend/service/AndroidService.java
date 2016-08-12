@@ -52,18 +52,18 @@ public class AndroidService
 		return atrList;
 	}
 	
-	public List<CityVo> getCityNoList(int schedule_no)
+	public List<CityVo> getCityList(int schedule_no)
 	{
-		List<CityVo> cityNoList = androidDao.getCityNoList(schedule_no);
+		List<CityVo> cityVoList = androidDao.getCityList(schedule_no);
 		
-		return cityNoList;
+		return cityVoList;
 	}
 	
-	public List<PostVo> getPostListNoList(int city_no)
+	public List<PostVo> getPostList(int city_no)
 	{
-		List<PostVo> postListNoList = androidDao.getPostListNoList(city_no);
+		List<PostVo> postVoList = androidDao.getPostList(city_no);
 		
-		return postListNoList;
+		return postVoList;
 	}
 	
 }

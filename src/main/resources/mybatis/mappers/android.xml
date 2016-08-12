@@ -63,7 +63,7 @@
 	</select>
 	
 	<!-- 스케줄no에 따른 city 조회  -->
-	<select id="getCityNoList" resultType="cityvo" parameterType="int">
+	<select id="getCityList" resultType="cityvo" parameterType="int">
 		select no,
 			   schedule_no,
 			   cityList_no,
@@ -74,7 +74,7 @@
 	</select>
 	
 	<!-- city의 no에 따른 postList_no 조회  -->
-	<select id="getPostListNoList" resultType="postvo" parameterType="int">
+	<select id="getPostList" resultType="postvo" parameterType="int">
 		select no,
 			   city_no,
 			   postList_no,

@@ -145,34 +145,34 @@ public class AndroidController
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AttractionVo> atrList = new ArrayList<AttractionVo>();
 		
-		List<CityVo> cityNoList = androidService.getCityNoList(schedule_no);
+		List<CityVo> cityVoList = androidService.getCityList(schedule_no);
 		
-		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityNoList.size()];
+		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityVoList.size()];
 
 		//------------------------------------------------------------------------------------------------
 		
-		for ( int i = 0; i < cityNoList.size(); i++ )
+		for ( int i = 0; i < cityVoList.size(); i++ )
 		{
-			List<PostVo> postListNoList = androidService.getPostListNoList(cityNoList.get(i).getNo());
+			atrList.clear();
 			
-			for ( int j = 0; j < postListNoList.size(); j++ )
+			List<PostVo> postVoList = androidService.getPostList(cityVoList.get(i).getNo());
+			
+			for ( int j = 0; j < postVoList.size(); j++ )
 			{
-				atrList.add(j, androidService.selectAtrByNo(postListNoList.get(j).getPostList_no()));	
+				atrList.add(androidService.selectAtrByNo(postVoList.get(j).getPostList_no()));	
 			}
 
-		    map.put("cityNoList", cityNoList);
-		    map.put("postListNoList", postListNoList);
+		    map.put("cityNoList", cityVoList);
+		    map.put("postListNoList", postVoList);
 		    map.put("atrList", atrList);
 			
-		    Kruskal kruskal = new Kruskal(atrList);
-			//travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
-			
-			atrList.clear();
+		    /*Kruskal kruskal = new Kruskal(atrList);
+			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());*/
 		}
 
 		//------------------------------------------------------------------------------------------------
 
-		map.put("travelRootByCity", travelRootByCity);
+		//map.put("travelRootByCity", travelRootByCity);
 		
 		return map;
 	}	
@@ -210,13 +210,9 @@ public class AndroidController
 		atrList.add(2, "3");
 		atrList.add(3, "4");
 		
-		atrList.clear();
-		
-		atrList.add(0, "1");
-		atrList.add(1, "2");
-		atrList.add(2, "3");
-		
 		map.put("atrList", atrList);
+		
+		atrList.clear();
 			
 		return map;
 	}

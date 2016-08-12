@@ -58,17 +58,17 @@ public class AndroidDao
     	return atrList;
     }
     
-    public List<CityVo> getCityNoList(int schedule_no)
+    public List<CityVo> getCityList(int schedule_no)
     {
-    	List<CityVo> cityNoList = sqlSession.selectList("android.getCityNoList", schedule_no);
+    	List<CityVo> cityVoList = sqlSession.selectList("android.getCityList", schedule_no);
     	
-    	return cityNoList;
+    	return cityVoList;
     }
     
-    public List<PostVo> getPostListNoList(int city_no)
+    public List<PostVo> getPostList(int city_no)
 	{
-		List<PostVo> postListNoList = sqlSession.selectList("android.getPostListNoList", city_no);
+		List<PostVo> postVoList = sqlSession.selectList("android.getPostList", city_no);
 		
-		return postListNoList;
+		return postVoList;
 	}
 }
