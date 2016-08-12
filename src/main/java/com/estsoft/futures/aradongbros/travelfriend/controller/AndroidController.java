@@ -168,7 +168,8 @@ public class AndroidController
 			
 		    Kruskal kruskal = new Kruskal(atrList);
 		    map.put("kruskal", kruskal.getTravelRoot());
-			travelRootByCity[0].setTRAVEL_ROOT(kruskal.getTravelRoot());
+		    
+			//travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
 		}
 
 		//------------------------------------------------------------------------------------------------
