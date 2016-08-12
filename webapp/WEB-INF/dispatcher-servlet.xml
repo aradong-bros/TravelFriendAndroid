@@ -44,6 +44,12 @@
 		<property name="order" value="1" />
 	</bean>
 	
+	<!-- 멀티파트 리솔버 설정(파일 업로드 관련) -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000"/>
+		<property name="maxInMemorySize" value="100000000"/>
+	</bean>
+	
 	<!-- AOP auto Proxy 설정 -->
 	<aop:aspectj-autoproxy />
 </beans>
