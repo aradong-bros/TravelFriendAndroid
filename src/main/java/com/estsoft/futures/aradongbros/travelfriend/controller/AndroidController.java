@@ -166,6 +166,8 @@ public class AndroidController
 			
 		    Kruskal kruskal = new Kruskal(atrList);
 			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
+			
+			atrList.clear();
 		}
 
 		//------------------------------------------------------------------------------------------------
@@ -208,10 +210,11 @@ public class AndroidController
 		atrList.add(2, "3");
 		atrList.add(3, "4");
 		
-		atrList.removeAll(atrList);
+		atrList.clear();
 		
 		atrList.add(0, "1");
 		atrList.add(1, "2");
+		atrList.add(2, "3");
 		
 		map.put("atrList", atrList);
 			
