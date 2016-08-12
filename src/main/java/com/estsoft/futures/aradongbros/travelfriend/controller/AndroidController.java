@@ -166,13 +166,13 @@ public class AndroidController
 		    map.put("postListNoList", postVoList);
 		    map.put("atrList", atrList);
 			
-		    /*Kruskal kruskal = new Kruskal(atrList);
-			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());*/
+		    Kruskal kruskal = new Kruskal(atrList);
+			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
 		}
 
 		//------------------------------------------------------------------------------------------------
 
-		//map.put("travelRootByCity", travelRootByCity);
+		map.put("travelRootByCity", travelRootByCity);
 		
 		return map;
 	}	
