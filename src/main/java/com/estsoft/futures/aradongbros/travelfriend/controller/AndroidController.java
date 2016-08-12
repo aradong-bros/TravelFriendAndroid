@@ -136,8 +136,8 @@ public class AndroidController
 	 */
 	@RequestMapping("/getTravelRoot")
 	@ResponseBody
-	public Map<String, Object> getTravelRoot(@ModelAttribute List<AttractionVo> atrList)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
-	{	
+	public Map<String, Object> getTravelRoot(@ModelAttribute(value="atrList") List<AttractionVo> atrList)  // 다른 테이블 테이터 합쳐서 가져오고 싶을때 DTO로 만들어서 가져온다.
+	{
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		Kruskal kruskal = new Kruskal(atrList);
@@ -151,7 +151,7 @@ public class AndroidController
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
 	//받을땐 모텔어트리뷰터로 받는다.
-	// localhost:8080/TravelFriendAndroid/android/test
+	// http://222.239.250.207:8080/TravelFriendAndroid/android/test
 	@RequestMapping("/test")  
 	public String test(RedirectAttributes redirectAttributes)
 	{
