@@ -1,9 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +33,7 @@ public class CityController
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		String no = "";
+		int[] noList = new int[cityList.length];
 		
 		for ( int i = 0; i < cityList.length; i++ )
 		{
@@ -50,18 +48,12 @@ public class CityController
 			}
 			
 			cityService.insertCityData(cityList[i]);
-
-			if ( i == cityList.length - 1 )
-			{
-				no += "\"no\":" + cityList[i].getNo();
-				break;
-			}
 			
-			no += "\"no\":" + cityList[i].getNo() + ",";
+			noList[i] = cityList[i].getNo();
 			
 		}
 		
-		map.put("no", no);
+		map.put("noList", noList);
 		
 		return map;
 	}
