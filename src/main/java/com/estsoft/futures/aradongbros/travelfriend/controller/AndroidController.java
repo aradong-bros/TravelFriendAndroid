@@ -170,7 +170,7 @@ public class AndroidController
 		    
 		    map.put("kruskal", kruskal.getTravelRoot());
 		    
-			travelRootByCity[i].setTRAVEL_ROOT(kruskal.getTravelRoot());
+			travelRootByCity[i] = new TravelRootByCity(kruskal.getTravelRoot());
 		}
 
 		//------------------------------------------------------------------------------------------------

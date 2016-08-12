@@ -6,6 +6,13 @@ public class TravelRootByCity
 {
 	int[] TRAVEL_ROOT;
 
+	public TravelRootByCity() {}
+	
+	public TravelRootByCity(int[] TRAVEL_ROOT)
+	{
+		this.TRAVEL_ROOT = TRAVEL_ROOT;
+	}
+	
 	public int[] getTRAVEL_ROOT() {
 		return TRAVEL_ROOT;
 	}
