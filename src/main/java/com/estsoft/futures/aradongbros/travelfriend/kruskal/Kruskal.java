@@ -2,7 +2,7 @@ package com.estsoft.futures.aradongbros.travelfriend.kruskal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.estsoft.futures.aradongbros.travelfriend.dto.AttractionDTO;
+import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 
 public class Kruskal 
 {
@@ -12,18 +12,18 @@ public class Kruskal
 	
 	public Kruskal(){}
 	
-	public Kruskal(AttractionDTO[] atrList)
+	public Kruskal(List<AttractionVo> atrList)
 	{	
-		node = new Node[atrList.length];
+		node = new Node[atrList.size()];
 		
-		for ( int i = 0; i < atrList.length; i++ )
+		for ( int i = 0; i < atrList.size(); i++ )
 		{
-			String[] location = atrList[i].getLocation().split(",");
+			String[] location = atrList.get(i).getLocation().split(",");
 			
 			this.locationX = Double.parseDouble(location[0]);
 			this.locationY = Double.parseDouble(location[1]);
 			
-			node[i] = new Node(atrList[i].getNo(), this.locationX, this.locationY);
+			node[i] = new Node(atrList.get(i).getNo(), this.locationX, this.locationY);
 		}		
 	}
 	
