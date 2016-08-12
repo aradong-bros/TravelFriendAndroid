@@ -1,5 +1,6 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dto.No;
 import com.estsoft.futures.aradongbros.travelfriend.service.ScheduleService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.Isfinished;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
