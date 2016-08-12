@@ -43,4 +43,55 @@
 		order by start.departureTime asc;
 		]]>
 	</select>
+	
+	<select id="selectTransferStationList" parameterType="map" resultType="int">
+		<![CDATA[
+		select start.trainStation_no from
+			(select route.* from
+				trainOperationRoute route,
+				(select trainInfo_no from trainOperationRoute where trainStation_no = #{startStationNo}) train
+			where route.trainInfo_no = train.trainInfo_no) start,
+			(select route.* from
+				trainOperationRoute route,
+				(select trainInfo_no from trainOperationRoute where trainStation_no = #{endStationNo}) train
+			where route.trainInfo_no = train.trainInfo_no) end
+		where start.trainStation_no = end.trainStation_no
+		group by start.trainStation_no;
+		]]>
+	</select>
+	
+	<select id="selectTransferStartTrainTime" parameterType="map" resultType="trainoperationroutevo">
+		<![CDATA[
+		select transfer.* from
+			(select * from trainOperationRoute where trainStation_no = #{transferStationNo}) transfer,
+			(select * from trainOperationRoute where trainStation_no = #{endStationNo}) end
+		where transfer.trainInfo_no = end.trainInfo_no
+			and transfer.order < end.order
+			and transfer.trainCategory_no = #{categoryNo}
+			and transfer.trainCategory_no = end.trainCategory_no
+			and transfer.departureTime >= addTime(#{boardingTime}, "00:10") and transfer.departureTime < addTime(#{boardingTime}, "00:50")
+		order by transfer.departureTime asc
+		]]>
+	</select>
+	
+	<select id="selectEndTrainTimeAfter" parameterType="map" resultType="trainoperationroutevo">
+		<![CDATA[
+		select end.* from
+			(select * from trainOperationRoute where trainStation_no = #{transferStationNo}) transfer,
+			(select * from trainOperationRoute where trainStation_no = #{endStationNo}) end
+		where transfer.trainInfo_no = end.trainInfo_no
+			and transfer.order < end.order
+			and transfer.trainCategory_no = #{categoryNo}
+			and transfer.trainCategory_no = end.trainCategory_no
+			and transfer.departureTime >= addTime(#{boardingTime}, "00:10") and transfer.departureTime < addTime(#{boardingTime}, "00:50")
+		order by transfer.departureTime asc
+		]]>
+	</select>
+	
+	<select id="selectStationName" parameterType="int" resultType="string">
+		<![CDATA[
+		select name from trainStation
+		where no = #{no}
+		]]>
+	</select>
 </mapper>

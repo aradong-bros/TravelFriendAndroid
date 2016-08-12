@@ -21,6 +21,7 @@ public class TrainController
 	@Autowired
 	private TrainService trainService;
 	
+	//직통 기차 검색
 	@RequestMapping("/getDirectPath")
 	@ResponseBody
 	public Map<String, Object> getDirectPath(
@@ -32,10 +33,25 @@ public class TrainController
 		Map<String, Object> map = new HashMap<>();
 		
 		List<Map<String, Object>> trainTimeList = trainService.getTrainTimeList(
-				startStation,
-				endStation,
-				goDate,
-				goTime);
+				startStation, endStation, goDate, goTime);
+		
+		map.put("trainTimeList", trainTimeList);
+		return map;
+	}
+	
+	//환승 기차 검색 결과
+	@RequestMapping("/getTransferPath")
+	@ResponseBody
+	public Map<String, Object> getTransferPath(
+			@RequestParam("goDate")Date goDate,
+			@RequestParam("goTime")Time goTime,
+			@RequestParam("startStation")String startStation,
+			@RequestParam("endStation")String endStation)
+	{
+		Map<String, Object> map = new HashMap<>();
+		
+		List<Map<String, Object>> trainTimeList = trainService.getTransferTrainTimeList(
+				startStation, endStation, goDate, goTime);
 		
 		map.put("trainTimeList", trainTimeList);
 		return map;
