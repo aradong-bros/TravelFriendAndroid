@@ -267,7 +267,7 @@ public class TrainService
 				map.put("transferStationDepartureTime", transferStartList.get(j).getDepartureTime());
 				map.put("arrivalTime", endList.get(j).getDepartureTime());
 				map.put("trainNum", trainDao.selectTrainInfoByNo(startList.get(i).getTrainInfo_no()).getTrainNum());
-				map.put("transferTrainNum", trainDao.selectTrainInfoByNo(startList.get(i).getTrainInfo_no()).getTrainNum());
+				map.put("transferTrainNum", trainDao.selectTrainInfoByNo(transferStartList.get(j).getTrainInfo_no()).getTrainNum());
 				map.put("trainModel", trainDao.selectTrainInfoByNo(startList.get(i).getTrainInfo_no()).getTrainModel());
 				map.put("transferTrainModel", trainDao.selectTrainInfoByNo(transferStartList.get(j).getTrainInfo_no()).getTrainModel());
 				
