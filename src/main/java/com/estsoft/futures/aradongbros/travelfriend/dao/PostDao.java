@@ -30,10 +30,10 @@ public class PostDao
 	}
 	
 	// 수정 : postOrder
-	public void modifyPostOrder(int no, int postOrder)
+	public void modifyPostOrder(int postList_no, int postOrder)
 	{
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("no", no);
+		map.put("no", postList_no);
 		map.put("postOrder", postOrder);
 		
 		sqlSession.update("post.modifyPostOrder", map);

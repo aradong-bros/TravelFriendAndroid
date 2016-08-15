@@ -83,4 +83,5 @@
 		where city_no = #{city_no}
 	</select>
 
+	
 </mapper>
