@@ -71,4 +71,14 @@ public class AndroidDao
 		
 		return postVoList;
 	}
+    
+    //-----------
+	public void modifyPostOrder(int postList_no, int postOrder)
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("postList_no", postList_no);
+		map.put("postOrder", postOrder);
+		
+		sqlSession.update("post.modifyPostOrder", map);
+	}
 }

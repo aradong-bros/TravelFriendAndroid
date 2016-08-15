@@ -66,4 +66,10 @@ public class AndroidService
 		return postVoList;
 	}
 	
+	//----------------------------
+	public void modifyPostOrder(int postList_no, int postOrder)
+	{
+		androidDao.modifyPostOrder(postList_no, postOrder);
+	}
+	
 }
