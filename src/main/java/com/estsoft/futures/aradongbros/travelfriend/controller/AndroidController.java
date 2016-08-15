@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
@@ -169,7 +170,20 @@ public class AndroidController
 
 		//------------------------------------------------------------------------------------------------
 
+		//------------------------------------------------------------------------------------------------
+		
+		StartEnd[] se = new StartEnd[cityVoList.size() * 2];
+		
+		for ( int i = 0; i < cityVoList.size(); i++ )
+		{
+			se[i] = new StartEnd(travelRootByCity[i].getTRAVEL_ROOT()[0], travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1]);
+		}
+		
+		//------------------------------------------------------------------------------------------------
+		
+		
 		map.put("travelRootByCity", travelRootByCity);
+		map.put("StartEndByCity", se);
 		
 		return map;
 	}	
