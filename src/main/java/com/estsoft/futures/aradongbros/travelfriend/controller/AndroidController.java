@@ -29,6 +29,8 @@ public class AndroidController
 {
 	@Autowired
 	private AndroidService androidService;
+	@Autowired
+	private PostService postService;
 	
 	/**
 	 * 세 종류의 메소드가 있다.
@@ -174,7 +176,7 @@ public class AndroidController
 		{
 			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
 			{
-				androidService.modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
+				postService.modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
 			}
 		}
 

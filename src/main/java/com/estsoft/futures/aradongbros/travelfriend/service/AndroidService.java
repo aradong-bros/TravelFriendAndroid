@@ -64,12 +64,5 @@ public class AndroidService
 		List<PostVo> postVoList = androidDao.getPostList(city_no);
 		
 		return postVoList;
-	}
-	
-	//----------------------------
-	public void modifyPostOrder(int postList_no, int postOrder)
-	{
-		androidDao.modifyPostOrder(postList_no, postOrder);
-	}
-	
+	}	
 }
