@@ -33,7 +33,7 @@ public class PostDao
 	public void modifyPostOrder(int postList_no, int postOrder)
 	{
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("no", postList_no);
+		map.put("postList_no", postList_no);
 		map.put("postOrder", postOrder);
 		
 		sqlSession.update("post.modifyPostOrder", map);
