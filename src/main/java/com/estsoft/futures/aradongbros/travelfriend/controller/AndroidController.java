@@ -172,7 +172,7 @@ public class AndroidController
 
 		//------------------------------------------------------------------------------------------------
 		
-		StartEnd[] se = new StartEnd[cityVoList.size() * 2];
+		StartEnd[] se = new StartEnd[cityVoList.size()];
 		
 		for ( int i = 0; i < cityVoList.size(); i++ )
 		{
