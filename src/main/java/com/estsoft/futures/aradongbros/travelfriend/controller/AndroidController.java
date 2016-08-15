@@ -150,8 +150,7 @@ public class AndroidController
 		
 		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityVoList.size()];
 
-		//------------------------------------------------------------------------------------------------
-		
+		// 도시별 전체경로 저장하기
 		for ( int i = 0; i < cityVoList.size(); i++ )
 		{
 			atrList.clear();
@@ -167,11 +166,17 @@ public class AndroidController
 		    
 			travelRootByCity[i] = new TravelRootByCity(kruskal.getTravelRoot());
 		}
-
-		//------------------------------------------------------------------------------------------------
-
-		//------------------------------------------------------------------------------------------------
 		
+		// postOder 순서 업데이트
+		for ( int i = 0; i < travelRootByCity.length; i++ )
+		{
+			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
+			{
+				new PostController().modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
+			}
+		}
+
+		// 도시별 시작점, 끝점 저장하기
 		StartEnd[] se = new StartEnd[cityVoList.size()];
 		
 		for ( int i = 0; i < cityVoList.size(); i++ )
@@ -179,7 +184,6 @@ public class AndroidController
 			se[i] = new StartEnd(travelRootByCity[i].getTRAVEL_ROOT()[0], travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1]);
 		}
 		
-		//------------------------------------------------------------------------------------------------
 		
 		
 		map.put("travelRootByCity", travelRootByCity);
