@@ -168,11 +168,12 @@ public class AndroidController
 		}
 		
 		// postOder 순서 업데이트
+		PostController postController = new PostController();
 		for ( int i = 0; i < travelRootByCity.length; i++ )
 		{
 			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
 			{
-				new PostController().modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
+				postController.modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
 			}
 		}
 

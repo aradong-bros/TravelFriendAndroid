@@ -58,8 +58,8 @@ public class PostController
 	}
 	
 	// 수정 : postOrder -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/postModifyPostOrder?no={no 값}&postOrder={postOrder 값}
-	@RequestMapping("/postModifyPostOrder")
-	@ResponseBody
+	//@RequestMapping("/postModifyPostOrder")
+	//@ResponseBody
 	public Map<String,Object> modifyPostOrder(int no, int postOrder)
 	{
 		Map<String,Object> map = new HashMap<String,Object>();
