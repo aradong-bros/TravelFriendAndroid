@@ -17,6 +17,7 @@ import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
+import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
@@ -28,6 +29,7 @@ public class AndroidController
 {
 	@Autowired
 	private AndroidService androidService;
+	private PostService postService;
 	
 	/**
 	 * 세 종류의 메소드가 있다.
@@ -173,7 +175,7 @@ public class AndroidController
 		{
 			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
 			{
-				new PostDao().modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
+				postService.modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
 			}
 		}
 

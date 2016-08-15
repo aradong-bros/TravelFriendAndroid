@@ -27,8 +27,8 @@ public class PostService
 	}
 	
 	// 수정 : postOrder
-	public void modifyPostOrder(int no, int postOrder)
+	public void modifyPostOrder(int postList_no, int postOrder)
 	{
-		postDao.modifyPostOrder(no, postOrder);
+		postDao.modifyPostOrder(postList_no, postOrder);
 	}
 }
