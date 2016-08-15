@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.dao.PostDao;
 import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
@@ -168,12 +169,11 @@ public class AndroidController
 		}
 		
 		// postOder 순서 업데이트
-		PostController postController = new PostController();
 		for ( int i = 0; i < travelRootByCity.length; i++ )
 		{
 			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
 			{
-				postController.modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
+				new PostDao().modifyPostOrder(travelRootByCity[i].getTRAVEL_ROOT()[j], j + 1);
 			}
 		}
 
