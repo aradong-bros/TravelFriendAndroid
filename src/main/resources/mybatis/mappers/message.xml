@@ -6,7 +6,7 @@
 		<![CDATA[
 		select 
 			message.no, message.talk_no, message.user_no, message.content, 
-			DATE_FORMAT( message.time, '%Y-%m-%d %p %h:%i:%s' ) as `time`,user.name,user.picture 
+			DATE_FORMAT( message.time, '%Y-%m-%d %H:%i:%s' ) as `time`,user.name,user.picture 
 		from 
 			message, user
 		where talk_no = #{talk_no} 
