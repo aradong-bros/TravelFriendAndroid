@@ -61,8 +61,8 @@ public class TrainController
 	//리다이렉트로 맵 받기
 	@RequestMapping("/sample")
 	@ResponseBody
-	public Map<String, Object> sample(@ModelAttribute Map<String, Object> map)
+	public String sample(@ModelAttribute Map<String, Object> map)
 	{
-		return map;
+		return "잘 받음";
 	}
 }
