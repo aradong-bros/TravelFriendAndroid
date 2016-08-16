@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,6 +55,14 @@ public class TrainController
 				startStation, endStation, goDate, goTime);
 		
 		map.put("trainTimeList", trainTimeList);
+		return map;
+	}
+	
+	//리다이렉트로 맵 받기
+	@RequestMapping("/sample")
+	@ResponseBody
+	public Map<String, Object> sample(@ModelAttribute Map<String, Object> map)
+	{
 		return map;
 	}
 }
