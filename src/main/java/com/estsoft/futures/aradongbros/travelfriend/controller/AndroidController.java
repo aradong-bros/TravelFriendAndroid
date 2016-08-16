@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.estsoft.futures.aradongbros.travelfriend.dao.PostDao;
 import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
@@ -144,8 +144,9 @@ public class AndroidController
 	 * url : http://222.239.250.207:8080/TravelFriendAndroid/android/getTravelRoot?schedule_no={schedule_no 값}
 	 */
 	@RequestMapping("/getTravelRoot")
-	@ResponseBody							
-	public Map<String, Object> getTravelRoot(@RequestParam("schedule_no") int schedule_no)  
+	//@ResponseBody							
+	public String getTravelRoot(@RequestParam("schedule_no") int schedule_no,
+											  RedirectAttributes redirectAttributes)  
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AttractionVo> atrList = new ArrayList<AttractionVo>();
@@ -196,7 +197,9 @@ public class AndroidController
 		map.put("schedule_no", schedule_no);
 		map.put("StartEndByCity", se);
 		
-		return map;
+		redirectAttributes.addFlashAttribute("map", map);
+		
+		return "redirect:/train/sample";
 	}	
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
