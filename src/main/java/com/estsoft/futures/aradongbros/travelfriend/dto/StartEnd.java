@@ -36,6 +36,6 @@ public class StartEnd
 	}
 	@Override
 	public String toString() {
-		return "StartEnd [start=" + start + ", end=" + end + "]";
+		return "StartEnd [city_no=" + city_no + ", start=" + start + ", end=" + end + "]";
 	}
 }

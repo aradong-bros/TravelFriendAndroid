@@ -185,12 +185,15 @@ public class AndroidController
 		
 		for ( int i = 0; i < cityVoList.size(); i++ )
 		{
-			se[i] = new StartEnd(cityVoList.get(i).getNo(), travelRootByCity[i].getTRAVEL_ROOT()[0], travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1]);
+			se[i] = new StartEnd(cityVoList.get(i).getNo(), 
+								 travelRootByCity[i].getTRAVEL_ROOT()[0], 
+								 travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1]);
 		}
 		
 		
 		
 		map.put("travelRootByCity", travelRootByCity);
+		map.put("schedule_no", schedule_no);
 		map.put("StartEndByCity", se);
 		
 		return map;
