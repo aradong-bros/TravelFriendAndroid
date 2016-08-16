@@ -4,7 +4,10 @@
 <mapper namespace="message">
 	<select id="getSomeMessage" parameterType="map" resultType="map">
 		<![CDATA[
-		select message.*,user.name,user.picture from 
+		select 
+			message.no, message.talk_no, message.user_no, message.content, 
+			DATE_FORMAT( message.time, '%Y-%m-%d %p %h:%i:%s' ) as `time`,user.name,user.picture 
+		from 
 			message, user
 		where talk_no = #{talk_no} 
 			and message.no <= #{no1} 
