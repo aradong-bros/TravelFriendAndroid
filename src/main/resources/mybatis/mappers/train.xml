@@ -69,7 +69,7 @@
 			and transfer.order < end.order
 			and transfer.trainCategory_no = #{categoryNo}
 			and transfer.trainCategory_no = end.trainCategory_no
-			and transfer.departureTime >= addTime(#{boardingTime}, "00:10") and transfer.departureTime < addTime(#{boardingTime}, "00:50")
+			and transfer.departureTime >= addTime(#{boardingTime}, "00:10")
 		order by transfer.departureTime asc
 		]]>
 	</select>
@@ -83,7 +83,7 @@
 			and transfer.order < end.order
 			and transfer.trainCategory_no = #{categoryNo}
 			and transfer.trainCategory_no = end.trainCategory_no
-			and transfer.departureTime >= addTime(#{boardingTime}, "00:10") and transfer.departureTime < addTime(#{boardingTime}, "00:50")
+			and transfer.departureTime >= addTime(#{boardingTime}, "00:10")
 		order by transfer.departureTime asc
 		]]>
 	</select>
@@ -104,7 +104,8 @@
 	
 	<select id="selectAllStationName" resultType="string">
 		<![CDATA[
-		select name from trainStation;
+		select name from trainStation
+		order by name asc;
 		]]>
 	</select>
 </mapper>
