@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +16,19 @@ import org.springframework.stereotype.Service;
 import com.estsoft.futures.aradongbros.travelfriend.dao.TrainDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.TrainInfoVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.TrainOperationRouteVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.TrainStationVo;
 
 @Service
 public class TrainService 
 {
 	@Autowired
 	private TrainDao trainDao;
+	
+	//두 점 사이에 거리 구하기
+	public double getDistance(double x, double y, double x1, double y1)
+	{
+		return Math.sqrt(Math.pow(Math.abs(x1-x), 2) + Math.pow(Math.abs(y1-y), 2));
+	}
 	
 	//출발시간이 빠른 순으로 정렬
 	static class DepTimeASCCompare implements Comparator<Map<String,Object>>{
@@ -29,6 +37,16 @@ public class TrainService
 			Time t1 = (Time) o1.get("departureTime");
 			Time t2 = (Time) o2.get("departureTime");
 			return t1.compareTo(t2);
+		}
+	}
+	
+	//거리가 짧은 순으로 정렬
+	static class DistanceASCCompare implements Comparator<Map<String, Object>>{
+		@Override
+		public int compare(Map<String, Object> distanceMap1, Map<String, Object> distanceMap2) {
+			Double d1 = (Double) distanceMap1.get("distance");
+			Double d2 = (Double) distanceMap2.get("distance");
+			return d1.compareTo(d2);
 		}
 	}
 	
@@ -276,5 +294,39 @@ public class TrainService
 		}
 		
 		return timeMap;
+	}
+
+	public String getNearStation(String location, int cityNum) 
+	{
+		String locationSplit[] = location.split(",");
+		double latitude = Double.parseDouble(locationSplit[0]);
+		double longitude = Double.parseDouble(locationSplit[1]);
+		
+		List<TrainStationVo> cityStationList = trainDao.getCityStationList(cityNum);
+		List<Map<String, Object>> distanceMapList = new ArrayList<>();
+		
+		for(int i=0; i<cityStationList.size(); i++){
+			TrainStationVo stationVo = cityStationList.get(i);
+			String stationLocation = stationVo.getLocation();
+			String stationLocationSplit[] = stationLocation.split(",");
+			double stationLatitude = Double.parseDouble(stationLocationSplit[0]);
+			double stationLongitude = Double.parseDouble(stationLocationSplit[1]);
+			
+			Map<String, Object> distanceMap = new HashMap<>();
+			distanceMap.put("stationName", stationVo.getName());
+			distanceMap.put("distance", getDistance(stationLatitude, stationLongitude, latitude, longitude));
+			
+			distanceMapList.add(distanceMap);
+		}
+		
+		Collections.sort(distanceMapList, new DistanceASCCompare());
+		
+		return (String) distanceMapList.get(0).get("stationName");
+	}
+
+	public List<String> getAllStationName() 
+	{
+		List<String> stationNameList = trainDao.getAllStationName();
+		return stationNameList;
 	}
 }

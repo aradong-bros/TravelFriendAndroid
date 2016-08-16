@@ -94,4 +94,17 @@
 		where no = #{no}
 		]]>
 	</select>
+	
+	<select id="selectTrainStationByCityNo" parameterType="int" resultType="trainstationvo">
+		<![CDATA[
+		select * from trainStation
+		where cityNum = #{cityNum}
+		]]>
+	</select>
+	
+	<select id="selectAllStationName" resultType="string">
+		<![CDATA[
+		select name from trainStation;
+		]]>
+	</select>
 </mapper>

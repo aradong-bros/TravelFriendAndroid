@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.estsoft.futures.aradongbros.travelfriend.vo.TrainInfoVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.TrainOperationRouteVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.TrainStationVo;
 
 @Repository
 public class TrainDao 
@@ -92,5 +93,16 @@ public class TrainDao
 	{
 		String name = sqlSession.selectOne("train.selectStationName", no);
 		return name;
+	}
+
+	public List<TrainStationVo> getCityStationList(int cityNum) {
+		List<TrainStationVo> cityStationList = sqlSession.selectList("train.selectTrainStationByCityNo", cityNum);
+		return cityStationList;
+	}
+
+	public List<String> getAllStationName() 
+	{
+		List<String> stationNameList = sqlSession.selectList("train.selectAllStationName");
+		return stationNameList;
 	}
 }
