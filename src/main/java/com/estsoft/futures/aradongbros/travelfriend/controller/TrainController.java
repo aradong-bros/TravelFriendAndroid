@@ -87,6 +87,7 @@ public class TrainController
 			startEnd.put("city_no", list.get(i).getCity_no());
 			startEnd.put("startStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getStart()).getLocation(), list.get(i).getCity_no()));
 			startEnd.put("endStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getEnd()).getLocation(), list.get(i).getCity_no()));
+			startEnd.put("isUsed", false);
 		}
 		
 		List<Integer> cityOrderList = new ArrayList<>();
