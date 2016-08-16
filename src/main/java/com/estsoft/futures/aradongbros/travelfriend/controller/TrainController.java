@@ -63,6 +63,6 @@ public class TrainController
 	@ResponseBody
 	public String sample(@ModelAttribute Map<String, Object> map)
 	{
-		return "잘 받음";
+		return map + "잘 받음";
 	}
 }
