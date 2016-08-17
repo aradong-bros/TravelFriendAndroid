@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Category;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
@@ -70,5 +71,12 @@ public class AndroidDao
 		List<PostVo> postVoList = sqlSession.selectList("android.getPostList", city_no);
 		
 		return postVoList;
+	}
+    
+	public String getCategory(int no)
+	{
+		String category = sqlSession.selectOne("android.getCategory", no);
+		
+		return category;
 	}
 }

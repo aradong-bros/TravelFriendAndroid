@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.estsoft.futures.aradongbros.travelfriend.dao.AndroidDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Category;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
@@ -64,5 +65,12 @@ public class AndroidService
 		List<PostVo> postVoList = androidDao.getPostList(city_no);
 		
 		return postVoList;
-	}	
+	}
+	
+	public String getCategory(int no)
+	{
+		String category = androidDao.getCategory(no);
+		
+		return category;
+	}
 }

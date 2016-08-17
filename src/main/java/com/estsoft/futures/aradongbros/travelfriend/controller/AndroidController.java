@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +18,13 @@ import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
 import com.estsoft.futures.aradongbros.travelfriend.dto.TravelRootByCity;
 import com.estsoft.futures.aradongbros.travelfriend.kruskal.Kruskal;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
+import com.estsoft.futures.aradongbros.travelfriend.service.CityService;
 import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.AttractionVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityListVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.Status;
 
 @Controller
 @RequestMapping("/android")
@@ -31,6 +34,8 @@ public class AndroidController
 	private AndroidService androidService;
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private CityService cityService;
 	
 	/**
 	 * 세 종류의 메소드가 있다.
@@ -172,6 +177,36 @@ public class AndroidController
 			travelRootByCity[i] = new TravelRootByCity(kruskal.getTravelRoot());
 		}
 		
+		// 각 도시별 TOTAL_TIME 시간 구하기
+		int totalTime = 0;
+		int[] TOTAL_TIME = new int[cityVoList.size()];
+		
+		for ( int i = 0; i < TOTAL_TIME.length; i++ )
+		{
+			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
+			{
+				if( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "inn" )
+				{
+					totalTime += 8;
+				}
+				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "tour" )
+				{
+					totalTime += 2;
+				}
+				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "food" )
+				{
+					totalTime += 1;
+				}
+			}
+			
+			TOTAL_TIME[i] = totalTime;
+			totalTime = 0;
+		}
+		
+		
+		
+		
+		
 		// postOder 순서 업데이트
 		for ( int i = 0; i < travelRootByCity.length; i++ )
 		{
@@ -188,7 +223,8 @@ public class AndroidController
 		{
 			se[i] = new StartEnd(cityVoList.get(i).getNo(), 
 								 travelRootByCity[i].getTRAVEL_ROOT()[0], 
-								 travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1]);
+								 travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1],
+								 1111);
 		}
 		
 		
@@ -201,6 +237,26 @@ public class AndroidController
 		
 		return "redirect:/train/sample";
 	}	
+	
+	@RequestMapping("/cityModifyOrder")
+	@ResponseBody	 
+	public Map<String, Object> cityModifyOrder(@ModelAttribute List<Integer> cityNoList)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for ( int i = 0; i < cityNoList.size(); i++ )
+		{
+			cityService.modifyOrder(cityNoList.get(i), i + 1);			
+		}
+		
+		cityService.modifyStatus(cityNoList.get(0), Enum.valueOf(Status.class, "start"));
+		cityService.modifyStatus(cityNoList.get(cityNoList.size() - 1), Enum.valueOf(Status.class, "end"));
+		
+		map.put("cityNoList", cityNoList);
+		map.put("result", "city 테이블에 순서들어가있으면 성공!");
+	
+		return map;	
+	}
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
 	//받을땐 모텔어트리뷰터로 받는다.
@@ -228,18 +284,28 @@ public class AndroidController
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<String> atrList = new ArrayList<String>();
+		int[] no = {4440, 4435, 4444, 4445};
 		
-		atrList.add(0, "1");
-		atrList.add(1, "2");
-		atrList.add(2, "3");
-		atrList.add(3, "4");
+		int totalTime = 0;
 		
-		map.put("atrList", atrList);
-		
-		atrList.clear();
+		for ( int i = 0; i < no.length; i++ )
+		{
+			if( androidService.getCategory(no[i]) == "inn" )
+			{
+				totalTime += 8;
+			}
+			else if ( androidService.getCategory(no[i]) == "tour" )
+			{
+				totalTime += 2;
+			}
+			else if ( androidService.getCategory(no[i]) == "food" )
+			{
+				totalTime += 1;
+			}
+		}
+
+		map.put("totalTime", totalTime);
 			
 		return map;
 	}
-	
 }

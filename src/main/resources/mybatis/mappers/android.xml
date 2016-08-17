@@ -82,6 +82,13 @@
 		from post 
 		where city_no = #{city_no}
 	</select>
+	
+	<!-- city의 no에 따른 postList_no 조회  -->
+	<select id="getCategory" resultType="string" parameterType="int">
+		select category
+		from postList 
+		where no = #{no}
+	</select>
 
 	
 </mapper>
