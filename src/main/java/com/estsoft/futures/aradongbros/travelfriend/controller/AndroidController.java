@@ -277,7 +277,7 @@ public class AndroidController
 		return "redirect:/android/getTravelRoot";
 	}*/
 	
-	//localhost:8080/TravelFriendAndroid/android/test
+	//http://222.239.250.207:8080/TravelFriendAndroid/android/test
 	@RequestMapping("/test")
 	@ResponseBody	 
 	public Map<String, Object> test()
@@ -287,7 +287,7 @@ public class AndroidController
 		int[] no = {4440, 4435, 4444, 4445};
 		
 		int totalTime = 0;
-		
+		String a = androidService.getCategory(no[0]);
 		for ( int i = 0; i < no.length; i++ )
 		{
 			if( androidService.getCategory(no[i]) == "inn" )
@@ -304,6 +304,7 @@ public class AndroidController
 			}
 		}
 
+		map.put("4440's category", a);
 		map.put("totalTime", totalTime);
 			
 		return map;
