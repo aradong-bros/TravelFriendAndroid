@@ -290,15 +290,15 @@ public class AndroidController
 		String a = androidService.getCategory(no[0]);
 		for ( int i = 0; i < no.length; i++ )
 		{
-			if( androidService.getCategory(no[i]) == "inn" )
+			if( androidService.getCategory(no[i]).equals("inn") )
 			{
 				totalTime += 8;
 			}
-			else if ( androidService.getCategory(no[i]) == "tour" )
-			{
+			else if ( androidService.getCategory(no[i]).equals("tour") )
+			{ 
 				totalTime += 2;
 			}
-			else if ( androidService.getCategory(no[i]) == "food" )
+			else if ( androidService.getCategory(no[i]).equals("food") )
 			{
 				totalTime += 1;
 			}
