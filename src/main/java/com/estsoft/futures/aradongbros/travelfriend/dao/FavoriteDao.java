@@ -1,6 +1,8 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,20 @@ public class FavoriteDao
 		List<FavoriteVo> favoList = sqlSession.selectList("favorite.selectFavoriteList", user_no);
 		
 		return favoList;
+	}
+	
+	public void insertFavoriteData(int user_no, int schedule_no)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("user_no", user_no);
+		map.put("schedule_no", schedule_no);
+		
+		sqlSession.selectList("favorite.insertFavoriteData", map);
+	}
+	
+	public void deleteFavoriteData(int no)
+	{
+		sqlSession.delete("favorite.deleteFavoriteData", no);
 	}
 }

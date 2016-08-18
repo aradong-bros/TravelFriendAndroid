@@ -3,6 +3,31 @@
 
 <mapper namespace="favorite"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
 
+	<!-- user_no 받아서  favorite 리스트 조회  -->
+	<select id="selectFavoriteList" resultType="favoritevo" parameterType="int">
+		select no,
+			   user_no,
+			   schedule_no
+		from favorite
+		where user_no = #{user_no}
+	</select>
 
+	<!-- favorite 1개 입력 -->
+	<insert id="insertFavoriteData" parameterType="map"> <!-- 인자로 넘겨주는 놈의 타입 -->
+		<![CDATA[
+			insert into favorite values(null, #{user_no}, #{schedule_no}})
+		]]>
+		
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<!-- favorite 1개 삭제 -->
+	<delete id="deleteFavoriteData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from favorite
+		where no = #{no}
+	</delete>
 	
 </mapper>

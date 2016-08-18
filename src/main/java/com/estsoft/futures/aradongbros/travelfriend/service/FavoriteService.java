@@ -20,4 +20,14 @@ public class FavoriteService
 		
 		return favoList;
 	}
+	
+	public void insertFavoriteData(int user_no, int schedule_no)
+	{
+		favoriteDao.insertFavoriteData(user_no, schedule_no);
+	}
+	
+	public void deleteFavoriteData(int no)
+	{
+		favoriteDao.deleteFavoriteData(no);
+	}
 }
