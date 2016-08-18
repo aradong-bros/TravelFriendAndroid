@@ -30,4 +30,9 @@ public class FavoriteService
 	{
 		favoriteDao.deleteFavoriteData(no);
 	}
+	
+	public void deleteFavoriteData2(int user_no, int schedule_no)
+	{
+		favoriteDao.deleteFavoriteData2(user_no, schedule_no);
+	}
 }

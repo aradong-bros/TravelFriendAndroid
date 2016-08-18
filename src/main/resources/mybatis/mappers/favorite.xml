@@ -23,11 +23,19 @@
 		</selectKey>
 	</insert>
 	
-	<!-- favorite 1개 삭제 -->
+	<!-- favorite 1개 삭제 by no -->
 	<delete id="deleteFavoriteData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
 		delete
 		from favorite
 		where no = #{no}
+	</delete>
+	
+	<!-- favorite 1개 삭제  by user_no, schedule_no-->
+	<delete id="deleteFavoriteData" parameterType="map"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from favorite
+		where user_no = #{user_no}
+			and schedule_no = #{schedule_no}
 	</delete>
 	
 </mapper>

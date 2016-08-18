@@ -60,7 +60,7 @@ public class FavoriteController
 		return map;
 	}
 	
-	// 삭제 -> URL : http://222.239.250.207:8080/TravelFriendAndroid/favorite/deleteFavoriteData?no={no 값}
+	// 삭제 (보관함에서)-> URL : http://222.239.250.207:8080/TravelFriendAndroid/favorite/deleteFavoriteData?no={no 값}
 	@RequestMapping("/deleteFavoriteData") 
 	@ResponseBody
 	public Map<String, Object> deleteFavoriteData(@RequestParam("no") int no)
@@ -68,6 +68,19 @@ public class FavoriteController
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		favoriteService.deleteFavoriteData(no);
+		 
+		return map;
+	}
+	
+	// 삭제 (삽입창에서)-> URL : http://222.239.250.207:8080/TravelFriendAndroid/favorite/deleteFavoriteData2?user_no={user_no 값}&schedule_no={schedule_no 값}
+	@RequestMapping("/deleteFavoriteData2") 
+	@ResponseBody
+	public Map<String, Object> deleteFavoriteData2(@RequestParam("user_no") int user_no,
+			  									  @RequestParam("schedule_no") int schedule_no)
+	{		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		favoriteService.deleteFavoriteData2(user_no, schedule_no);
 		 
 		return map;
 	}
