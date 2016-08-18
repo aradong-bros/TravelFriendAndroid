@@ -42,6 +42,7 @@ public class FavoriteController
 			favoriteList.add(scheduleService.selectScheduleData(favoList.get(i).getSchedule_no()));			
 		}
 
+		map.put("favoList", favoList);
 		map.put("favoriteList", favoriteList);
 		
 		return map;
