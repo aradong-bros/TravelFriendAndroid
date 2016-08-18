@@ -35,14 +35,14 @@ public class FavoriteController
 		
 		List<FavoriteVo> favoList = favoriteService.selectFavoriteList(user_no);
 		
-		List<ScheduleVo> schList = new ArrayList<ScheduleVo>();
+		List<ScheduleVo> favoriteList = new ArrayList<ScheduleVo>();
 		
 		for ( int i = 0; i < favoList.size(); i++ )
 		{
-			schList.add(scheduleService.selectScheduleData(favoList.get(i).getSchedule_no()));			
+			favoriteList.add(scheduleService.selectScheduleData(favoList.get(i).getSchedule_no()));			
 		}
 
-		map.put("schList", schList);
+		map.put("favoriteList", favoriteList);
 		
 		return map;
 	}
