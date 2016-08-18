@@ -15,7 +15,7 @@
 	<!-- favorite 1개 입력 -->
 	<insert id="insertFavoriteData" parameterType="map"> <!-- 인자로 넘겨주는 놈의 타입 -->
 		<![CDATA[
-			insert into favorite values(null, #{user_no}, #{schedule_no}})
+			insert into favorite values(null, #{user_no}, #{schedule_no})
 		]]>
 		
 		<selectKey keyProperty="no" resultType="int" order="AFTER">

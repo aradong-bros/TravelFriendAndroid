@@ -68,7 +68,7 @@ public class FavoriteController
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		favoriteService.deleteFavoriteData(no);
-		
+		 
 		return map;
 	}
 }
