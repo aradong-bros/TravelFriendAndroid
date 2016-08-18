@@ -26,6 +26,18 @@ public class PostService
 		postDao.deletePostData(no);
 	}
 	
+	// city와 함께 삭제
+	public void deleteCityRelatedData(int no)
+	{
+		postDao.deleteCityRelatedData(no);
+	}
+	
+	// 스케줄과 함께 삭제
+	public void deleteCityRelatedDataInSchedule(int no)
+	{
+		postDao.deleteCityRelatedDataInSchedule(no);
+	}
+	
 	// 수정 : postOrder
 	public void modifyPostOrder(int postList_no, int postOrder)
 	{

@@ -14,11 +14,25 @@
 		</selectKey>
 	</insert>
 
-	<!-- City 1개 삭제 -->
+	<!-- post 1개 삭제 -->
 	<delete id="deletePostData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
 		delete
 		from post
 		where no = #{no}
+	</delete>
+	
+	<!-- City 삭제시 같이 삭제 -->
+	<delete id="deleteCityRelatedData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from post
+		where city_no = #{no}
+	</delete>
+	
+	<!-- 스케줄 삭제시 같이 삭제  -->
+	<delete id="deleteCityRelatedDataInSchedule" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from post
+		where city_no = #{city_no}
 	</delete>
 	
 	<!-- 수정 : postOrder  -->

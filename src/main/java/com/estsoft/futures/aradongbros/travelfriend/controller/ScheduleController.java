@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.futures.aradongbros.travelfriend.service.CityService;
+import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
 import com.estsoft.futures.aradongbros.travelfriend.service.ScheduleService;
+import com.estsoft.futures.aradongbros.travelfriend.service.TrainScheduleService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.Isfinished;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
 
@@ -22,6 +25,12 @@ public class ScheduleController
 {
 	@Autowired
 	private ScheduleService scheduleService;
+	@Autowired
+	private CityService cityService;
+	@Autowired
+	private PostService postService;
+	@Autowired
+	private TrainScheduleService trainScheduleService;
 
 	// 사용자꺼 전체 조회  -> url : http://222.239.250.207:8080/TravelFriendAndroid/schedule/schSelectByUser/{user_no}
 	@RequestMapping("/schSelectByUser/{user_no}")
@@ -90,6 +99,12 @@ public class ScheduleController
 	public Map<String,Object> deleteScheduleData(@PathVariable("no") int no)
 	{			
 		Map<String,Object> map = new HashMap<String,Object>();
+		
+		postService.deleteCityRelatedDataInSchedule(no);
+		
+		trainScheduleService.deleteTrainScheduleByScheduleNo(no);
+		
+		cityService.deleteScheduleRelatedData(no);
 		
 		scheduleService.deleteScheduleData(no);
 		

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.futures.aradongbros.travelfriend.dto.No;
 import com.estsoft.futures.aradongbros.travelfriend.service.CityService;
+import com.estsoft.futures.aradongbros.travelfriend.service.PostService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.Status;
 
@@ -25,10 +26,11 @@ public class CityController
 {
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private PostService postService;
 	
 	// 조회
 	
-
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/cityInsert
 	@RequestMapping("/cityInsert")
 	@ResponseBody
@@ -67,6 +69,7 @@ public class CityController
 	{			
 		Map<String,Object> map = new HashMap<String,Object>();
 		
+		postService.deleteCityRelatedData(no);
 		cityService.deleteCityData(no);
 		
 		return map;

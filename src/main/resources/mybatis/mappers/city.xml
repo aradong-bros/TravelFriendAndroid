@@ -3,6 +3,17 @@
 
 <mapper namespace="city"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
 
+	<!-- schedule_no 받아서  city 리스트 조회  -->
+	<select id="selectCityBySchNo" resultType="cityvo" parameterType="int">
+		select no,
+			   schedule_no,
+			   cityList_no,
+		       status,
+		       cityOrder
+		from city 
+		where schedule_no = #{no}
+	</select>
+
 	<!-- City 1개 삽입 insertCityData -->
 	<insert id="insertCityData" parameterType="cityvo"> <!-- 인자로 넘겨주는 놈의 타입 -->
 		<![CDATA[
@@ -19,6 +30,13 @@
 		delete
 		from city
 		where no = #{no}
+	</delete>
+	
+	<!-- 스케줄 삭제시 같이 삭제-->
+	<delete id="deleteScheduleRelatedData" parameterType="int"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+		delete
+		from city
+		where schedule_no = #{no}
 	</delete>
 	
 	<!-- 수정 : status  -->

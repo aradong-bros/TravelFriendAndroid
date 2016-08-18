@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.Isfinished;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
 

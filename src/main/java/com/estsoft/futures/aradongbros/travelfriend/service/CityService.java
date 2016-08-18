@@ -27,6 +27,12 @@ public class CityService
 		cityDao.deleteCityData(no);
 	}
 	
+	// 스케줄과 함꼐 삭제
+	public void deleteScheduleRelatedData(int no)
+	{
+		cityDao.deleteScheduleRelatedData(no);
+	}
+	
 	// 수정 : status
 	public void modifyStatus(int no, Status status)
 	{
