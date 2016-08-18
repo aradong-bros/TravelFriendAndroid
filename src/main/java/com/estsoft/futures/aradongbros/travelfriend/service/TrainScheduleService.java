@@ -16,4 +16,9 @@ public class TrainScheduleService
 	{
 		trainScheduleDao.insertTrainSchedule(vo);
 	}
+	
+	public void deleteTrainScheduleByScheduleNo(int schedule_no)
+	{
+		trainScheduleDao.deleteTrainScheduleByScheduleNo(schedule_no);
+	}
 }

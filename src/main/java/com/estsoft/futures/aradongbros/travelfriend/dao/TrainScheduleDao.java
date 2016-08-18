@@ -15,4 +15,9 @@ public class TrainScheduleDao
 	public void insertTrainSchedule(TrainScheduleVo vo) {
 		sqlSession.insert("trainschedule.insertTrainSchedule", vo);
 	}
+
+	public void deleteTrainScheduleByScheduleNo(int schedule_no) 
+	{
+		sqlSession.delete("trainschedule.deleteTrainScheduleByScheduleNo", schedule_no);
+	}
 }

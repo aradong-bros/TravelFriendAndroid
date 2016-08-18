@@ -8,4 +8,8 @@
 			#{endStation}, #{startDate}, #{arrivalDate} 
 		)
 	</insert>
+	
+	<delete id="deleteTrainScheduleByScheduleNo" parameterType="int">
+		delete from trainSchedule where schedule_no = #{schedule_no}
+	</delete>
 </mapper>

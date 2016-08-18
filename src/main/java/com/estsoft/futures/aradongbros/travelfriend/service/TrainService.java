@@ -323,7 +323,7 @@ public class TrainService
 		return timeMap;
 	}
 
-	public String getNearStation(String location, int cityNum) 
+	public List<String> getNearStation(String location, int cityNum) 
 	{
 		String locationSplit[] = location.split(",");
 		double latitude = Double.parseDouble(locationSplit[0]);
@@ -353,7 +353,7 @@ public class TrainService
 			stationList.add((String)distanceMap.get("stationName"));
 		}
 		
-		return stationList.get(0);
+		return stationList;
 	}
 
 	public List<String> getAllStationName() 

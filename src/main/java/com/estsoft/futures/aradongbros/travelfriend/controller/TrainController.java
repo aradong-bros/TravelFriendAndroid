@@ -99,6 +99,8 @@ public class TrainController
 			startEnd.put("city_no", list.get(i).getCity_no());
 			startEnd.put("startStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getStart()).getLocation(), list.get(i).getCity_no()));
 			startEnd.put("endStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getEnd()).getLocation(), list.get(i).getCity_no()));
+//			startEnd.put("startStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getStart()).getLocation(), list.get(i).getCity_no()).get(0));
+//			startEnd.put("endStation", trainService.getNearStation(androidService.selectAllAtrByNo(list.get(i).getEnd()).getLocation(), list.get(i).getCity_no()).get(0));
 			startEnd.put("totalTime", list.get(i).getTOTAL_TIME());
 			startEndList.add(startEnd);
 		}
@@ -112,11 +114,22 @@ public class TrainController
 			if(nowCityIndex == -1){ //시작역 -> 첫도시
 				ScheduleVo scheduleVo = scheduleService.selectScheduleData(schedule_no); //여행의 시작역을 찾기위해 스케줄을 받아온다.
 				for(int i=0; i<startEndList.size(); i++){ //모든 도시를 돌면서
-					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(scheduleVo.getFirstStation(), (String)startEndList.get(i).get("startStation"), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())); //일단 직통(여행의 시작역 -> 첫번째 도시의 시작역)을 찾는다
-					if(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0){ //직통열차 없으면
-						mappedTrainTimeList = trainService.getTransferTrainTimeList(scheduleVo.getFirstStation(), (String)startEndList.get(i).get("startStation"), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())); //환승을 찾는다
+					List<String> nearStationList = (ArrayList<String>)startEndList.get(i).get("startStation");
+					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(scheduleVo.getFirstStation(), nearStationList.get(0), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())); //가장 가까운 역이랑 경로를 뽑음
+					if(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0){ //가장 가까운 역이랑 경로가 없으면
+						for(int j=1; j<nearStationList.size(); j++){ //도시 안에서 다음으로 가까운 역이랑 경로를 뽑음
+							mappedTrainTimeList.addAll(trainService.getTrainTimeList(scheduleVo.getFirstStation(), nearStationList.get(j), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())));
+							if( !(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0) ) break; //경로가 하나라도 있으면 그만 찾음
+						}
 					}
-					for (Map<String, Object> map2 : mappedTrainTimeList) {
+					
+					if(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0){ //직통이 결국 없으면 환승경로를 찾음
+						for (String nearStationName : nearStationList) { //도시안에서 가장 가까운 역부터 환승경로를 찾음
+							mappedTrainTimeList.addAll(trainService.getTransferTrainTimeList(scheduleVo.getFirstStation(), nearStationName, DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())));
+						}
+					}
+
+					for (Map<String, Object> map2 : mappedTrainTimeList) { //그 경로의 city_no와 cityIndex를 넣어줌
 						map2.put("city_no", startEndList.get(i).get("city_no"));
 						map2.put("cityIndex", i);
 					}
@@ -125,13 +138,52 @@ public class TrainController
 			}else{ //도시 -> 도시
 				for(int i=0; i<startEndList.size(); i++){ //모든 도시를 돌면서
 					if(isUsed[i] || i==nowCityIndex) continue; //갔던 도시와 지금 떠나려는 도시는 제외 (지금 떠나려는 도시도 아마 isUsed에 체크 되있을텐데 혹시 모르니)
-//					List<Map<String, Object>> mappedTrainTimeList = 
-//							trainService.getTrainTimeList(
-//									(String)startEndList.get(nowCityIndex).get("endStation"), 
-//									(String)startEndList.get(i).get("startStation"), 
-//									new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), nowCity에서 totalTime)), 
-//									new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), nowCity에서 totalTime))
-//							);
+					
+//					List<String> nowNearStationList = (ArrayList<String>)startEndList.get(nowCityIndex).get("endStation");
+//					List<String> nextNearStationList = (ArrayList<String>)startEndList.get(i).get("startStation");
+//					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(
+//							nowNearStationList.get(0), 
+//							nextNearStationList.get(0), 
+//							new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
+//							new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
+//					);
+//					if(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0){
+//						for(int j=0; j<nowNearStationList.size(); j++){
+//							for(int k=0; j<nowNearStationList.size(); k++){
+//								mappedTrainTimeList.addAll(trainService.getTrainTimeList(
+//										nowNearStationList.get(j), 
+//										nextNearStationList.get(k), 
+//										new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
+//										new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
+//										)
+//								);
+//								if( !(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0) ) break;
+//							}
+//						}
+//					}
+					
+					
+					
+					
+					
+					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(
+							(String)startEndList.get(nowCityIndex).get("endStation"), 
+							(String)startEndList.get(i).get("startStation"), 
+							new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(i).get("totalTime"))), 
+							new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(i).get("totalTime")))
+					); //직통열차 찾음(line128~133)
+					if(mappedTrainTimeList.isEmpty() || mappedTrainTimeList == null || mappedTrainTimeList.size() == 0){ //직통열차 없으면
+						mappedTrainTimeList = trainService.getTransferTrainTimeList(
+								(String)startEndList.get(nowCityIndex).get("endStation"), 
+								(String)startEndList.get(i).get("startStation"), 
+								new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(i).get("totalTime"))), 
+								new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(i).get("totalTime")))
+						); //환승을 찾는다(line135~140)
+					}
+					for (Map<String, Object> map2 : mappedTrainTimeList) { //그 경로의 city_no와 cityIndex를 넣어줌
+						map2.put("city_no", startEndList.get(i).get("city_no"));
+						map2.put("cityIndex", i);
+					}
 				}
 			}
 			
@@ -160,7 +212,12 @@ public class TrainController
 			vo.setStartStation((String)fastestRouteMap.get("startStationName"));
 			vo.setEndStation((String)fastestRouteMap.get("endStationName"));
 			vo.setStartDate(DateUtils.getDateTimeString((Date)fastestRouteMap.get("goDate"), (Time)fastestRouteMap.get("departureTime")));
-			vo.setArrivalDate(DateUtils.getDateTimeString(new Date((DateUtils.getAddMillis((Date)fastestRouteMap.get("goDate"), (Time)fastestRouteMap.get("departureTime"), (Time)fastestRouteMap.get("operationTime")))), new Time((DateUtils.getAddMillis((Date)fastestRouteMap.get("goDate"), (Time)fastestRouteMap.get("departureTime"), (Time)fastestRouteMap.get("operationTime"))))));
+			vo.setArrivalDate(
+					DateUtils.getDateTimeString(
+							new Date(DateUtils.getAddMillis((Date)fastestRouteMap.get("goDate"), (Time)fastestRouteMap.get("departureTime"), (Time)fastestRouteMap.get("operationTime"))), 
+							new Time(DateUtils.getAddMillis((Date)fastestRouteMap.get("goDate"), (Time)fastestRouteMap.get("departureTime"), (Time)fastestRouteMap.get("operationTime")))
+					)
+			);
 			trainScheduleService.insertTrainSchedule(vo);
 		}
 		
