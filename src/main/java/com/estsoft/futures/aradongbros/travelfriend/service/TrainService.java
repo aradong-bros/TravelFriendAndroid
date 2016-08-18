@@ -24,14 +24,8 @@ public class TrainService
 	@Autowired
 	private TrainDao trainDao;
 	
-	//두 점 사이에 거리 구하기
-	public double getDistance(double x, double y, double x1, double y1)
-	{
-		return Math.sqrt(Math.pow(Math.abs(x1-x), 2) + Math.pow(Math.abs(y1-y), 2));
-	}
-	
 	//출발시간이 빠른 순으로 정렬
-	static class DepTimeASCCompare implements Comparator<Map<String,Object>>{
+	public static class DepTimeASCCompare implements Comparator<Map<String,Object>>{
 		@Override
 		public int compare(Map<String, Object> o1, Map<String, Object> o2) {
 			Time t1 = (Time) o1.get("departureTime");
@@ -41,13 +35,29 @@ public class TrainService
 	}
 	
 	//거리가 짧은 순으로 정렬
-	static class DistanceASCCompare implements Comparator<Map<String, Object>>{
+	public static class DistanceASCCompare implements Comparator<Map<String, Object>>{
 		@Override
 		public int compare(Map<String, Object> distanceMap1, Map<String, Object> distanceMap2) {
 			Double d1 = (Double) distanceMap1.get("distance");
 			Double d2 = (Double) distanceMap2.get("distance");
 			return d1.compareTo(d2);
 		}
+	}
+	
+	//걸린시간이 짧은 순으로 정렬
+	public static class OperationTimeASCCompare implements Comparator<Map<String,Object>>{
+		@Override
+		public int compare(Map<String,Object>o1, Map<String,Object> o2){
+			Time t1 = (Time) o1.get("operationTime");
+			Time t2 = (Time) o2.get("operationTime");
+			return t1.compareTo(t2);
+		}
+	}
+	
+	//두 점 사이에 거리 구하기
+	public double getDistance(double x, double y, double x1, double y1)
+	{
+		return Math.sqrt(Math.pow(Math.abs(x1-x), 2) + Math.pow(Math.abs(y1-y), 2));
 	}
 	
 	//역이름으로 역번호 가져오기
@@ -68,6 +78,7 @@ public class TrainService
 		return dayOfWeek;
 	}
 
+	//직통 기차경로
 	public List<Map<String, Object>> getTrainTimeList(String startStation, String endStation, Date goDate, Time goTime) 
 	{
 		int startStationNo = getStationNo(startStation);
@@ -136,6 +147,7 @@ public class TrainService
 			map.put("arrivalTime", trainEndTimeList.get(i).getDepartureTime());
 			map.put("trainNum", trainInfoVo.getTrainNum());
 			map.put("trainModel", trainInfoVo.getTrainModel());
+			map.put("goDate", goDate);
 			
 			int startHour = trainStartTimeList.get(i).getDepartureTime().getHours();
 			int startMinut = trainStartTimeList.get(i).getDepartureTime().getMinutes();
@@ -153,6 +165,7 @@ public class TrainService
 		return mappedTrainTimeList;
 	}
 
+	//환승 기차경로
 	public List<Map<String, Object>> getTransferTrainTimeList(
 			String startStation, String endStation, Date goDate, Time goTime) 
 	{
@@ -164,6 +177,10 @@ public class TrainService
 		List<Integer> transferStationList = trainDao.getTransferStationList(startStationNo, endStationNo);
 		for (Integer transferStationNo : transferStationList) {
 			mappedTrainTimeList.addAll(transferMethod(startStationNo, endStationNo, transferStationNo, weekdayNo, goTime));
+		}
+		
+		for (Map<String,Object> map : mappedTrainTimeList) {
+			map.put("goDate", goDate);
 		}
 		
 		return mappedTrainTimeList;
@@ -289,6 +306,16 @@ public class TrainService
 				map.put("trainModel", trainDao.selectTrainInfoByNo(startList.get(i).getTrainInfo_no()).getTrainModel());
 				map.put("transferTrainModel", trainDao.selectTrainInfoByNo(transferStartList.get(j).getTrainInfo_no()).getTrainModel());
 				
+				int startHour = startList.get(i).getDepartureTime().getHours();
+				int startMinut = startList.get(i).getDepartureTime().getMinutes();
+				int endHour = endList.get(j).getDepartureTime().getHours();
+				int endMinut = endList.get(j).getDepartureTime().getMinutes();
+				int startTime = (startHour*60) + startMinut;
+				int endTime = (endHour*60) + endMinut;
+				if(startTime > endTime) endTime += (24*60);
+				int operationTime = endTime - startTime;
+				map.put("operationTime", new Time(operationTime/60, operationTime%60, 0));
+				
 				timeMap.add(map);
 			}
 		}
@@ -321,7 +348,12 @@ public class TrainService
 		
 		Collections.sort(distanceMapList, new DistanceASCCompare());
 		
-		return (String) distanceMapList.get(0).get("stationName");
+		List<String> stationList = new ArrayList<>();
+		for (Map<String, Object> distanceMap : distanceMapList) {
+			stationList.add((String)distanceMap.get("stationName"));
+		}
+		
+		return stationList.get(0);
 	}
 
 	public List<String> getAllStationName() 
