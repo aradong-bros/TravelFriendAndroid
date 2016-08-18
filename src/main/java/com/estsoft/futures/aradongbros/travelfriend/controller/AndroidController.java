@@ -185,15 +185,15 @@ public class AndroidController
 		{
 			for ( int j = 0; j < travelRootByCity[i].getTRAVEL_ROOT().length; j++ )
 			{
-				if( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "inn" )
+				if( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]).equals("inn") )
 				{
-					totalTime += 8;
+					totalTime += 7;
 				}
-				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "tour" )
+				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]).equals("tour") )
 				{
-					totalTime += 2;
+					totalTime += 3;
 				}
-				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]) == "food" )
+				else if ( androidService.getCategory(travelRootByCity[i].getTRAVEL_ROOT()[j]).equals("food") )
 				{
 					totalTime += 1;
 				}
@@ -224,7 +224,7 @@ public class AndroidController
 			se[i] = new StartEnd(cityVoList.get(i).getNo(), 
 								 travelRootByCity[i].getTRAVEL_ROOT()[0], 
 								 travelRootByCity[i].getTRAVEL_ROOT()[travelRootByCity[i].getTRAVEL_ROOT().length - 1],
-								 1111);
+								 TOTAL_TIME[i]);
 		}
 		
 		
@@ -235,7 +235,7 @@ public class AndroidController
 		
 		redirectAttributes.addFlashAttribute("map", map);
 		
-		return "redirect:/train/sample";
+		return "redirect:/train/makeTrainSchedule";
 	}	
 	
 	@RequestMapping("/cityModifyOrder")
@@ -278,7 +278,7 @@ public class AndroidController
 	}*/
 	
 	//http://222.239.250.207:8080/TravelFriendAndroid/android/test
-	@RequestMapping("/test")
+/*	@RequestMapping("/test")
 	@ResponseBody	 
 	public Map<String, Object> test()
 	{
@@ -292,11 +292,11 @@ public class AndroidController
 		{
 			if( androidService.getCategory(no[i]).equals("inn") )
 			{
-				totalTime += 8;
+				totalTime += 7;
 			}
 			else if ( androidService.getCategory(no[i]).equals("tour") )
 			{ 
-				totalTime += 2;
+				totalTime += 3;
 			}
 			else if ( androidService.getCategory(no[i]).equals("food") )
 			{
@@ -308,5 +308,5 @@ public class AndroidController
 		map.put("totalTime", totalTime);
 			
 		return map;
-	}
+	}*/
 }
