@@ -31,7 +31,7 @@
 	</delete>
 	
 	<!-- favorite 1개 삭제  by user_no, schedule_no-->
-	<delete id="deleteFavoriteData" parameterType="map"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
+	<delete id="deleteFavoriteData2" parameterType="map"> <!-- parameterType은 객체 하나만 받을 수 있다. -->
 		delete
 		from favorite
 		where user_no = #{user_no}
