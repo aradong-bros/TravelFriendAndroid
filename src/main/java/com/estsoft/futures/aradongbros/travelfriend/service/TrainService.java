@@ -322,7 +322,8 @@ public class TrainService
 		
 		return timeMap;
 	}
-
+	
+	//도시안에 좌표 근처 기차역 가까운 순으로 찾기
 	public List<String> getNearStation(String location, int cityNum) 
 	{
 		String locationSplit[] = location.split(",");
@@ -356,9 +357,26 @@ public class TrainService
 		return stationList;
 	}
 
+	//모든 기차역의 이름을 ㄱㄴㄷ 순으로 찾기
 	public List<String> getAllStationName() 
 	{
 		List<String> stationNameList = trainDao.getAllStationName();
 		return stationNameList;
+	}
+
+	// 두 기차역 사이의 거리 구하기
+	public Double getStationDistance(String nowLeaveStation, String nextStation) 
+	{
+		TrainStationVo station1 = trainDao.getStationByName(nowLeaveStation);
+		TrainStationVo station2 = trainDao.getStationByName(nextStation);
+		
+		String spot1[] = station1.getLocation().split(",");
+		double x = Double.parseDouble(spot1[1]);
+		double y = Double.parseDouble(spot1[0]);
+		String spot2[] = station2.getLocation().split(",");
+		double x1 = Double.parseDouble(spot2[1]);
+		double y1 = Double.parseDouble(spot2[0]);
+		
+		return getDistance(x, y, x1, y1);
 	}
 }

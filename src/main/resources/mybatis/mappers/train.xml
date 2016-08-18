@@ -110,4 +110,11 @@
 		order by name asc;
 		]]>
 	</select>
+	
+	<select id="selectStationByName" parameterType="string" resultType="trainstationvo">
+		<![CDATA[
+		select * from trainStation
+		where name = #{station}
+		]]>
+	</select>
 </mapper>

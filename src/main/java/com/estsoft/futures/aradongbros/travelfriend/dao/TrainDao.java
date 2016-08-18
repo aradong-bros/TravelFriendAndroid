@@ -105,4 +105,11 @@ public class TrainDao
 		List<String> stationNameList = sqlSession.selectList("train.selectAllStationName");
 		return stationNameList;
 	}
+
+	
+	public TrainStationVo getStationByName(String station) 
+	{
+		TrainStationVo vo = sqlSession.selectOne("train.selectStationByName", station);
+		return vo;
+	}
 }
