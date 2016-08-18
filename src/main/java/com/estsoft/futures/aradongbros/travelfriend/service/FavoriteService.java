@@ -25,14 +25,9 @@ public class FavoriteService
 	{
 		favoriteDao.insertFavoriteData(user_no, schedule_no);
 	}
-	
-	public void deleteFavoriteData(int no)
+
+	public void deleteFavoriteData(int user_no, int schedule_no)
 	{
-		favoriteDao.deleteFavoriteData(no);
-	}
-	
-	public void deleteFavoriteData2(int user_no, int schedule_no)
-	{
-		favoriteDao.deleteFavoriteData2(user_no, schedule_no);
+		favoriteDao.deleteFavoriteData(user_no, schedule_no);
 	}
 }

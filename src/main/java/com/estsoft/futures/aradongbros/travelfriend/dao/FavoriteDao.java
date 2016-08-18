@@ -33,18 +33,13 @@ public class FavoriteDao
 		sqlSession.selectList("favorite.insertFavoriteData", map);
 	}
 	
-	public void deleteFavoriteData(int no)
-	{
-		sqlSession.delete("favorite.deleteFavoriteData", no);
-	}
-	
-	public void deleteFavoriteData2(int user_no, int schedule_no)
+	public void deleteFavoriteData(int user_no, int schedule_no)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("user_no", user_no);
 		map.put("schedule_no", schedule_no);
 		
-		sqlSession.delete("favorite.deleteFavoriteData2", map);
+		sqlSession.delete("favorite.deleteFavoriteData", map);
 	}
 }
