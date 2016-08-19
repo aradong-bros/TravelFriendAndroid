@@ -91,8 +91,12 @@ public class TrainController
 			RedirectAttributes redirectAttributes)
 	{
 		int schedule_no = (int) map.get("schedule_no");
+		StartEnd arr[] = (StartEnd[])map.get("StartEndByCity");
+		List<StartEnd> list = new ArrayList<>();
+		for (StartEnd startEnd : list) {
+			list.add(startEnd);
+		}
 		
-		List<StartEnd> list = (ArrayList<StartEnd>) map.get("StartEndByCity");
 		List<Map<String,Object>> startEndList = new ArrayList<>();
 		for(int i=0; i<list.size(); i++){
 			Map<String, Object> startEnd = new HashMap<>();
