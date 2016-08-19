@@ -133,9 +133,11 @@ public class TrainService
 			break;
 		}
 
-		if(trainStartTimeList.size() == 0 || trainStartTimeList == null || trainStartTimeList.size() != trainEndTimeList.size()) return null;
-		
 		List<Map<String, Object>> mappedTrainTimeList = new ArrayList<>();
+		
+//		if(trainStartTimeList.size() == 0 || trainStartTimeList == null || trainStartTimeList.size() != trainEndTimeList.size()) {
+//			return null;
+//		}
 		
 		for(int i=0; i<trainStartTimeList.size(); i++){
 			TrainInfoVo trainInfoVo = trainDao.selectTrainInfoByNo(trainStartTimeList.get(i).getTrainInfo_no());
