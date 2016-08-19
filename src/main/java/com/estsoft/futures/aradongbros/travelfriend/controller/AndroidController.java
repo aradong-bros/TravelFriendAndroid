@@ -240,7 +240,7 @@ public class AndroidController
 	
 	@RequestMapping("/cityModifyOrder")
 	@ResponseBody	 
-	public Map<String, Object> cityModifyOrder(@ModelAttribute List<Integer> cityOrderList)
+	public Map<String, Object> cityModifyOrder(@ModelAttribute ArrayList<Integer> cityOrderList)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		

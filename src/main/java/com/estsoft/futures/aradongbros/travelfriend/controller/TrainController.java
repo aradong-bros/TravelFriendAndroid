@@ -107,7 +107,7 @@ public class TrainController
 			startEndList.add(startEnd);
 		}
 		
-		List<Integer> cityOrderList = new ArrayList<>();
+		ArrayList<Integer> cityOrderList = new ArrayList<>();
 		int nowCityIndex = -1; //현재 갈 곳을 찾고있는 도시(startEndList의 index)
 		boolean isUsed[] = new boolean[startEndList.size()]; //이미 갔던 도시인지 확인하는 배열. boolean의 기본값은 false
 		TrainScheduleVo vo = new TrainScheduleVo();
