@@ -95,8 +95,8 @@ public class TrainController
 		int schedule_no = (int) map.get("schedule_no");
 		StartEnd arr[] = (StartEnd[])map.get("StartEndByCity");
 		List<StartEnd> list = new ArrayList<>();
-		for (StartEnd startEnd : list) {
-			list.add(startEnd);
+		for (int i=0; i<arr.length; i++) {
+			list.add(arr[i]);
 		}
 		
 		List<Map<String,Object>> startEndList = new ArrayList<>();
