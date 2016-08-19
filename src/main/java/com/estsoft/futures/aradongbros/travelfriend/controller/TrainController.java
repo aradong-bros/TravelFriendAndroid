@@ -115,7 +115,7 @@ public class TrainController
 		boolean isUsed[] = new boolean[startEndList.size()]; //이미 갔던 도시인지 확인하는 배열. boolean 배열의 기본 값은 전부 false
 		TrainScheduleVo vo = new TrainScheduleVo();
 		
-		return ""+startEndList.get(0).get("startStation");
+		return ""+startEndList.get(1).get("startStation");
 		
 //		while(!isAllTrue(isUsed)){
 //			List<Map<String, Object>> operationTime = new ArrayList<>(); //?도시로 가는데 ?역에서 ?역으로 가고 ?시간 걸리는지 모아놓은 리스트(city_no, startStationName, endStationName, operationTime, 그외에도 경로 찾는것처럼 있음)
