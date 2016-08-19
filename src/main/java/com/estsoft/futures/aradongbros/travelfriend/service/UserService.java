@@ -32,4 +32,9 @@ public class UserService
 	public UserVo getUserNameAndPicture(int user_no) {
 		return userDao.getUserNameAndPicture(user_no);
 	}
+
+	public void deleteUser(int no) 
+	{
+		userDao.deleteUser(no);
+	}
 }

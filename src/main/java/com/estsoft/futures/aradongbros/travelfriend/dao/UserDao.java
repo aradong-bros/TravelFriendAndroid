@@ -39,4 +39,9 @@ public class UserDao
 	public UserVo getUserNameAndPicture(int user_no) {
 		return sqlSession.selectOne("user.getUserNameAndPicture", user_no);
 	}
+
+	public void deleteUser(int no) 
+	{
+		sqlSession.delete("user.deleteUser", no);
+	}
 }

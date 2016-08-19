@@ -37,4 +37,10 @@
 		where no = #{no}
 		]]>
 	</update>
+	
+	<delete id="deleteUser" parameterType="int">
+		<![CDATA[
+		delete from user where no = #{no}
+		]]>
+	</delete>
 </mapper>

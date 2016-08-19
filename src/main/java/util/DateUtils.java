@@ -34,7 +34,7 @@ public class DateUtils {
 	}
 	
 	public static long getAddMillis(Date d, Time t, Time addTime){
-		c.set(d.getYear(), d.getMonth(), d.getDate(), t.getHours(), t.getMinutes());
+		c.set(d.getYear()+1900, d.getMonth(), d.getDate(), t.getHours(), t.getMinutes());
 		c.add(Calendar.MINUTE, (addTime.getHours()*60) + addTime.getMinutes());
 		
 		return c.getTimeInMillis();

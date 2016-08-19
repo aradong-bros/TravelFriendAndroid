@@ -112,4 +112,10 @@ public class UserController {
 		String storedURL = "http://222.239.250.207:8080/TravelFriendAndroid/user/profileDownload/" + storedFileName;
 		return storedURL;
 	}
+	
+	@RequestMapping("/deleteUser")
+	public void userDelete(@RequestParam("no")int no)
+	{
+		userService.deleteUser(no);
+	}
 }
