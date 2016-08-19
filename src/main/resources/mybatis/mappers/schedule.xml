@@ -40,7 +40,9 @@
 			   isPublic,
 			   startDate,
 			   endDate,
-			   isfinished
+			   isfinished,
+			   firstStation,
+			   lastStation
 		from schedule 
 		where no = #{no}
 	</select>

@@ -202,11 +202,7 @@ public class AndroidController
 			TOTAL_TIME[i] = totalTime;
 			totalTime = 0;
 		}
-		
-		
-		
-		
-		
+
 		// postOder 순서 업데이트
 		for ( int i = 0; i < travelRootByCity.length; i++ )
 		{
@@ -227,8 +223,6 @@ public class AndroidController
 								 TOTAL_TIME[i]);
 		}
 		
-		
-		
 		map.put("travelRootByCity", travelRootByCity);
 		map.put("schedule_no", schedule_no);
 		map.put("StartEndByCity", se);
@@ -236,6 +230,7 @@ public class AndroidController
 		redirectAttributes.addFlashAttribute("map", map);
 		
 		return "redirect:/train/makeTrainSchedule";
+		//return map;
 	}	
 	
 	@RequestMapping("/cityModifyOrder")
@@ -249,8 +244,8 @@ public class AndroidController
 			cityService.modifyOrder(cityOrderList.get(i), i + 1);			
 		}
 		
-		//cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
-		//cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
+		cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
+		cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
 		
 		map.put("cityNoList", cityOrderList);
 		map.put("result", "city 테이블에 순서들어가있으면 성공!");
