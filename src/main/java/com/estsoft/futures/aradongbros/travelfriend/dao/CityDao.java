@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,6 +18,20 @@ public class CityDao
     private SqlSession sqlSession;  // mybatis 사용하기위해 선언
     
 	// 조회
+	public List<CityVo> selectCityListBySchedule(int schedule_no)
+	{
+		List<CityVo> cityListBySchedule = sqlSession.selectList("city.selectCityListBySchedule", schedule_no);
+		
+		return cityListBySchedule;
+	}
+	
+	// no로 city 전체 받아오기
+	public CityVo selectCityByNo(int no)
+	{
+		CityVo cityVo = sqlSession.selectOne("city.selectCityByNo", no);
+		
+		return cityVo;
+	}
 	
 	// 삽입
 	public void insertCityData(CityVo cityVo)

@@ -1,5 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,20 @@ public class CityService
 	private CityDao cityDao;
 	
 	// 조회
+	public List<CityVo> selectCityListBySchedule(int schedule_no)
+	{
+		List<CityVo> cityListBySchedule = cityDao.selectCityListBySchedule(schedule_no);
+		
+		return cityListBySchedule;
+	}
+	
+	// no로 city 전체 받아오기
+	public CityVo selectCityByNo(int no)
+	{
+		CityVo cityVo = cityDao.selectCityByNo(no);
+		
+		return cityVo;
+	}
 	
 	// 삽입
 	public void insertCityData(CityVo cityVo)

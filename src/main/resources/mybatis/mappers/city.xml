@@ -3,6 +3,29 @@
 
 <mapper namespace="city"> <!-- dao에서 sql사용시 "android.sql문 이름" 이런식으로 사용하기 위함 -->
 
+	<!-- selectCityListBySchedule -->
+	<select id="selectCityListBySchedule" resultType="cityvo" parameterType="int">
+		select no,
+			   schedule_no,
+			   cityList_no,	
+		       status,
+		       cityOrder
+		from city 
+		where schedule_no = #{schedule_no}
+		order by cityOrder;
+	</select>
+	
+	<!-- no로 city 전체 받아오기 -->
+	<select id="selectCityByNo" resultType="cityvo" parameterType="int">
+		select no,
+			   schedule_no,
+			   cityList_no,	
+		       status,
+		       cityOrder
+		from city 
+		where no = #{no}
+	</select>
+
 	<!-- schedule_no 받아서  city 리스트 조회  -->
 	<select id="selectCityBySchNo" resultType="cityvo" parameterType="int">
 		select no,

@@ -249,14 +249,43 @@ public class AndroidController
 			cityService.modifyOrder(cityOrderList.get(i), i + 1);			
 		}
 		
-		//cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
-		//cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
+		cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
+		cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
 		
 		map.put("cityNoList", cityOrderList);
 		map.put("result", "city 테이블에 순서들어가있으면 성공!");
 	
 		return map;	
 	}
+	
+	// 각 스케줄에 해당하는 도시 순서 출력
+	@RequestMapping("/selectCityListBySchedule/{schedule_no}")
+	@ResponseBody	 
+	public Map<String, Object> selectCityListBySchedule(@PathVariable("schedule_no") int schedule_no)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		List<CityVo> cityListBySchedule = cityService.selectCityListBySchedule(schedule_no);
+		
+		map.put("cityListBySchedule", cityListBySchedule);
+		
+		return map;	
+	}
+	
+	// 각 도시에 해당하는 포스트 순서 출력
+	@RequestMapping("/selectPostListBySchedule/{city_no}")
+	@ResponseBody	 
+	public Map<String, Object> selectPostListBySchedule(@PathVariable("city_no") int city_no)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		List<PostVo> postListBySchedule = postService.selectPostListBySchedule(city_no);
+		
+		map.put("postListBySchedule", postListBySchedule);
+		
+		return map;	
+	}
+	
 	//테스트 
 	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
 	//받을땐 모텔어트리뷰터로 받는다.

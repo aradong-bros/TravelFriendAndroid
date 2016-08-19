@@ -18,7 +18,13 @@ public class PostDao
     private SqlSession sqlSession;  // mybatis 사용하기위해 선언
     
 	// 조회
-	
+	public List<PostVo> selectPostListBySchedule(int city_no)
+	{
+		List<PostVo> postListBySchedule = sqlSession.selectList("post.selectPostListBySchedule", city_no);
+				
+		return postListBySchedule;
+	}
+    
 	// 삽입
 	public void insertPostData(PostVo postVo)
 	{

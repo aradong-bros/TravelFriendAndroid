@@ -32,5 +32,6 @@
 		<mapper resource="mybatis/mappers/message.xml"/>
 		<mapper resource="mybatis/mappers/trainschedule.xml"/>
 		<mapper resource="mybatis/mappers/favorite.xml"/>
+		<mapper resource="mybatis/mappers/citylist.xml"/>
 	</mappers>
 </configuration>

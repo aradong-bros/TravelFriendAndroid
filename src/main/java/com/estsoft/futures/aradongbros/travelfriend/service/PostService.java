@@ -1,5 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,12 @@ public class PostService
 	private PostDao postDao;
 	
 	// 조회
+	public List<PostVo> selectPostListBySchedule(int city_no)
+	{
+		List<PostVo> postListBySchedule = postDao.selectPostListBySchedule(city_no);
+				
+		return postListBySchedule;
+	}
 	
 	// 삽입
 	public void insertPostData(PostVo postVo)
