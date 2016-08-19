@@ -246,11 +246,21 @@ public class AndroidController
 		
 		cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
 		cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
-			
+		
+		if ( cityOrderList.size() == 0 )
+		{
+			map.put("result", "fail");
+		}
+		else
+		{			
+			map.put("result", "success");
+		}
+		
 		return map;	
 	}
 	
 	// 각 스케줄에 해당하는 도시 순서 출력
+	//URL -> http://222.239.250.207:8080/TravelFriendAndroid/android/selectCityListBySchedule/{schedule_no 값}
 	@RequestMapping("/selectCityListBySchedule/{schedule_no}")
 	@ResponseBody	 
 	public Map<String, Object> selectCityListBySchedule(@PathVariable("schedule_no") int schedule_no)
@@ -265,6 +275,7 @@ public class AndroidController
 	}
 	
 	// 각 도시에 해당하는 포스트 순서 출력
+	//URL -> http://222.239.250.207:8080/TravelFriendAndroid/android/selectPostListBySchedule/{city_no 값}
 	@RequestMapping("/selectPostListBySchedule/{city_no}")
 	@ResponseBody	 
 	public Map<String, Object> selectPostListBySchedule(@PathVariable("city_no") int city_no)
@@ -279,7 +290,7 @@ public class AndroidController
 	}
 	
 	//테스트 
-	//컨트롤러 메소드 끼리 list를 주고받을 때 사용
+	//컨트롤러 메소드 끼리 list를 주고	받을 때 사용
 	//받을땐 모텔어트리뷰터로 받는다.
 	// http://222.239.250.207:8080/TravelFriendAndroid/android/test
 /*	@RequestMapping("/test")  
