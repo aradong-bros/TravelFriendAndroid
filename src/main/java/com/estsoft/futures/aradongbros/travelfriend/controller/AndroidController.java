@@ -240,19 +240,19 @@ public class AndroidController
 	
 	@RequestMapping("/cityModifyOrder")
 	@ResponseBody	 
-	public Map<String, Object> cityModifyOrder(@ModelAttribute List<Integer> cityNoList)
+	public Map<String, Object> cityModifyOrder(@ModelAttribute List<Integer> cityOrderList)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		for ( int i = 0; i < cityNoList.size(); i++ )
+		for ( int i = 0; i < cityOrderList.size(); i++ )
 		{
-			cityService.modifyOrder(cityNoList.get(i), i + 1);			
+			cityService.modifyOrder(cityOrderList.get(i), i + 1);			
 		}
 		
-		cityService.modifyStatus(cityNoList.get(0), Enum.valueOf(Status.class, "start"));
-		cityService.modifyStatus(cityNoList.get(cityNoList.size() - 1), Enum.valueOf(Status.class, "end"));
+		cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
+		cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
 		
-		map.put("cityNoList", cityNoList);
+		map.put("cityNoList", cityOrderList);
 		map.put("result", "city 테이블에 순서들어가있으면 성공!");
 	
 		return map;	
