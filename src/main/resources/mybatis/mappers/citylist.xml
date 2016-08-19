@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="citylist"> 
+
+	<!-- no로 city 전체 받아오기 -->
+	<select id="selectCityListByNo" resultType="citylistvo" parameterType="int">
+		select no,
+			   areaCode,
+			   sigunguCode,	
+		       name,
+		       location
+		from cityList
+		where no = #{no}
+	</select>
+	
+</mapper>
