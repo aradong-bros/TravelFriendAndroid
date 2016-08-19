@@ -109,26 +109,7 @@ public class UserController {
 			}
 		}
 		
-		String storedURL = "http://222.239.250.207:8080/user/profileDownload?fileName=" + storedFileName;
+		String storedURL = "http://222.239.250.207:8080/TravelFriendAndroid/user/profileDownload/" + storedFileName;
 		return storedURL;
-	}
-	
-	@RequestMapping("/profileDownload")
-	public void profileDownload(
-			@RequestParam("fileName")String fileName,
-			HttpServletResponse response) throws Exception
-	{
-		File file = new File(filePath + fileName);
-		if(file.canRead()) System.out.println("읽힘");
-		byte fileByte[] = FileUtils.readFileToByteArray(file);
-		
-		response.setContentType("application/octet-stream");
-		response.setContentLength(fileByte.length);
-		response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.getOutputStream().write(fileByte);
-		
-		response.getOutputStream().flush();
-		response.getOutputStream().close();
 	}
 }

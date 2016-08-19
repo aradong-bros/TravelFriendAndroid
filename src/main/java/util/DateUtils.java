@@ -8,6 +8,7 @@ public class DateUtils {
 	private static Calendar c = Calendar.getInstance();
 	
 	public static Date getDateByString(String date){
+		System.out.println(date);
 		int year = Integer.parseInt(date.substring(0, 4));
 		int month = Integer.parseInt(date.substring(5, 7));
 		int day = Integer.parseInt(date.substring(8, 10));

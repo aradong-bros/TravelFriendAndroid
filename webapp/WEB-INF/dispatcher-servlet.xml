@@ -36,6 +36,9 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<!-- the mvc resources tag does the magic -->
+ 	<mvc:resources mapping="/user/profileDownload/**" location="file:/home/aradongbros/userImage/" />
+ 		
 	<!-- 기본 뷰 리졸버 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
