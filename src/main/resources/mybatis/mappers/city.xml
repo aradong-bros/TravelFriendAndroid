@@ -30,7 +30,7 @@
 	<select id="selectFirstCityVo" resultType="cityvo" parameterType="int">
 		select no,
 			   schedule_no,
-			   ci	tyList_no,	
+			   cityList_no,	
 		       status,
 		       cityOrder
 		from city 
