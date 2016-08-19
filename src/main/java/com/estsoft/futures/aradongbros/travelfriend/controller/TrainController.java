@@ -121,7 +121,8 @@ public class TrainController
 				ScheduleVo scheduleVo = scheduleService.selectScheduleData(schedule_no); //여행의 시작역을 찾기위해 스케줄을 받아온다.
 				for(int i=0; i<startEndList.size(); i++){ //모든 도시를 돌면서
 					List<String> nearStationList = (ArrayList<String>)startEndList.get(i).get("startStation");
-					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(scheduleVo.getFirstStation(), nearStationList.get(0), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())); //가장 가까운 역이랑 경로를 뽑음
+					List<Map<String, Object>> mappedTrainTimeList = new ArrayList<>();
+					mappedTrainTimeList.addAll(trainService.getTrainTimeList(scheduleVo.getFirstStation(), nearStationList.get(0), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate()))); //가장 가까운 역이랑 경로를 뽑음
 					if(mappedTrainTimeList == null || mappedTrainTimeList.isEmpty() || mappedTrainTimeList.size() == 0){ //가장 가까운 역이랑 경로가 없으면
 						for(int j=1; j<nearStationList.size(); j++){ //도시 안에서 다음으로 가까운 역이랑 경로를 뽑음
 							mappedTrainTimeList.addAll(trainService.getTrainTimeList(scheduleVo.getFirstStation(), nearStationList.get(j), DateUtils.getDateByString(scheduleVo.getStartDate()), DateUtils.getTimeByString(scheduleVo.getStartDate())));
@@ -148,12 +149,13 @@ public class TrainController
 					
 					List<String> nowNearStationList = (ArrayList<String>)startEndList.get(nowCityIndex).get("endStation");
 					List<String> nextNearStationList = (ArrayList<String>)startEndList.get(i).get("startStation");
-					List<Map<String, Object>> mappedTrainTimeList = trainService.getTrainTimeList(
+					List<Map<String, Object>> mappedTrainTimeList = new ArrayList<>();
+					mappedTrainTimeList.addAll(trainService.getTrainTimeList(
 							nowNearStationList.get(0), 
 							nextNearStationList.get(0), 
 							new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
 							new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
-					);
+					));
 					if(mappedTrainTimeList == null || mappedTrainTimeList.isEmpty() || mappedTrainTimeList.size() == 0){
 						for(int j=0; j<nowNearStationList.size(); j++){
 							for(int k=0; k<nextNearStationList.size(); k++){
