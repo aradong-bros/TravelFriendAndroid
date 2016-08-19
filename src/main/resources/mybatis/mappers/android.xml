@@ -12,7 +12,6 @@
 		       category
 		from postList 
 		where cityList_no = #{cityList_no}
-		order by no desc
 	</select>
 
 	<!-- no 받아서  관광지 하나 조회 -->
@@ -59,7 +58,6 @@
 		from postList 
 		where cityList_no = #{cityList_no}
 			and category = #{category}
-		order by no desc
 	</select>
 	
 	<!-- 스케줄no에 따른 city 조회  -->
