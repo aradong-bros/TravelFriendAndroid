@@ -9,19 +9,25 @@ public class DateUtils {
 	
 	public static Date getDateByString(String date){
 		System.out.println(date);
-		int year = Integer.parseInt(date.substring(0, 4));
-		int month = Integer.parseInt(date.substring(5, 7));
-		int day = Integer.parseInt(date.substring(8, 10));
+		
+		String dateString = date.split(" ")[0];
+		String d[] = dateString.split("-");
+		
+		int year = Integer.parseInt(d[0]);
+		int month = Integer.parseInt(d[1]);
+		int day = Integer.parseInt(d[2]);
 		
 		return new Date(year, month, day);
 	}
 	
 	public static Time getTimeByString(String time){
-		int hour = Integer.parseInt(time.substring(11, 13));
-		int min = Integer.parseInt(time.substring(14, 16));
-		int sec = Integer.parseInt(time.substring(17, 19));
+		String dateString = time.split(" ")[1];
+		String t[] = dateString.split(":");
 		
-		return new Time(hour, min, sec);
+		int hour = Integer.parseInt(t[0]);
+		int min = Integer.parseInt(t[1]);
+		
+		return new Time(hour, min, 0);
 	}
 	
 	public static String getDateTimeString(Date date, Time time){
@@ -38,5 +44,10 @@ public class DateUtils {
 		c.add(Calendar.MINUTE, (addTime.getHours()*60) + addTime.getMinutes());
 		
 		return c.getTimeInMillis();
+	}
+	
+	public static Time getTimeByHoursInt(int hourInt){
+		Time time = new Time(hourInt, 0, 0);
+		return time;
 	}
 }

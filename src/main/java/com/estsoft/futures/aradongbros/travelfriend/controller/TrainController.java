@@ -161,8 +161,8 @@ public class TrainController
 						mappedTrainTimeList.addAll(trainService.getTrainTimeList(
 								nowNearStationList.get(0), 
 								nextNearStationList.get(0), 
-								new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
-								new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
+								new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime")))), 
+								new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime"))))
 						));
 						if(mappedTrainTimeList == null || mappedTrainTimeList.isEmpty() || mappedTrainTimeList.size() == 0){
 							for(int j=0; j<nowNearStationList.size(); j++){
@@ -170,8 +170,8 @@ public class TrainController
 									mappedTrainTimeList.addAll(trainService.getTrainTimeList(
 											nowNearStationList.get(j), 
 											nextNearStationList.get(k), 
-											new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
-											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
+											new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime")))), 
+											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime"))))
 											)
 									);
 									if( !(mappedTrainTimeList == null || mappedTrainTimeList.isEmpty() || mappedTrainTimeList.size() == 0) ) break;
@@ -185,8 +185,8 @@ public class TrainController
 									mappedTrainTimeList.addAll(trainService.getTransferTrainTimeList(
 											nowNearStationList.get(j), 
 											nextNearStationList.get(k), 
-											new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime"))), 
-											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), (Time)startEndList.get(nowCityIndex).get("totalTime")))
+											new Date(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime")))), 
+											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime"))))
 											)
 									);
 									if( !(mappedTrainTimeList == null || mappedTrainTimeList.isEmpty() || mappedTrainTimeList.size() == 0) ) break; //경로가 하나라도 있으면 그만 찾음
@@ -283,6 +283,9 @@ public class TrainController
 		
 		redirectAttributes.addFlashAttribute("cityOrderList", cityOrderList);
 		System.out.println("cityOrderList.size() : " + cityOrderList.size());
+		for (Integer integer : cityOrderList) {
+			System.out.println("city_no-----> " + integer);
+		}
 		return "redirect:/android/cityModifyOrder";
 	}
 	
