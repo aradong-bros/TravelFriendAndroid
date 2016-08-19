@@ -41,10 +41,12 @@ public class TrainController
 	private AndroidService androidService; //관광지정보
 	
 	private boolean isAllTrue(boolean boolArr[]){
+		boolean result = true;
 		for(int i=0; i<boolArr.length; i++){
-			if(boolArr[i] == false) return false;
+			if(boolArr[i] == false) result=false;
 		}
-		return true;
+		
+		return result;
 	}
 	
 	//직통 기차 검색
