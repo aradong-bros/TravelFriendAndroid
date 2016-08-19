@@ -84,7 +84,7 @@
 	<!-- 수정 : order  -->
 	<update id="modifyOrder" parameterType="map">
 		update city 
-		set order = #{order}
+		set cityOrder = #{order}
 		where no = #{no} 
 	</update>
 
