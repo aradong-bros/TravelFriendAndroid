@@ -41,10 +41,12 @@ public class TrainController
 	private AndroidService androidService; //관광지정보
 	
 	private boolean isAllTrue(boolean boolArr[]){
+		boolean result = true;
 		for(int i=0; i<boolArr.length; i++){
-			if(!boolArr[i]) return false;
+			if(boolArr[i] == false) result=false;
 		}
-		return true;
+		
+		return result;
 	}
 	
 	//직통 기차 검색
@@ -107,18 +109,14 @@ public class TrainController
 			startEndList.add(startEnd);
 		}
 		
-		String asdf = "";
-		asdf += "schedule_no : " + schedule_no + "\n";
-		for (StartEnd startEnd : arr) {
-			asdf += "startendbycity : " + startEnd + "\n";
-		}
+		ArrayList<Integer> cityOrderList = new ArrayList<>();
+		int nowCityIndex = -1; //현재 갈 곳을 찾고있는 도시(startEndList의 index)
+		boolean isUsed[] = new boolean[startEndList.size()]; //이미 갔던 도시인지 확인하는 배열
+		for(int i=0; i<isUsed.length; i++) isUsed[i] = false;
+		TrainScheduleVo vo = new TrainScheduleVo();
 		
-		return asdf;
-		
-//		ArrayList<Integer> cityOrderList = new ArrayList<>();
-//		int nowCityIndex = -1; //현재 갈 곳을 찾고있는 도시(startEndList의 index)
-//		boolean isUsed[] = new boolean[startEndList.size()]; //이미 갔던 도시인지 확인하는 배열. boolean의 기본값은 false
-//		TrainScheduleVo vo = new TrainScheduleVo();
+		return ""+isUsed.length;
+//		if(!isAllTrue(isUsed)) return "!isAllTrue(isUsed) = true";
 //		while(!isAllTrue(isUsed)){
 //			List<Map<String, Object>> operationTime = new ArrayList<>(); //?도시로 가는데 ?역에서 ?역으로 가고 ?시간 걸리는지 모아놓은 리스트(city_no, startStationName, endStationName, operationTime, 그외에도 경로 찾는것처럼 있음)
 //			if(nowCityIndex == -1){ //시작역 -> 첫도시
