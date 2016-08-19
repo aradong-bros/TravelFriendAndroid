@@ -115,7 +115,8 @@ public class TrainController
 		for(int i=0; i<isUsed.length; i++) isUsed[i] = false;
 		TrainScheduleVo vo = new TrainScheduleVo();
 		
-		if(!isAllTrue(isUsed)) return "!isAllTrue(isUsed) = true";
+		return ""+isUsed.length;
+//		if(!isAllTrue(isUsed)) return "!isAllTrue(isUsed) = true";
 //		while(!isAllTrue(isUsed)){
 //			List<Map<String, Object>> operationTime = new ArrayList<>(); //?도시로 가는데 ?역에서 ?역으로 가고 ?시간 걸리는지 모아놓은 리스트(city_no, startStationName, endStationName, operationTime, 그외에도 경로 찾는것처럼 있음)
 //			if(nowCityIndex == -1){ //시작역 -> 첫도시
@@ -266,7 +267,7 @@ public class TrainController
 //		}
 //		
 //		redirectAttributes.addFlashAttribute("cityOrderList", cityOrderList);
-		return "redirect:/android/cityModifyOrder";
+//		return "redirect:/android/cityModifyOrder";
 	}
 	
 	//기차역 이름 조회
