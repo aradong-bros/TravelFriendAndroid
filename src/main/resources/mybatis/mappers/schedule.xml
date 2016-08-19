@@ -18,6 +18,8 @@
 		where user_no = #{user_no}
 	</select>
 	<!-- 다른사람들꺼 전체조회  -->
+	
+	
 	<select id="selectScheduleAllDataByOther" resultType="schedulevo" parameterType="int">
 		select no,
 			   user_no,

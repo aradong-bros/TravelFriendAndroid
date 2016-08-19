@@ -244,8 +244,8 @@ public class AndroidController
 			cityService.modifyOrder(cityOrderList.get(i), i + 1);			
 		}
 		
-		cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
-		cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
+		//cityService.modifyStatus(cityOrderList.get(0), Enum.valueOf(Status.class, "start"));
+		//cityService.modifyStatus(cityOrderList.get(cityOrderList.size() - 1), Enum.valueOf(Status.class, "end"));
 		
 		map.put("cityNoList", cityOrderList);
 		map.put("result", "city 테이블에 순서들어가있으면 성공!");
