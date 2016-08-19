@@ -92,7 +92,7 @@ public class TrainController
 	
 	//trainSchedule 짜기
 	@RequestMapping("/makeTrainSchedule")
-	@ResponseBody
+//	@ResponseBody
 	public String makeTrainSchedule(
 			@ModelAttribute Map<String, Object> map,
 			RedirectAttributes redirectAttributes)
