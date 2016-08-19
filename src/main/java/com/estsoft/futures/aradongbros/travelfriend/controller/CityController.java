@@ -29,7 +29,20 @@ public class CityController
 	@Autowired
 	private PostService postService;
 	
-	// 조회
+	// 조회 -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/selectFirstCityVo/{schedule_no 값}
+	@RequestMapping("/selectFirstCityVo/{schedule_no}")
+	@ResponseBody
+	public Map<String,Object> selectFirstCityVo(@PathVariable("schedule_no") int schedule_no)
+	{	
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		CityVo firstCityVo = cityService.selectFirstCityVo(schedule_no);
+		
+		map.put("firstCityVo", firstCityVo);
+		
+		return map;
+	}
+	
 	
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/cityInsert
 	@RequestMapping("/cityInsert")

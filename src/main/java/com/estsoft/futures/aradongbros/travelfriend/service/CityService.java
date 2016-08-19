@@ -23,6 +23,14 @@ public class CityService
 		return cityListBySchedule;
 	}
 	
+	// 스케줄의 첫번째 도시 조회
+	public CityVo selectFirstCityVo(int schedule_no)
+	{
+		CityVo firstCityVo = cityDao.selectFirstCityVo(schedule_no);
+		
+		return firstCityVo;
+	}
+	
 	// no로 city 전체 받아오기
 	public CityVo selectCityByNo(int no)
 	{
@@ -36,6 +44,8 @@ public class CityService
 	{
 		cityDao.insertCityData(cityVo);
 	}
+	
+	
 	
 	// 삭제
 	public void deleteCityData(int no)

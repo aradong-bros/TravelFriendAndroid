@@ -25,6 +25,14 @@ public class CityDao
 		return cityListBySchedule;
 	}
 	
+	// 스케줄의 첫번째 도시 조회
+	public CityVo selectFirstCityVo(int schedule_no)
+	{
+		CityVo firstCityVo = sqlSession.selectOne("city.selectFirstCityVo", schedule_no);
+		
+		return firstCityVo;
+	}
+	
 	// no로 city 전체 받아오기
 	public CityVo selectCityByNo(int no)
 	{
