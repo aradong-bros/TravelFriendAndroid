@@ -284,6 +284,14 @@ public class AndroidController
 	
 		List<PostVo> postListBySchedule = postService.selectPostListBySchedule(city_no);
 		
+		List<AttractionVo> atrListByPost = new ArrayList<AttractionVo>();
+		
+		for ( int i = 0; i < postListBySchedule.size(); i++ )
+		{
+			atrListByPost.add(androidService.selectAllAtrByNo(postListBySchedule.get(i).getPostList_no()));			
+		}
+				
+		map.put("atrListByPost", atrListByPost);
 		map.put("postListBySchedule", postListBySchedule);
 		
 		return map;	
