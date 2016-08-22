@@ -50,8 +50,7 @@ public class CityController
 	public Map<String,Object> insertCityData(@RequestBody CityVo[] cityList)
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
-		
-		List<No> noList = new ArrayList<No>();
+		List<CityVo> cityVoList = new ArrayList<CityVo>();
 		
 		for ( int i = 0; i < cityList.length; i++ )
 		{
@@ -67,10 +66,10 @@ public class CityController
 			
 			cityService.insertCityData(cityList[i]);
 			
-			noList.add(new No(cityList[i].getNo()));
+			cityVoList.add(cityService.selectCityByNo(cityList[i].getNo()));
 		}
 		
-		map.put("noList", noList);
+		map.put("cityVoList", cityVoList);
 		
 		return map;
 	}
