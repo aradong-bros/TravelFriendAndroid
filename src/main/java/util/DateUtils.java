@@ -8,8 +8,6 @@ public class DateUtils {
 	private static Calendar c = Calendar.getInstance();
 	
 	public static Date getDateByString(String date){
-		System.out.println(date);
-		
 		String dateString = date.split(" ")[0];
 		String d[] = dateString.split("-");
 		
