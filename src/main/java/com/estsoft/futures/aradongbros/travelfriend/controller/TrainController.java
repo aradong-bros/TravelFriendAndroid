@@ -206,7 +206,7 @@ public class TrainController
 											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime"))))
 											)
 									);
-									if( !(mappedTrainTimeList.isEmpty()) ) break;
+									if( !(mappedTrainTimeList.isEmpty()) ){ j=nowNearStationList.size(); k=nextNearStationList.size(); }
 								}
 							}
 						}
@@ -221,7 +221,7 @@ public class TrainController
 											new Time(DateUtils.getAddMillis(DateUtils.getDateByString(vo.getArrivalDate()), DateUtils.getTimeByString(vo.getArrivalDate()), DateUtils.getTimeByHoursInt((int) startEndList.get(nowCityIndex).get("totalTime"))))
 											)
 									);
-									if( !(mappedTrainTimeList.isEmpty()) ) break; //경로가 하나라도 있으면 그만 찾음
+									if( !(mappedTrainTimeList.isEmpty()) ){ j=nowNearStationList.size(); k=nextNearStationList.size(); }
 								}
 							}
 						}
@@ -240,7 +240,7 @@ public class TrainController
 											tomorrow, 
 											new Time(0, 0, 0))
 									);
-									if( !(mappedTrainTimeList.isEmpty()) ) break; //경로가 하나라도 있으면 그만 찾음
+									if( !(mappedTrainTimeList.isEmpty()) ){ j=nowNearStationList.size(); k=nextNearStationList.size(); }
 								}
 							}
 						}
@@ -259,7 +259,7 @@ public class TrainController
 											tomorrow, 
 											new Time(0, 0, 0))
 									);
-									if( !(mappedTrainTimeList.isEmpty()) ) break; //경로가 하나라도 있으면 그만 찾음
+									if( !(mappedTrainTimeList.isEmpty()) ){ j=nowNearStationList.size(); k=nextNearStationList.size(); }
 								}
 							}
 						}
@@ -322,8 +322,8 @@ public class TrainController
 			Collections.sort(operationTime, new TrainService.OperationTimeASCCompare()); //빨리 가는 순서대로 정렬
 			//빨리 가는거 5개 정도 뽑음
 			List<Map<String,Object>> subList;
-			if(operationTime.size() > 5){
-				subList = operationTime.subList(0, 5);
+			if(operationTime.size() > 30){
+				subList = operationTime.subList(0, 30);
 			}else{
 				subList = operationTime;
 			}
