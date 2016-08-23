@@ -197,6 +197,11 @@ public class AndroidController
 				}
 			}
 			
+/*			if ( totalTime > 15 )
+			{
+				totalTime -= 4;
+			}*/
+			
 			TOTAL_TIME[i] = totalTime;
 			totalTime = 0;
 		}
