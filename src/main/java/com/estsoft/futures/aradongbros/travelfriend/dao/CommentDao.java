@@ -21,9 +21,9 @@ public class CommentDao
 		return commentVo;
 	}
 
-	public CommentVo getComment(int no) 
+	public Map<String, Object> getComment(int no) 
 	{
-		CommentVo commentVo = sqlSession.selectOne("comment.selectCommentByNo", no);
+		Map<String, Object> commentVo = sqlSession.selectOne("comment.selectCommentByNo", no);
 		return commentVo;
 	}
 

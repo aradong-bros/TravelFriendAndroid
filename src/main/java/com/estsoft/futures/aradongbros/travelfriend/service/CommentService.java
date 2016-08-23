@@ -15,12 +15,11 @@ public class CommentService
 	@Autowired
 	private CommentDao commentDao;
 	
-	public CommentVo insertComment(CommentVo commentVo)
+	public Map<String,Object> insertComment(CommentVo commentVo)
 	{
 		commentVo = commentDao.insertComment(commentVo);
-		commentVo = commentDao.getComment(commentVo.getNo());
 		
-		return commentVo;
+		return commentDao.getComment(commentVo.getNo());
 	}
 
 	public List<Map<String, Object>> getPostCommentList(int postList_no) 
@@ -34,10 +33,10 @@ public class CommentService
 		return affectNum;
 	}
 
-	public CommentVo modifyComment(CommentVo commentVo) 
+	public Map<String, Object> modifyComment(CommentVo commentVo) 
 	{
 		commentDao.modifyComment(commentVo);
-		CommentVo dbCommentVo = commentDao.getComment(commentVo.getNo());
+		Map<String, Object> dbCommentVo = commentDao.getComment(commentVo.getNo());
 		
 		return dbCommentVo;
 	}

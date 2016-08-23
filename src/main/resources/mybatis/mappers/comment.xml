@@ -2,9 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="comment">
-	<select id="selectCommentByNo" parameterType="int" resultType="commentvo">
+	<select id="selectCommentByNo" parameterType="int" resultType="map">
 		<![CDATA[
-		select * from comment
+		select 
+			no,
+			user_no,
+			postList_no,
+			DATE_FORMAT( date, '%Y-%m-%d %H:%i:%s' ) as date,
+			content
+		from 
+			comment
 		where no = #{no}
 		]]>
 	</select>
@@ -16,7 +23,7 @@
 			u.picture as `user_picture`,
 			c.no as `comment_no`,
 			c.user_no as `user_no`,
-			c.date as `date`,
+			DATE_FORMAT( c.date, '%Y-%m-%d %H:%i:%s' ) as `date`,
 			c.content as `content`
 		from 
 			comment c, user u

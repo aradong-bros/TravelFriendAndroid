@@ -30,13 +30,10 @@ public class CommentController
 	 */
 	@RequestMapping("/insertComment")
 	@ResponseBody
-	public Map<String, CommentVo> insertComment(
+	public Map<String, Object> insertComment(
 			@ModelAttribute CommentVo commentVo)
 	{
-		Map<String, CommentVo> map = new HashMap<>();
-		map.put("commentVo", commentService.insertComment(commentVo));
-		
-		return map;
+		return commentService.insertComment(commentVo);
 	}
 	
 	/*
@@ -85,14 +82,11 @@ public class CommentController
 	 */
 	@RequestMapping("/modifyComment")
 	@ResponseBody
-	public Map<String, CommentVo> modifyComment(
+	public Map<String, Object> modifyComment(
 			@ModelAttribute CommentVo commentVo)
 	{
-		CommentVo dbCommentVo = commentService.modifyComment(commentVo);
+		Map<String, Object> dbCommentVo = commentService.modifyComment(commentVo);
 		
-		Map<String, CommentVo> map = new HashMap<>();
-		map.put("commentVo", commentVo);
-		
-		return map;
+		return dbCommentVo;
 	}
 }
