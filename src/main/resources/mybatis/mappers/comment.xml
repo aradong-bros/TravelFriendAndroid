@@ -9,10 +9,20 @@
 		]]>
 	</select>
 	
-	<select id="selectCommentByPostList_no" parameterType="int" resultType="commentvo">
+	<select id="selectCommentByPostList_no" parameterType="int" resultType="map">
 		<![CDATA[
-		select * from comment
-		where postList_no = #{postList_no}
+		select 
+			u.name as `user_name`,
+			u.picture as `user_picture`,
+			c.no as `comment_no`,
+			c.user_no as `user_no`,
+			c.date as `date`,
+			c.content as `content`
+		from 
+			comment c, user u
+		where 
+			postList_no = #{postList_no} and
+			c.user_no = u.no;
 		]]>
 	</select>
 	

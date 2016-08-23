@@ -47,10 +47,10 @@ public class CommentController
 	 */
 	@RequestMapping("/postCommentList")
 	@ResponseBody
-	public Map<String, List<CommentVo>> getPostCommentList(
+	public Map<String, Object> getPostCommentList(
 			@RequestParam("postList_no") int postList_no)
 	{
-		Map<String, List<CommentVo>> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
 		map.put("comments", commentService.getPostCommentList(postList_no));
 		

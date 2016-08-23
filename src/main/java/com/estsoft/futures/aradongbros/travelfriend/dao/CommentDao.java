@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class CommentDao
 		return commentVo;
 	}
 
-	public List<CommentVo> getPostCommentList(int postList_no) 
+	public List<Map<String,Object>> getPostCommentList(int postList_no) 
 	{
 		return sqlSession.selectList("comment.selectCommentByPostList_no", postList_no);
 	}

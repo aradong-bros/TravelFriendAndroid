@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CommentService
 		return commentVo;
 	}
 
-	public List<CommentVo> getPostCommentList(int postList_no) 
+	public List<Map<String, Object>> getPostCommentList(int postList_no) 
 	{
 		return commentDao.getPostCommentList(postList_no);
 	}
