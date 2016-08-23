@@ -35,7 +35,7 @@ public class CityController
 	public Map<String,Object> selectFirstCityVo(@PathVariable("schedule_no") int schedule_no)
 	{	
 		Map<String,Object> map = new HashMap<String,Object>();
-		
+
 		CityVo firstCityVo = cityService.selectFirstCityVo(schedule_no);
 		
 		map.put("firstCityVo", firstCityVo);

@@ -155,7 +155,6 @@ public class AndroidController
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AttractionVo> atrList = new ArrayList<AttractionVo>();
-		
 		List<CityVo> cityVoList = androidService.getCityList(schedule_no);
 		
 		TravelRootByCity[] travelRootByCity = new TravelRootByCity[cityVoList.size()];
@@ -164,7 +163,6 @@ public class AndroidController
 		for ( int i = 0; i < cityVoList.size(); i++ )
 		{
 			atrList.clear();
-			
 			List<PostVo> postVoList = androidService.getPostList(cityVoList.get(i).getNo());
 			
 			for ( int j = 0; j < postVoList.size(); j++ )
@@ -266,7 +264,6 @@ public class AndroidController
 	public Map<String, Object> selectCityListBySchedule(@PathVariable("schedule_no") int schedule_no)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-	
 		List<CityVo> cityListBySchedule = cityService.selectCityListBySchedule(schedule_no);
 		
 		map.put("cityListBySchedule", cityListBySchedule);
@@ -281,9 +278,7 @@ public class AndroidController
 	public Map<String, Object> selectPostListBySchedule(@PathVariable("city_no") int city_no)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-	
 		List<PostVo> postListBySchedule = postService.selectPostListBySchedule(city_no);
-		
 		List<AttractionVo> atrListByPost = new ArrayList<AttractionVo>();
 		
 		for ( int i = 0; i < postListBySchedule.size(); i++ )

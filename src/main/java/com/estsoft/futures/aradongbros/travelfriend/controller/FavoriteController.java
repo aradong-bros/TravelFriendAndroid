@@ -34,7 +34,6 @@ public class FavoriteController
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<FavoriteVo> favoList = favoriteService.selectFavoriteList(user_no);
-		
 		List<ScheduleVo> favoriteList = new ArrayList<ScheduleVo>();
 		
 		for ( int i = 0; i < favoList.size(); i++ )

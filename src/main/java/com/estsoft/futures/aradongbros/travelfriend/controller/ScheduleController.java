@@ -101,11 +101,8 @@ public class ScheduleController
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		postService.deleteCityRelatedDataInSchedule(no);
-		
 		trainScheduleService.deleteTrainScheduleByScheduleNo(no);
-		
 		cityService.deleteScheduleRelatedData(no);
-		
 		scheduleService.deleteScheduleData(no);
 		
 		return map;
