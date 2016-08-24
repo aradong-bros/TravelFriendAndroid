@@ -19,6 +19,7 @@
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.MessageVo" alias="messagevo"/>
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.TrainScheduleVo" alias="trainschedulevo"/>
 		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.FavoriteVo" alias="favoritevo"/>
+		<typeAlias type="com.estsoft.futures.aradongbros.travelfriend.vo.SaleInformationVo" alias="saleinformationvo"/>
 	</typeAliases>
 	
 	<mappers>
@@ -33,5 +34,6 @@
 		<mapper resource="mybatis/mappers/trainschedule.xml"/>
 		<mapper resource="mybatis/mappers/favorite.xml"/>
 		<mapper resource="mybatis/mappers/citylist.xml"/>
+		<mapper resource="mybatis/mappers/saleinformation.xml"/>
 	</mappers>
 </configuration>
