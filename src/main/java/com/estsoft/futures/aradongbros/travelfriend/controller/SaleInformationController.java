@@ -21,6 +21,7 @@ public class SaleInformationController
 	private SaleInformationService saleInfoService;
 	
 	// 각 도시별 할인정보 조회
+	//url -> http://222.239.250.207:8080/TravelFriendAndroid/saleInfo/getSaleInfoListByCity/{cityList_no 값}
 	@RequestMapping("/getSaleInfoListByCity/{cityList_no}")
 	@ResponseBody
 	public Map<String, Object> getSaleInfoListByCity(@PathVariable("cityList_no")int cityList_no)
