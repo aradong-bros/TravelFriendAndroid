@@ -69,4 +69,9 @@ public class PostDao
 	{
 		return sqlSession.selectList("post.selectPostByCity_no", city_no);
 	}
+
+	public List<PostVo> selectPostBySchedule_no(int schedule_no) 
+	{
+		return sqlSession.selectList("post.selectPostBySchedule_no", schedule_no);
+	}
 }

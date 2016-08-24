@@ -93,4 +93,17 @@ public class PostController
 		
 		return map;
 	}
+	
+	// schedule_no에 따라 post 가져오기 -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/selectPostBySchedule_no/{schedule_no 값}
+	@RequestMapping("/selectPostBySchedule_no/{schedule_no}")
+	@ResponseBody
+	public Map<String,Object> selectPostBySchedule_no(@PathVariable("schedule_no")int schedule_no)
+	{
+		Map<String,Object> map = new HashMap<>();
+		
+		List<PostVo> list = postService.selectPostBySchedule_no(schedule_no);
+		map.put("postList", list);
+		
+		return map;
+	}
 }

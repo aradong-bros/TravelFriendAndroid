@@ -56,4 +56,9 @@ public class PostService
 	{
 		return postDao.selectPostByCity_no(city_no);
 	}
+
+	public List<PostVo> selectPostBySchedule_no(int schedule_no) 
+	{
+		return postDao.selectPostBySchedule_no(schedule_no);
+	}
 }

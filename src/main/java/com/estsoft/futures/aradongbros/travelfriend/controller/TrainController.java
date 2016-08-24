@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -366,5 +367,20 @@ public class TrainController
 	{
 		List<String> stationNameList = trainService.getAllStationName();
 		return stationNameList;
+	}
+	
+	//스케쥴 넘버에 따라 trainSchedule 조회
+	@RequestMapping("/selectTrainScheduleBySchedule_no/{schedule_no}")
+	@ResponseBody
+	public Map<String,Object> selectTrainScheduleBySchedule_no(
+			@PathVariable("schedule_no")int schedule_no)
+	{
+		Map<String,Object> map = new HashMap<>();
+		
+		List<TrainScheduleVo> list = 
+				trainScheduleService.selectTrainScheduleBySchedule_no(schedule_no);
+		map.put("trainScheduleList", list);
+		
+		return map;
 	}
 }

@@ -20,6 +20,17 @@
 		where city_no = #{city_no}
 		order by postOrder;
 	</select>
+	
+	<!-- selectPostBySchedule_no -->
+	<select id="selectPostByCity_no" resultType="postvo" parameterType="int">
+		select post.*
+		from post,
+			(select * from city where schedule_no = #{schedule_no})a
+		where
+			post.city_no = a.no
+		order by
+			cityOrder asc, postOrder asc;
+	</select>
 
 	<!-- City 1개 삽입 insertCityData -->
 	<insert id="insertPostData" parameterType="postvo"> <!-- 인자로 넘겨주는 놈의 타입 -->
