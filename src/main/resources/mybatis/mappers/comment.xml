@@ -41,7 +41,7 @@
 	
 	<delete id="deleteCommentByNo" parameterType="int">
 		<![CDATA[
-		delete from comment where no = {#no}
+		delete from comment where no = #{no}
 		]]>
 	</delete>
 	
