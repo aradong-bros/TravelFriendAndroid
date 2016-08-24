@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,5 +70,10 @@ public class CityService
 	public void modifyOrder(int no, int order)
 	{
 		cityDao.modifyOrder(no, order);
+	}
+
+	public List<Map<String, Object>> selectCityListBySchedule_no(int schedule_no) 
+	{
+		return cityDao.selectCityListBySchedule_no(schedule_no);
 	}
 }

@@ -50,7 +50,7 @@ public class CityController
 	{
 		Map<String,Object> map = new HashMap<>();
 		
-		List<CityVo> list = cityService.selectCityListBySchedule(schedule_no);
+		List<Map<String,Object>> list = cityService.selectCityListBySchedule_no(schedule_no);
 		map.put("cityList", list);
 		
 		return map;

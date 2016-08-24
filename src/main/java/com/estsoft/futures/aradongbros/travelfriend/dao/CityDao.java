@@ -25,6 +25,12 @@ public class CityDao
 		return cityListBySchedule;
 	}
 	
+	//스케쥴 넘버로 도시 가져오는데 외래키로 다른 정보들도 다 가져옴
+	public List<Map<String, Object>> selectCityListBySchedule_no(int schedule_no) 
+	{
+		return sqlSession.selectList("city.selectCityListBySchedule_no", schedule_no);
+	}
+	
 	// 스케줄의 첫번째 도시 조회
 	public CityVo selectFirstCityVo(int schedule_no)
 	{

@@ -48,6 +48,21 @@
 		from city 
 		where schedule_no = #{no}
 	</select>
+	
+	<!-- schedule_no 받아서  city 리스트 조회(외래키 참조)  -->
+	<select id="selectCityListBySchedule_no" resultType="map" parameterType="int">
+		select 
+			c.no as `no`,
+			c.schedule_no as `schedule_no`,
+			c.cityList_no as `cityList_no`,
+			c.status as `status`,
+			c.cityOrder as `cityOrder`,
+			cList.name as `name`,
+			cList.location as `location`
+		from 
+			city c, cityList cList
+		where c.schedule_no = #{no} and c.cityList_no = cList.no
+	</select>
 
 	<!-- City 1개 삽입 insertCityData -->
 	<insert id="insertCityData" parameterType="cityvo"> <!-- 인자로 넘겨주는 놈의 타입 -->

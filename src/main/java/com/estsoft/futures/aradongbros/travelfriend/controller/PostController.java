@@ -88,7 +88,7 @@ public class PostController
 	{
 		Map<String,Object> map = new HashMap<>();
 		
-		List<PostVo> list = postService.selectPostByCity_no(city_no);
+		List<Map<String,Object>> list = postService.selectPostByCity_no(city_no);
 		map.put("postList", list);
 		
 		return map;
@@ -101,7 +101,7 @@ public class PostController
 	{
 		Map<String,Object> map = new HashMap<>();
 		
-		List<PostVo> list = postService.selectPostBySchedule_no(schedule_no);
+		List<Map<String,Object>> list = postService.selectPostBySchedule_no(schedule_no);
 		map.put("postList", list);
 		
 		return map;

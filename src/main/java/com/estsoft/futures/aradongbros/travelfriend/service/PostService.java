@@ -1,6 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,12 +53,12 @@ public class PostService
 		postDao.modifyPostOrder(postList_no, postOrder);
 	}
 
-	public List<PostVo> selectPostByCity_no(int city_no) 
+	public List<Map<String,Object>> selectPostByCity_no(int city_no) 
 	{
 		return postDao.selectPostByCity_no(city_no);
 	}
 
-	public List<PostVo> selectPostBySchedule_no(int schedule_no) 
+	public List<Map<String,Object>> selectPostBySchedule_no(int schedule_no) 
 	{
 		return postDao.selectPostBySchedule_no(schedule_no);
 	}

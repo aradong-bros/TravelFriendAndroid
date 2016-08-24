@@ -13,23 +13,51 @@
 		order by postOrder;
 	</select>
 	
-	<!-- selectPostByCity_no -->
-	<select id="selectPostByCity_no" resultType="postvo" parameterType="int">
-		select *
-		from post 
-		where city_no = #{city_no}
+	<!-- selectPostByCity_no(외래키 참조) -->
+	<select id="selectPostByCity_no" resultType="map" parameterType="int">
+		select 
+			p.no as `no`,
+			p.city_no as `city_no`,
+			p.postList_no as `postList_no`,
+			p.postOrder as `postOrder`,
+			pList.name as `name`,
+			pList.location as `location`,
+			pList.picture as `picture`,
+			pList.category as `category`,
+			cList.name as `cityName`,
+			cList.location as `cityLocation`
+		from 
+			post p, postList pList, cityList cList
+		where 
+			p.city_no = #{city_no} and 
+			p.postList_no = pList.no and 
+			pList.cityList_no = cList.no
 		order by postOrder;
 	</select>
 	
-	<!-- selectPostBySchedule_no -->
-	<select id="selectPostBySchedule_no" resultType="postvo" parameterType="int">
-		select post.*
-		from post,
-			(select * from city where schedule_no = #{schedule_no})a
+	<!-- selectPostBySchedule_no(외래키 참조) -->
+	<select id="selectPostBySchedule_no" resultType="map" parameterType="int">
+		select 
+			p.no as `no`,
+			p.city_no as `city_no`,
+			p.postList_no as `postList_no`,
+			p.postOrder as `postOrder`,
+			pList.name as `name`,
+			pList.location as `location`,
+			pList.picture as `picture`,
+			pList.category as `category`,
+			cList.name as `cityName`,
+			cList.location as `cityLocation`
+		from post p,
+			(select * from city where schedule_no = #{schedule_no})c,
+			postList pList,
+			cityList cList
 		where
-			post.city_no = a.no
+			p.city_no = c.no and
+			p.postList_no = pList.no and
+			pList.cityList_no = cList.no
 		order by
-			cityOrder asc, postOrder asc;
+			c.cityOrder asc, p.postOrder asc;
 	</select>
 
 	<!-- City 1개 삽입 insertCityData -->
