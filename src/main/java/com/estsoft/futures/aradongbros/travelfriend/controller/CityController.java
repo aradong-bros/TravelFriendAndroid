@@ -43,6 +43,19 @@ public class CityController
 		return map;
 	}
 	
+	// 스케쥴에 담긴 모든 city 순서대로 조회 -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/selectCityBySchedule_no/{schedule_no 값}
+	@RequestMapping("/selectCityBySchedule_no/{schedule_no}")
+	@ResponseBody
+	public Map<String,Object> selectCityBySchedule_no(@PathVariable("schedule_no") int schedule_no)
+	{
+		Map<String,Object> map = new HashMap<>();
+		
+		List<CityVo> list = cityService.selectCityListBySchedule(schedule_no);
+		map.put("cityList", list);
+		
+		return map;
+	}
+	
 	
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/city/cityInsert
 	@RequestMapping("/cityInsert")
