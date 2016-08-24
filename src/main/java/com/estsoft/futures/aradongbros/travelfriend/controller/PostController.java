@@ -3,6 +3,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,19 @@ public class PostController
 	{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("schedule_no", schedule_no);
+		return map;
+	}
+	
+	// city_no에 따라 post 가져오기 -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/selectPostByCity_no/{city_no 값}
+	@RequestMapping("/selectPostByCity_no/{city_no}")
+	@ResponseBody
+	public Map<String,Object> selectPostByCity_no(@PathVariable("city_no")int city_no)
+	{
+		Map<String,Object> map = new HashMap<>();
+		
+		List<PostVo> list = postService.selectPostByCity_no(city_no);
+		map.put("postList", list);
+		
 		return map;
 	}
 }

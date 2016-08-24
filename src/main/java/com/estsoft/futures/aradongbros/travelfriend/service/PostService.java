@@ -51,4 +51,9 @@ public class PostService
 	{
 		postDao.modifyPostOrder(postList_no, postOrder);
 	}
+
+	public List<PostVo> selectPostByCity_no(int city_no) 
+	{
+		return postDao.selectPostByCity_no(city_no);
+	}
 }

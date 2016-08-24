@@ -12,6 +12,14 @@
 		where city_no = #{city_no}
 		order by postOrder;
 	</select>
+	
+	<!-- selectPostByCity_no -->
+	<select id="selectPostByCity_no" resultType="postvo" parameterType="int">
+		select *
+		from post 
+		where city_no = #{city_no}
+		order by postOrder;
+	</select>
 
 	<!-- City 1개 삽입 insertCityData -->
 	<insert id="insertPostData" parameterType="postvo"> <!-- 인자로 넘겨주는 놈의 타입 -->

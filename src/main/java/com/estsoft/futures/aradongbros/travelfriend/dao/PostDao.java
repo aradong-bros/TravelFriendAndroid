@@ -64,4 +64,9 @@ public class PostDao
 		
 		sqlSession.update("post.modifyPostOrder", map);
 	}
+
+	public List<PostVo> selectPostByCity_no(int city_no) 
+	{
+		return sqlSession.selectList("post.selectPostByCity_no", city_no);
+	}
 }
