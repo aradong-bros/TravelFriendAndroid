@@ -22,7 +22,7 @@
 	</select>
 	
 	<!-- selectPostBySchedule_no -->
-	<select id="selectPostByCity_no" resultType="postvo" parameterType="int">
+	<select id="selectPostBySchedule_no" resultType="postvo" parameterType="int">
 		select post.*
 		from post,
 			(select * from city where schedule_no = #{schedule_no})a
