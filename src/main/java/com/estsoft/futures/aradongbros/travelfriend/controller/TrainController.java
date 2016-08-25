@@ -390,9 +390,12 @@ public class TrainController
 	public Map<String,Object> selectStartEndStationByName(@RequestParam("first") String first,
 														  @RequestParam("last") String last)
 	{
+		System.out.println(first + " : " + last);
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		List<TrainStationVo> StartEndStation = trainService.selectStartEndStationByName(first, last);
+		map.put("StartEndStation", StartEndStation);
 		
 		return map;
 	}
