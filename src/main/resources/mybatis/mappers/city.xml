@@ -61,7 +61,11 @@
 			cList.location as `location`
 		from 
 			city c, cityList cList
-		where c.schedule_no = #{no} and c.cityList_no = cList.no
+		where 
+			c.schedule_no = #{no} and 
+			c.cityList_no = cList.no
+		order by 
+			cityOrder
 	</select>
 
 	<!-- City 1개 삽입 insertCityData -->
