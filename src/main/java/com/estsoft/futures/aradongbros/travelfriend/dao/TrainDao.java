@@ -1,7 +1,7 @@
 package com.estsoft.futures.aradongbros.travelfriend.dao;
 
 import java.sql.Time;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,5 +111,22 @@ public class TrainDao
 	{
 		TrainStationVo vo = sqlSession.selectOne("train.selectStationByName", station);
 		return vo;
+	}
+	
+	public List<TrainStationVo> selectStartEndStationByName(String first, String last)
+	{
+		List<TrainStationVo> StartEndStation = new ArrayList<TrainStationVo>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		TrainStationVo trainStation;
+		
+		map.put("station", first);
+		trainStation = sqlSession.selectOne("train.selectStartEndStationByName", map);
+		StartEndStation.add(trainStation);
+						
+		map.put("station", last);
+		trainStation = sqlSession.selectOne("train.selectStartEndStationByName", map);
+		StartEndStation.add(trainStation);
+		
+		return StartEndStation;
 	}
 }

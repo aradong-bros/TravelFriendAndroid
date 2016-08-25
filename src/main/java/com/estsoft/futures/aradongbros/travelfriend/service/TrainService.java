@@ -607,4 +607,13 @@ public class TrainService
 //		
 //		return cityOrderList;
 //	}
+	
+	public List<TrainStationVo> selectStartEndStationByName(String first, String last)
+	{
+		
+		
+		List<TrainStationVo> StartEndStation = trainDao.selectStartEndStationByName(first, last);
+		
+		return StartEndStation;
+	}
 }

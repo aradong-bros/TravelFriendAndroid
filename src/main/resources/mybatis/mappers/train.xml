@@ -117,4 +117,14 @@
 		where name = #{station}
 		]]>
 	</select>
+	
+	<!-- 영진이가 만듬 -->
+	<select id="selectStartEndStationByName" parameterType="map" resultType="trainstationvo">
+		<![CDATA[
+		select name, 
+			   location 
+		from trainStation
+		where name = #{station}
+		]]>
+	</select>
 </mapper>

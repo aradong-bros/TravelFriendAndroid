@@ -18,15 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.estsoft.futures.aradongbros.travelfriend.dto.StartEnd;
-import com.estsoft.futures.aradongbros.travelfriend.dto.StartEndStation;
 import com.estsoft.futures.aradongbros.travelfriend.service.AndroidService;
-import com.estsoft.futures.aradongbros.travelfriend.service.CityListService;
 import com.estsoft.futures.aradongbros.travelfriend.service.CityService;
 import com.estsoft.futures.aradongbros.travelfriend.service.ScheduleService;
 import com.estsoft.futures.aradongbros.travelfriend.service.TrainScheduleService;
 import com.estsoft.futures.aradongbros.travelfriend.service.TrainService;
 import com.estsoft.futures.aradongbros.travelfriend.vo.ScheduleVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.TrainScheduleVo;
+import com.estsoft.futures.aradongbros.travelfriend.vo.TrainStationVo;
 
 import util.DateUtils;
 
@@ -380,6 +379,20 @@ public class TrainController
 		List<TrainScheduleVo> list = 
 				trainScheduleService.selectTrainScheduleBySchedule_no(schedule_no);
 		map.put("trainScheduleList", list);
+		
+		return map;
+	}
+	
+	// 시작역, 종착역 받아서 객체로 정보 넘겨줌
+	//url -> http://222.239.250.207:8080/TravelFriendAndroid/train/selectStartEndStationByName?first={first 값}&last={last 값}
+	@RequestMapping("/selectStartEndStationByName")
+	@ResponseBody
+	public Map<String,Object> selectStartEndStationByName(@RequestParam("first") String first,
+														  @RequestParam("last") String last)
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		List<TrainStationVo> StartEndStation = trainService.selectStartEndStationByName(first, last);
 		
 		return map;
 	}
