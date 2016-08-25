@@ -273,7 +273,7 @@ public class AndroidController
 		
 		map.put("cityListBySchedule", cityListBySchedule);
 		
-		return map;	
+		return map;
 	}
 	
 	// 각 도시에 해당하는 포스트 순서 출력
