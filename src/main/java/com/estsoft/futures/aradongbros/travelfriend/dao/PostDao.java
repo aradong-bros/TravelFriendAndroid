@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.estsoft.futures.aradongbros.travelfriend.vo.CityVo;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
@@ -23,6 +24,16 @@ public class PostDao
 		List<PostVo> postListBySchedule = sqlSession.selectList("post.selectPostListBySchedule", city_no);
 				
 		return postListBySchedule;
+	}
+	
+	//selectPostCountByCity
+	public int selectPostCountByCity(@PathVariable int city_no)
+	{	
+		int postCount = 0;
+		
+		postCount = sqlSession.selectOne("post.selectPostCountByCity", city_no);
+		
+		return postCount;
 	}
     
 	// 삽입

@@ -13,6 +13,13 @@
 		order by postOrder;
 	</select>
 	
+		<!-- selectPostCountByCity -->
+	<select id="selectPostCountByCity" resultType="int" parameterType="int">
+		select count(*) 
+		from post 
+		where city_no = #{city_no};
+	</select>
+	
 	<!-- selectPostByCity_no(외래키 참조) -->
 	<select id="selectPostByCity_no" resultType="map" parameterType="int">
 		select 

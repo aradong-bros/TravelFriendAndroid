@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.estsoft.futures.aradongbros.travelfriend.dao.PostDao;
 import com.estsoft.futures.aradongbros.travelfriend.vo.PostVo;
@@ -21,6 +22,16 @@ public class PostService
 		List<PostVo> postListBySchedule = postDao.selectPostListBySchedule(city_no);
 				
 		return postListBySchedule;
+	}
+	
+	//selectPostCountByCity
+	public int selectPostCountByCity(@PathVariable int city_no)
+	{	
+		int postCount = 0;
+		
+		postCount = postDao.selectPostCountByCity(city_no);
+		
+		return postCount;
 	}
 	
 	// 삽입

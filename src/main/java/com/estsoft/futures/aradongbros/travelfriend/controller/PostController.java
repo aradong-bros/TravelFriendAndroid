@@ -27,6 +27,18 @@ public class PostController
 	
 	// 조회
 	
+	// selectPostCountByCity
+	// url : http://222.239.250.207:8080/TravelFriendAndroid/post/selectPostCountByCity/{city_no 값}
+	@RequestMapping("/selectPostCountByCity/{city_no}")
+	@ResponseBody
+	public int selectPostCountByCity(@PathVariable int city_no)
+	{	
+		int postCount = 0;
+		
+		postCount = postService.selectPostCountByCity(city_no);
+		
+		return postCount;
+	}
 	
 	// 삽입  -> url : http://222.239.250.207:8080/TravelFriendAndroid/post/postInsert
 	@RequestMapping("/postInsert")
