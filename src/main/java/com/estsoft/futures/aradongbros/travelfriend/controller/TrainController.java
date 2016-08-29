@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -394,6 +395,74 @@ public class TrainController
 		
 		List<TrainStationVo> StartEndStation = trainService.selectStartEndStationByName(first, last);
 		map.put("StartEndStation", StartEndStation);
+		
+		return map;
+	}
+	
+	//시작위치, 도시넘버, 도착역, 출발시간을 받아서 운행정보 넘겨줌
+	//url -> http://222.239.250.207:8080/TravelFriendAndroid/train/selectLastTrainSchedule?startLoc={시작위치}&cityList_no={도시넘버}&endStation={도착역}&startDate={출발시간}
+	@RequestMapping("/selectLastTrainSchedule")
+	@ResponseBody
+	public Map<String,Object> selectLastTrainSchedule(
+			@RequestParam("startLoc")String startLoc,
+			@RequestParam("cityList_no")int cityList_no,
+			@RequestParam("endStation")String endStation,
+			@RequestParam("startDate")String startDate)
+	{
+		Map<String, Object> map = new HashMap<>();
+		
+		System.out.println("startLoc : " + startLoc);
+		System.out.println("cityList_no : " + cityList_no);
+		System.out.println("endStation  : " + endStation);
+		System.out.println("startDate : " + startDate);
+		
+//		return "startLoc : " + startLoc + "<br>" +
+//			   "cityList_no : " + cityList_no + "<br>" +
+//			   "endStation  : " + endStation + "<br>" +
+//			   "startDate : " + startDate + "<br>";
+		
+		int year = Integer.parseInt(startDate.substring(0, 4));
+		int month = Integer.parseInt(startDate.substring(5, 7));
+		int date = Integer.parseInt(startDate.substring(8, 10));
+		int hour = Integer.parseInt(startDate.substring(11, 13));
+		int minute = Integer.parseInt(startDate.substring(14, 16));
+		
+		List<String> startStationList = trainService.getNearStation(startLoc, cityList_no);
+		for (String string : startStationList) {
+			System.out.print(string + ", ");
+		}
+		System.out.println();
+		List<Map<String, Object>> mappedTrainTimeList = new ArrayList<>();
+		for(int i=0; i<startStationList.size(); i++){
+			mappedTrainTimeList.addAll(
+					trainService.getTrainTimeList(
+							startStationList.get(i), 
+							endStation, 
+							new Date(year,month,date), 
+							new Time(hour,minute,0)
+					)
+			);
+			if(!mappedTrainTimeList.isEmpty()) break;
+		}
+		
+		if(mappedTrainTimeList.isEmpty()){
+			for(int i=0; i<startStationList.size(); i++){
+				mappedTrainTimeList.addAll(
+						trainService.getTransferTrainTimeList(
+								startStationList.get(i), 
+								endStation, 
+								new Date(year,month,date), 
+								new Time(hour,minute,0)
+						)
+				);
+				if(!mappedTrainTimeList.isEmpty()) break;
+			}
+		}
+		
+		if(mappedTrainTimeList.isEmpty()) return null;
+		
+		Collections.sort(mappedTrainTimeList, new TrainService.DepartureTimeASCCompare());
+		map = mappedTrainTimeList.get(0);
 		
 		return map;
 	}

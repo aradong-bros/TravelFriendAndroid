@@ -65,6 +65,16 @@ public class TrainService
 		}
 	}
 	
+	//도착시간 짧은 순으로 정렬
+	public static class DepartureTimeASCCompare implements Comparator<Map<String,Object>>{
+		@Override
+		public int compare(Map<String,Object>o1, Map<String,Object> o2){
+			Time t1 = (Time) o1.get("departureTime");
+			Time t2 = (Time) o2.get("departureTime");
+			return t1.compareTo(t2);
+		}
+	}
+	
 	//걸린시간이 짧은 5개중 가장 빨리 출발하는 열차의 운행정보 구하기
 	public Map<String, Object> getFastRouteMap(
 			List<Map<String, Object>> operationTime)
