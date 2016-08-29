@@ -461,8 +461,15 @@ public class TrainController
 		
 		if(mappedTrainTimeList.isEmpty()) return null;
 		
-		Collections.sort(mappedTrainTimeList, new TrainService.DepTimeASCCompare());
-		map = mappedTrainTimeList.get(0);
+		Collections.sort(mappedTrainTimeList, new TrainService.OperationTimeASCCompare());
+		
+		List<Map<String,Object>> subList = mappedTrainTimeList;
+		if(mappedTrainTimeList.size() > 5){
+			subList = mappedTrainTimeList.subList(0, 5);
+		}
+		
+		Collections.sort(subList, new TrainService.DepTimeASCCompare());
+		map = subList.get(0);
 		
 		return map;
 	}
