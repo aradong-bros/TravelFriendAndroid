@@ -12,7 +12,6 @@
 		       category
 		from postList 
 		where cityList_no = #{cityList_no}
-		limit 0,199
 	</select>
 
 	<!-- no 받아서  관광지 하나 조회 -->
