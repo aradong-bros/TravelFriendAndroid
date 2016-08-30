@@ -4,7 +4,15 @@
 <mapper namespace="trainschedule">
 	<select id="selectTrainScheduleByScheduleNo" parameterType="int" resultType="trainschedulevo">
 		<![CDATA[
-		select * from trainSchedule where schedule_no = #{schedule_no}
+		select t.* 
+		from 
+			trainSchedule t,
+			city c 
+		where 
+			t.schedule_no = #{schedule_no} and
+			t.city_no = c.no
+		group by city_no
+		order by c.cityOrder;
 		]]>
 	</select>
 

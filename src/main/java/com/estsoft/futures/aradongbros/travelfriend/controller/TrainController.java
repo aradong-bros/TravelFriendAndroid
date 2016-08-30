@@ -473,4 +473,14 @@ public class TrainController
 		
 		return map;
 	}
+	
+	//좌표, 도시넘버를 받아서 가장 가까운 기차역 하나 넘겨줌
+	//url -> http://222.239.250.207:8080/TravelFriendAndroid/train/nearTrainStation?startLoc={시작위치}&cityList_no={도시넘버}
+	@RequestMapping("/nearTrainStation")
+	@ResponseBody
+	public String nearTrainStation(
+			@RequestParam("startLoc")String startLoc,
+			@RequestParam("cityList_no")int cityList_no){
+		return trainService.getNearStation(startLoc, cityList_no).get(0);
+	}
 }
