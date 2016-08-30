@@ -5,6 +5,7 @@
 	<select id="selectTrainScheduleByScheduleNo" parameterType="int" resultType="trainschedulevo">
 		<![CDATA[
 		select * from trainSchedule where schedule_no = #{schedule_no}
+		group by city_no;
 		]]>
 	</select>
 
